@@ -1,0 +1,38 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}GreenNest – Organic Market{% endblock %}
+
+{% block content %}
+
+  <div class="bar"><div class="container">Danh sách yêu thích</div></div>
+
+  <section class="container wishlist-grid">
+    <article class="card wish-card">
+  <div class="thumb">
+    <div class="seed" aria-hidden="true" style="background: radial-gradient(circle at 30% 30%, #fff, #ffe7c8)"></div>
+  </div>
+
+  <div class="remove-wish">✕</div>
+  <div class="content">
+    <div class="pill org" style="background:#eef7e8; color:#2d5b1a; border:1px solid #d8eac9">• Tươi mỗi sáng</div>
+    <h3 style="margin:8px 0 6px">Cà rốt Đà Lạt 500g</h3>
+    <p class="subtle">Giòn ngọt, giàu beta-carotene.</p>
+    <div class="price">
+      <strong>29.000đ</strong>
+      <div class="add">
+        <div class="qty">
+          <button aria-label="Trừ">−</button>
+          <span>1</span>
+          <button aria-label="Cộng">+</button>
+        </div>
+        <button class="btn-primary" style="padding:8px 12px">Thêm</button>
+      </div>
+    </div>
+  </div>
+</article>
+  </section>
+
+{% endblock %}
+
+

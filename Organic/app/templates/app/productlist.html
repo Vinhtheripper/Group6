@@ -1,0 +1,153 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}GreenNest – Organic Market{% endblock %}
+
+{% block content %}
+<section class="container" style="margin:28px 0;">
+  <h1 style="font-size:32px; margin-bottom:10px;">Danh sách sản phẩm & Combo</h1>
+  <p class="subtle">Thực phẩm hữu cơ tươi sạch và combo tiết kiệm từ GreenNest.</p>
+</section>
+
+<!-- ===================== SẢN PHẨM ===================== -->
+<section class="container">
+  <h2 style="margin-bottom:16px;">🥦 Sản phẩm</h2>
+  <div class="grid">
+    {% for product in page_object %}
+      <article class="card">
+      <a href="{% url 'productdetail' product.id %}" style="text-decoration:none; color:inherit;">
+        <div class="thumb">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100%; height:200px; object-fit:cover;">
+          {% else %}
+            <div class="seed" aria-hidden="true"></div>
+          {% endif %}
+        </div>
+        <div class="content">
+          <div class="badge-row" style="display:flex; flex-wrap:wrap; gap:6px; align-items:center;">
+            {% for cert in product.certifications.all %}
+              <div class="pill"
+                style="background: {{ cert.style_colors.bg }};
+                      color: {{ cert.style_colors.text }};
+                      border: 1px solid {{ cert.style_colors.border }};
+                      font-size:13px;
+                      padding:2px 8px;
+                      border-radius:999px;">
+                • {{ cert.name }}
+            </div>
+          {% endfor %}
+
+          {% if product.sale %}
+            <div class="pill"
+              style="background:#FFEBEE;
+                    color:#C62828;
+                    border:1px solid #EF9A9A;
+                    font-size:13px;
+                    padding:2px 8px;
+                    border-radius:999px;
+                    font-weight:600;">
+              Giảm {{ product.discount_percentage|floatformat:0 }}%
+            </div>
+          {% endif %}
+        </div>
+
+
+          <h3 style="margin:8px 0 6px">{{ product.name }}</h3>
+          <p class="subtle">{{ product.description|truncatewords:12 }}</p>
+
+          <div class="price" >
+            {% if product.sale %}
+              <strong>${{ product.final_price|floatformat:2 }}</strong>
+            {% else %}
+              <strong>${{ product.price }}</strong>
+            {% endif %}
+
+            <form method="post" action="{% url 'add_to_cart' product.id %}" class="add-to-cart-form">
+              {% csrf_token %}
+              <div class="add">
+                <div class="qty">
+                  <button type="button" class="qty-decrease">−</button>
+                  <span class="qty-display">1</span>
+                  <button type="button" class="qty-increase">+</button>
+                </div>
+                <input type="hidden" name="quantity" value="1" class="qty-input">
+                <button type="submit" class="btn-primary" style="padding:8px 12px">Thêm</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </a>
+    </article>
+    {% empty %}
+      <p class="subtle">Không có sản phẩm nào để hiển thị.</p>
+    {% endfor %}
+  </div>
+
+  <!-- Phân trang -->
+  <div class="pagination">
+    {% if page_object.has_previous %}
+      <a href="?page={{ page_object.previous_page_number }}">←</a>
+    {% endif %}
+    {% for num in page_object.paginator.page_range %}
+      {% if page_object.number == num %}
+        <a href="?page={{ num }}" class="active">{{ num }}</a>
+      {% else %}
+        <a href="?page={{ num }}">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+    {% if page_object.has_next %}
+      <a href="?page={{ page_object.next_page_number }}">→</a>
+    {% endif %}
+  </div>
+</section>
+
+
+<!-- ===================== COMBO ===================== -->
+<section class="container" style="margin-top:48px;">
+  <h2 style="margin-bottom:16px;">🧺 Combo ưu đãi</h2>
+  <div class="grid">
+    {% for combo in combos %}
+      <article class="card">
+        <a href="{% url 'combodetail' combo.id %}" style="text-decoration:none; color:inherit;">
+          <div class="thumb">
+            {% if combo.image %}
+              <img src="{{ combo.image.url }}" alt="{{ combo.name }}" style="width:100%; height:200px; object-fit:cover;">
+            {% else %}
+              <div class="seed" aria-hidden="true"></div>
+            {% endif %}
+          </div>
+          <div class="content">
+            <div class="pill" style="background:#E8F5E9; color:#2E7D32; border:1px solid #A5D6A7;">
+              Giảm {{ combo.discount_percentage }}%
+            </div>
+            <h3 style="margin:8px 0 6px;">{{ combo.name }}</h3>
+            <p class="subtle">{{ combo.description|truncatewords:12 }}</p>
+            <div class="price">
+              <strong>${{ combo.final_price|floatformat:2 }}</strong>
+              <span style="text-decoration:line-through; color:gray; font-size:14px;">
+                ${{ combo.original_price|floatformat:2 }}
+              </span>
+            </div>
+            <form method="post" action="{% url 'add_combo_to_cart' combo.id %}" class="add-to-cart-form">
+              {% csrf_token %}
+              <div class="add" style="margin-top:8px; align-items:center; gap:10px;">
+                <div class="qty">
+                  <button type="button" class="qty-decrease">−</button>
+                  <span class="qty-display">1</span>
+                  <button type="button" class="qty-increase">+</button>
+                </div>
+                <input type="hidden" name="quantity" value="1" class="qty-input">
+                <button type="submit" class="btn-primary" style="padding:8px 12px;">Thêm</button>
+              </div>
+            </form>
+          </div>
+        </a>
+      </article>
+    {% empty %}
+      <p class="subtle">Chưa có combo nào được tạo.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<script src="{% static 'app/js/home.js' %}"></script>
+{% endblock %}

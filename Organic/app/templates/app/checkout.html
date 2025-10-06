@@ -1,0 +1,116 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}GreenNest – Thanh toán{% endblock %}
+{% block content %}
+
+<form method="post" action="{% url 'checkout' %}">
+  {% csrf_token %}
+  <section class="container checkout-wrapper">
+
+    <!-- ========== THÔNG TIN GIAO HÀNG ========== -->
+    <div class="checkout-card">
+      <h3>Thông tin giao hàng</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Họ và tên *</label>
+          <input type="text" name="full_name" placeholder="Nguyễn Văn A" value="{{ full_name|default_if_none:'' }}" required>
+        </div>
+        <div class="form-group">
+          <label>Số điện thoại *</label>
+          <input type="tel" name="phone" placeholder="0123 456 789" value="{{ phone|default_if_none:'' }}" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" name="email" placeholder="email@example.com" value="{{ email|default_if_none:'' }}">
+      </div>
+
+      <div class="form-group">
+        <label>Địa chỉ *</label>
+        <input type="text" name="address" placeholder="123 Đường ABC, Quận 1, TP.HCM" required>
+      </div>
+
+      <div class="form-group">
+        <label>Ghi chú (tuỳ chọn)</label>
+        <textarea name="note" rows="3" placeholder="Ví dụ: giao giờ hành chính..."></textarea>
+      </div>
+
+      <h3>Phương thức thanh toán</h3>
+      <label class="payment-option">
+        <input type="radio" name="payment" value="cash" checked> Thanh toán khi nhận hàng (COD)
+      </label>
+      <label class="payment-option">
+        <input type="radio" name="payment" value="momo"> Ví Momo
+      </label>
+      <label class="payment-option">
+        <input type="radio" name="payment" value="vnpay"> VnPay
+      </label>
+      <label class="payment-option">
+        <input type="radio" name="payment" value="bank"> Chuyển khoản ngân hàng
+      </label>
+    </div>
+
+    <!-- ========== TÓM TẮT ĐƠN HÀNG ========== -->
+    <div class="checkout-card order-summary">
+      <h3>Đơn hàng</h3>
+
+      {% for item in cart.items.all %}
+        <div class="summary-row">
+          {% if item.product %}
+            <span>{{ item.product.name }} (x{{ item.quantity }})</span>
+          {% elif item.combo %}
+            <span>🧺 {{ item.combo.name }} (x{{ item.quantity }})</span>
+          {% endif %}
+          <span>${{ item.subtotal|floatformat:2 }}</span>
+        </div>
+      {% empty %}
+        <p>Giỏ hàng trống</p>
+      {% endfor %}
+
+
+      <hr style="border:none; border-top:1px solid var(--gray); margin:14px 0;">
+      <div class="summary-row">
+        <span>Tạm tính</span>
+        <span>${{ cart.subtotal|floatformat: }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Phí vận chuyển</span>
+        <span>Miễn phí</span>
+      </div>
+
+      <!-- Ô nhập mã giảm giá -->
+      <hr style="border:none; border-top:1px solid var(--gray); margin:14px 0;">
+      <div style="display:flex; gap:10px;">
+        <input type="text" name="coupon" placeholder="Nhập mã giảm giá..." 
+              value="{{ coupon_code }}" style="flex:1;">
+        <button type="submit" class="btn btn-outline" name="applycoupon" value="1">
+          Áp dụng
+        </button>
+      </div>
+
+
+      {% if discount and discount > 0 %}
+      <div class="summary-row" style="color:green; font-weight:600; margin-top:8px;">
+        <span>Giảm giá</span>
+        <span>-${{ discount|floatformat:2 }}</span>
+      </div>
+      {% endif %}
+
+      <hr style="border:none; border-top:1px solid var(--gray); margin:14px 0;">
+      <div class="summary-row">
+        <strong>Tổng cộng</strong>
+        <strong>${{ total_after_discount|floatformat:2 }}</strong>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-checkout" name="placeorder" value="1"
+              {% if cart.items.count == 0 %}disabled style="opacity:0.6; cursor:not-allowed;"{% endif %}>
+        Đặt hàng
+      </button>
+    </div>
+  </section>
+</form>
+
+<script src="{% static 'app/js/checkout.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}Giỏ hàng – GreenNest{% endblock %}
+
+{% block content %}
+<section class="container" style="margin:28px 0;">
+  <h1 style="font-size:32px; margin-bottom:8px;">Giỏ hàng</h1>
+</section>
+
+<section class="container">
+  <table class="cart-table">
+    <thead>
+      <tr>
+        <th>Sản phẩm</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Tạm tính</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if cart.items.all %}
+        {% for item in cart.items.all %}
+          <tr>
+            <td style="display:flex; align-items:center; gap:12px;">
+              {% if item.product %}
+                <a href="{% url 'productdetail' item.product.id %}">
+                  <img src="{{ item.product.image.url }}" class="cart-thumb" alt="{{ item.product.name }}">
+                </a>
+                <strong><span>{{ item.product.name }}</span></strong>
+              {% elif item.combo %}
+                <a href="{% url 'combodetail' item.combo.id %}">
+                  <img src="{{ item.combo.image.url }}" class="cart-thumb" alt="{{ item.combo.name }}">
+                </a>
+                <strong> {{ item.combo.name }} </strong>
+              {% endif %}
+            </td>
+
+            <td>${{ item.item_price|floatformat:2 }}</td>
+
+            <td>
+              <div class="qty-control">
+                <a href="{% url 'update_quantity' item.id 'decrease' %}" class="qty-btn">−</a>
+                <span>{{ item.quantity }}</span>
+                <a href="{% url 'update_quantity' item.id 'increase' %}" class="qty-btn">+</a>
+              </div>
+            </td>
+
+            <td>${{ item.subtotal|floatformat:2 }}</td>
+            <td><a href="{% url 'remove_item' item.id %}" style="color:black;">✕</a></td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="5" style="text-align:center; color:var(--gray); padding:20px 0;">
+            Giỏ hàng của bạn đang trống.
+          </td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</section>
+
+<!-- Tổng kết -->
+<section class="container">
+  <div class="cart-summary">
+    <h3>Tổng đơn hàng</h3>
+    <div class="summary-row">
+      <span>Tổng số mặt hàng:</span>
+      <span>{{ cart.items.count }}</span>  
+    </div>
+    <div class="summary-row">
+      <span>Tạm tính:</span>
+      <span>${{ cart.subtotal|floatformat:2 }}</span>
+    </div>
+    <div class="summary-row">
+      <strong>Tổng cộng:</strong>
+      <strong>${{ cart.total|floatformat:2 }}</strong>
+    </div>
+    <a href="{% url 'checkout' %}" class="btn btn-primary" style="margin-top:16px; display:block; text-align:center;">
+      Thanh toán
+    </a>
+  </div>
+</section>
+
+{% endblock %}

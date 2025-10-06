@@ -1,0 +1,21 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}GreenNest – Organic Market{% endblock %}
+
+{% block content %}
+
+
+
+  <section class="container success-wrapper">
+    <div class="check">✔</div>
+    <h1>Cảm ơn bạn đã đặt hàng!</h1>
+    <p>Mã đơn hàng của bạn là <strong>{{ order.id }}</strong>.  
+       Chúng tôi sẽ liên hệ khi đơn hàng được giao.</p>
+    <div class="actions">
+      <a href="{% url 'orderdetail' order.id %}" class="btn btn-primary">Xem lại đơn hàng</a>
+      <a href="{% url 'home' %}" class="btn btn-ghost">Tiếp tục mua sắm</a>
+    </div>
+  </section>
+
+{% endblock %}

@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Organic Project{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'app/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'app/css/btn.css' %}">
+</head>
+<style>
+/* profile dropdown */
+.profile {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Dropdown */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;         
+  right: 0;
+  background: white;
+  border: 1px solid var(--gray);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  min-width: 160px;
+  z-index: 99;
+  padding-top: 6px;  
+}
+
+.profile:hover .dropdown,
+.dropdown:hover {
+  display: block;
+}
+
+.profile::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 8px; 
+}
+
+/* Link */
+.dropdown a {
+  display: block;
+  padding: 10px 14px;
+  color: var(--text);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.dropdown a:hover {
+  background: #f5f5f5;
+  color: var(--green);
+}
+</style>
+<body>
+  
+  <!-- Top bar -->
+  <div class="bar">
+    <div class="container">Sản phẩm organic được chứng nhận</div>
+  </div>
+
+  <!-- Header / Navbar -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="{% url 'home' %}">
+        <div class="logo">G</div>
+        <span>GreenNest</span>
+      </a>
+      <nav class="nav-right">
+        <div class="search">
+          <form method="get" action="{% url 'search' %}" style="display:flex; align-items:center; gap:8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M21 21l-3.9-3.9" stroke="#777" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="11" cy="11" r="7" stroke="#777" stroke-width="2" fill="none"/>
+            </svg>
+            <input type="text" name="q" placeholder="Tìm trái cây, rau, hạt..." value="{{ request.GET.q|default:'' }}">
+          </form>
+        </div>
+
+        <a class="icon-btn" href="{% url 'cart' %}">🛒</a>
+        <div class="profile">
+          {% if request.user.is_authenticated %}
+            <!-- Nếu đã login -->
+            <img src="{% if request.user.customer.customer_image %}{{ request.user.customer.customer_image.url }}{% else %}{% static 'app/images/avtmacdinh.jpeg' %}{% endif %}" 
+                alt="Avatar" class="avatar">
+            <div class="dropdown">
+              <a href="{% url 'myaccount' %}">My Account</a>
+              <a href="{% url 'logout' %}">Logout</a>
+            </div>
+          {% else %}
+            <!-- Nếu chưa login -->
+            <a href="{% url 'auth' %}">
+              <h3>Login</h3>
+            </a>
+          {% endif %}
+        </div>
+
+      </nav>
+    </div>
+  </header>
+ 
+  <!-- Main content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="container foot">
+      <div>
+        <div class="brand"><div class="logo">G</div><strong>GreenNest</strong></div>
+        <p class="subtle">Cửa hàng thực phẩm hữu cơ thân thiện môi trường. Chúng tôi tin vào sự minh bạch và tươi sạch.</p>
+      </div>
+      <div>
+        <h4>Liên hệ</h4>
+        <p class="subtle">support@greennest.vn<br/>0900 123 456</p>
+      </div>
+      <div>
+        <h4>Theo dõi</h4>
+        <p class="subtle">Facebook • Instagram • TikTok</p>
+      </div>
+    </div>
+    <div class="credits"></div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+  
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem(location.pathname + "_scroll", window.scrollY);
+    });
+
+    window.addEventListener("load", () => {
+      const key = location.pathname + "_scroll";
+      const pos = localStorage.getItem(key);
+      if (pos) {
+        window.scrollTo(0, pos);
+        localStorage.removeItem(key);
+      }
+    });
+
+    
+  </script>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

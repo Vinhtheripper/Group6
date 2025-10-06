@@ -1,0 +1,71 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}GreenNest – Organic Market{% endblock %}
+
+{% block content %}
+
+
+
+  <!-- Auth Card -->
+  <section class="auth-wrapper">
+    <div class="auth-card">
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="tab-btn {% if active_form == 'login' %}active{% endif %}" data-tab="login">Đăng nhập</button>
+        <button class="tab-btn {% if active_form == 'register' %}active{% endif %}" data-tab="register">Đăng ký</button>
+
+      </div>
+
+      <!-- Login Form -->
+      <form id="login" class="auth-form" method="post" action="{% url 'auth' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Email hoặc Username</label>
+          <input type="text" name="identifier" placeholder="email@example.com hoặc username" required>
+        </div>
+        <div class="form-group">
+          <label>Mật khẩu</label>
+          <input type="password" name="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="auth-btn">Đăng nhập</button>
+      </form>
+
+      <form id="register" class="auth-form" method="post" action="{% url 'auth' %}" style="display:none;">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" name="firstname" required>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" name="lastname" required>
+        </div>
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" name="username" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label>Mật khẩu</label>
+          <input type="password" name="password1" required>
+        </div>
+        <div class="form-group">
+          <label>Nhập lại mật khẩu</label>
+          <input type="password" name="password2" required>
+        </div>
+        <button type="submit" class="auth-btn">Đăng ký</button>
+      </form>
+    </div>
+
+  </section>
+
+
+
+  <!-- JS -->
+  <script src="{% static 'app/js/auth.js' %}"></script>
+ 
+{% endblock %}

@@ -1,0 +1,53 @@
+  .status.success { color: green; font-weight: bold; }
+  .status.pending { color: orange; font-weight: bold; }
+  .status.shipping { color: blue; font-weight: bold; }
+  .status.canceled { color: red; font-weight: bold; }
+  .account-content form input[type="text"],
+  .account-content form input[type="email"],
+  .account-content form input[type="tel"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+  }
+
+  .avatar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 15px;
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--green);
+  }
+
+  input[type="file"] {
+    border: none;
+    background: transparent;
+  }
+
+  .account-wrapper {
+    display: flex;
+    align-items: flex-start; 
+    gap: 20px;
+  }
+
+  .account-sidebar {
+    flex: 0 0 250px; 
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 500px; 
+    overflow-y: auto; 
+    position: sticky;
+    top: 20px; 
+  }
+
+  .account-content {
+    flex: 1;
+  }

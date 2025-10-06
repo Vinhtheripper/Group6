@@ -1,0 +1,186 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}GreenNest – Organic Market{% endblock %}
+
+{% block content %}
+
+
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-wrap">
+    <div class="hero-card">
+      <span class="eyebrow">100% Hữu cơ – Giao nhanh trong ngày</span>
+      <h1>Ăn sạch, sống xanh với thực phẩm <span style="color:var(--green)">ORGANIC</span></h1>
+      <p>Chọn lọc từ nông trại đạt chuẩn, quy trình lạnh khép kín, nhãn mác minh bạch.
+         Hãy bắt đầu giỏ hàng lành mạnh ngay hôm nay.</p>
+      <div style="display:flex; gap:10px; margin-top:16px">
+        <a class="btn btn-primary" href="{% url 'productlist' %}">Mua ngay</a>
+        <a class="btn btn-ghost" href="{% url 'aboutus' %}">Vì sao chọn GreenNest?</a>
+      </div>
+
+      <div class="chips">
+        <span class="chip">🥦 Rau củ</span>
+        <span class="chip">🍎 Trái cây</span>
+        <span class="chip">🌾 Ngũ cốc & hạt</span>
+        <span class="chip">🥛 Sữa & chế phẩm</span>
+      </div>
+
+      <div class="highlights">
+        <div class="badge"><span class="dot"></span>Canh tác không hoá chất</div>
+        <div class="badge"><span class="dot" style="background:var(--orange)"></span>Đóng gói thân thiện</div>
+        <div class="badge"><span class="dot" style="background:var(--brown)"></span>Truy xuất nguồn gốc</div>
+        <div class="badge"><span class="dot" style="background:#7e7e7e"></span>Hoàn tiền 100%</div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="card">
+        <div class="ph"></div>
+        <div class="ph orange"></div>
+        <div class="ph brown"></div>
+        <div class="ph"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sản phẩm mới -->
+<section id="products" class="container">
+  <div class="section-head">
+    <h2>Sản phẩm mới</h2>
+    <a class="btn" style="border:1px solid var(--gray); background:white" href="{% url 'productlist' %}">Xem tất cả →</a>
+  </div>
+  <div class="grid">
+    {% for product in new_products %}
+    <article class="card">
+      <a href="{% url 'productdetail' product.id %}" style="text-decoration:none; color:inherit;">
+        <div class="thumb">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100%; height:200px; object-fit:cover;">
+          {% else %}
+            <div class="seed" aria-hidden="true"></div>
+          {% endif %}
+        </div>
+        <div class="content">
+          <div class="badge-row" style="display:flex; flex-wrap:wrap; gap:6px; align-items:center;">
+            {% for cert in product.certifications.all %}
+              <div class="pill"
+                style="background: {{ cert.style_colors.bg }};
+                      color: {{ cert.style_colors.text }};
+                      border: 1px solid {{ cert.style_colors.border }};
+                      font-size:13px;
+                      padding:2px 8px;
+                      border-radius:999px;">
+                • {{ cert.name }}
+            </div>
+          {% endfor %}
+
+          {% if product.sale %}
+            <div class="pill"
+              style="background:#FFEBEE;
+                    color:#C62828;
+                    border:1px solid #EF9A9A;
+                    font-size:13px;
+                    padding:2px 8px;
+                    border-radius:999px;
+                    font-weight:600;">
+              Giảm {{ product.discount_percentage|floatformat:0 }}%
+            </div>
+          {% endif %}
+        </div>
+
+
+          <h3 style="margin:8px 0 6px">{{ product.name }}</h3>
+          <p class="subtle">{{ product.description|truncatewords:12 }}</p>
+
+          <div class="price" >
+            {% if product.sale %}
+              <strong>${{ product.final_price|floatformat:2 }}</strong>
+            {% else %}
+              <strong>${{ product.price }}</strong>
+            {% endif %}
+
+            <form method="post" action="{% url 'add_to_cart' product.id %}" class="add-to-cart-form">
+              {% csrf_token %}
+              <div class="add">
+                <div class="qty">
+                  <button type="button" class="qty-decrease">−</button>
+                  <span class="qty-display">1</span>
+                  <button type="button" class="qty-increase">+</button>
+                </div>
+                <input type="hidden" name="quantity" value="1" class="qty-input">
+                <button type="submit" class="btn-primary" style="padding:8px 12px">Thêm</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </a>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+
+{% if current_coupon %}
+<section class="container">
+  <div class="cta">
+    <div class="left">
+      <div class="leaf">%</div>
+      <div>
+        <h3 style="margin:0 0 4px; color:var(--green)">
+          Mã giảm giá: <strong id="couponCode">{{ current_coupon.code }}</strong>
+        </h3>
+        <p class="subtle">
+          {{ current_coupon.description|default:"Nhập mã để được ưu đãi đặc biệt!" }}
+        </p>
+      </div>
+    </div>
+    <button 
+      class="btn btn-primary" 
+      type="button" 
+      onclick="copyCoupon()"
+    >
+      Sao chép mã
+    </button>
+  </div>
+</section>
+{% endif %}
+
+
+<section id="about" class="container">
+  <div class="section-head"><h2>Cam kết của chúng tôi</h2></div>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card" style="border-color:var(--gray)">
+      <div class="content">
+        <h3>Chuỗi lạnh & tươi sạch</h3>
+        <p class="subtle">Bảo quản 0–4°C từ kho đến tay bạn. Bao bì giấy tái chế, mực in đậu nành.</p>
+      </div>
+    </div>
+    <div class="card" style="border-color:var(--gray)">
+      <div class="content">
+        <h3>Truy xuất nguồn gốc</h3>
+        <p class="subtle">Mỗi sản phẩm đều có mã lô, nông trại, và ngày thu hoạch rõ ràng.</p>
+      </div>
+    </div>
+    <div class="card" style="border-color:var(--gray)">
+      <div class="content">
+        <h3>Đổi trả dễ dàng</h3>
+        <p class="subtle">Không hài lòng? Hoàn tiền 100% trong 48 giờ, không cần giải thích.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{% static 'app/js/home.js' %}"></script>
+
+<script>
+  function copyCoupon() {
+    const code = document.getElementById('couponCode').innerText;
+    navigator.clipboard.writeText(code);
+    alert(`Đã sao chép mã: ${code}`);
+  }
+</script>
+
+{% endblock %}

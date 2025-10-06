@@ -1,0 +1,144 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Tài khoản - GreenNest{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'app/css/myaccount.css' %}">
+
+
+
+
+
+<section class="container account-wrapper">
+  <!-- Sidebar -->
+  <aside class="account-sidebar">
+    <h3>Menu</h3>
+    <a href="{% url 'myaccount' %}?view=profile"
+       class="{% if active_tab == 'profile' %}active{% endif %}">Thông tin cá nhân</a>
+    <a href="{% url 'myaccount' %}?view=orders"
+       class="{% if active_tab == 'orders' %}active{% endif %}">Đơn hàng của tôi</a>
+    <a href="{% url 'logout' %}">Đăng xuất</a>
+  </aside>
+
+  <!-- Content -->
+  <div class="account-content">
+
+    {% if active_tab == "profile" %}
+    <div class="account-section account-info">
+      <h2>Thông tin cá nhân</h2>
+
+      <form method="post" action="{% url 'editaccount' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="avatar-wrapper">
+          <img src="{% if customer.customer_image %}{{ customer.customer_image.url }}{% else %}{% static 'app/images/avtmacdinh.jpeg' %}{% endif %}"
+               alt="Avatar" class="profile-avatar">
+          <input type="file" name="customer_image" accept="image/*">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Họ</label>
+            <input type="text" name="first_name" value="{{ request.user.first_name }}">
+          </div>
+          <div class="form-group">
+            <label>Tên</label>
+            <input type="text" name="last_name" value="{{ request.user.last_name }}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" value="{{ request.user.email }}">
+        </div>
+
+        <div class="form-group">
+          <label>Số điện thoại</label>
+          <input type="tel" name="phone" value="{{ customer.phone|default:'' }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Lưu thay đổi</button>
+      </form>
+      <br>
+      <div class="account-section"> 
+      <h2>Đơn hàng gần đây</h2> 
+        {% if recent_orders %} 
+        <table class="order-table"> 
+          <thead> <tr> 
+            <th>Mã đơn</th> 
+            <th>Ngày đặt</th> 
+            <th>Trạng thái</th> 
+            <th>Tổng tiền</th> 
+            <th></th> </tr>   
+          </thead> 
+          <tbody>   
+            {% for order in recent_orders %} 
+            <tr> 
+              <td>#{{ order.id }}</td> 
+              <td>{{ order.date_order|date:"d/m/Y" }}</td> 
+              <td class="status">{{ order.get_status_display }}</td> 
+              <td>${{ order.get_cart_total|floatformat:2 }}</td> 
+              <td><a href="{% url 'orderdetail' order.id %}">Xem</a></td> 
+            </tr> 
+            {% endfor %} 
+          </tbody> 
+        </table> 
+        {% else %} 
+          <p>Bạn chưa có đơn hàng nào.</p> 
+        {% endif %} 
+      </div> 
+    </div>
+    {% endif %}
+    
+    
+
+    {% if active_tab == "orders" %}
+    <div class="account-section">
+      <h2>Đơn hàng gần nhất</h2>
+      {% if recent_order %}
+      <div class="order-detail-card">
+        <p><strong>Ngày đặt:</strong> {{ recent_order.date_order|date:"d/m/Y H:i" }}</p>
+        <p><strong>Trạng thái:</strong> {{ recent_order.get_status_display }}</p>
+        <hr>
+        <table class="order-items" border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr><th>Sản phẩm</th><th>SL</th><th>Giá</th><th>Tổng</th></tr>
+          </thead>
+          <tbody>
+            {% for item in recent_order.orderitem_set.all %}
+            <tr>
+              <td>
+                {% if item.product %}
+                  {{ item.product.name }}
+                {% elif item.combo %}
+                  {{ item.combo.name }}
+                {% endif %}
+              </td>
+              <td>{{ item.quantity }}</td>
+              <td>
+                {% if item.product %}
+                  ${{ item.product.final_price|floatformat:2 }}
+                {% elif item.combo %}
+                  ${{ item.combo.final_price|floatformat:2 }}
+                {% endif %}
+              </td>
+              <td>${{ item.get_total|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+        <hr>
+        <p><strong>Tổng cộng:</strong> {{ recent_order.get_cart_total|floatformat:2 }}</p>
+        <a href="{% url 'orderdetail' recent_order.id %}" class="btn btn-primary">Xem chi tiết</a>
+      </div>
+      {% else %}
+        <p>Bạn chưa có đơn hàng nào.</p>
+      {% endif %}
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+
+{% endblock %}
