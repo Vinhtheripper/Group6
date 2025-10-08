@@ -1,0 +1,394 @@
+[
+  {
+    "intent": "revenue_total",
+    "description": "Truy vấn tổng doanh thu toàn hệ thống, không giới hạn thời gian.",
+    "examples": [
+      "tổng doanh thu là bao nhiêu",
+      "doanh thu toàn hệ thống",
+      "green nest bán được bao nhiêu tiền",
+      "tổng doanh thu hiện nay",
+      "doanh thu tích lũy từ trước đến nay",
+      "tính tổng doanh thu của shop",
+      "shop đã kiếm được bao nhiêu tiền rồi",
+      "doanh thu tổng hợp toàn hệ thống",
+      "toàn bộ doanh thu kể từ khi mở bán",
+      "hệ thống đã thu về bao nhiêu tiền",
+      "toàn bộ tiền bán hàng hiện có",
+      "coi giúp tôi tổng doanh thu hiện tại",
+      "bán tổng cộng được bao nhiêu rồi",
+      "doanh thu toàn chuỗi green nest là bao nhiêu",
+      "thống kê doanh thu từ trước đến nay",
+      "toàn bộ doanh thu tích lũy bao nhiêu",
+      "shop đã đạt doanh số bao nhiêu rồi",
+      "tổng doanh thu đến thời điểm này"
+    ],
+    "entities": [],
+    "context": ["business", "finance"],
+    "response_templates": [
+      "Tổng doanh thu hiện tại là {revenue}₫.",
+      "Doanh thu tích lũy của GreenNest hiện là {revenue}₫."
+    ],
+    "tags": ["revenue", "overview"],
+    "confidence_threshold": 0.6
+  },
+  {
+    "intent": "revenue_today",
+    "description": "Truy vấn doanh thu trong ngày hiện tại.",
+    "examples": [
+      "doanh thu hôm nay",
+      "bán được bao nhiêu hôm nay",
+      "hôm nay thu được bao nhiêu",
+      "doanh số hôm nay là bao nhiêu",
+      "tổng tiền bán hàng hôm nay",
+      "tổng doanh thu trong ngày",
+      "coi thử doanh thu ngày hôm nay",
+      "hôm nay shop bán được nhiều không",
+      "doanh thu trong 24 giờ qua",
+      "hôm nay lời bao nhiêu",
+      "sáng giờ bán được bao nhiêu rồi",
+      "thống kê doanh thu hôm nay",
+      "ngày hôm nay có bao nhiêu đơn và doanh thu",
+      "bán hôm nay có khá không",
+      "doanh thu từ sáng đến giờ",
+      "số tiền hôm nay thu về là bao nhiêu",
+      "cập nhật doanh thu trong ngày"
+    ],
+    "entities": ["date"],
+    "context": ["business", "daily"],
+    "response_templates": [
+      "Doanh thu hôm nay là {revenue}₫.",
+      "Trong ngày hôm nay, GreenNest đã thu về {revenue}₫."
+    ],
+    "tags": ["revenue", "daily"],
+    "confidence_threshold": 0.6
+  },
+  {
+    "intent": "revenue_month",
+    "description": "Truy vấn doanh thu trong một tháng cụ thể hoặc tháng hiện tại.",
+    "examples": [
+      "doanh thu tháng này là bao nhiêu",
+      "tổng doanh thu trong tháng hiện tại",
+      "bán được bao nhiêu tiền tháng này",
+      "doanh thu tháng 10",
+      "doanh thu tháng 9",
+      "doanh thu tháng trước là bao nhiêu",
+      "tổng doanh thu của tháng vừa rồi",
+      "doanh thu trong tháng gần nhất",
+      "tháng này lời bao nhiêu",
+      "báo cáo doanh thu tháng này",
+      "doanh thu trung bình tháng này là bao nhiêu",
+      "so với tháng trước doanh thu tháng này thế nào",
+      "tháng 8 bán được bao nhiêu",
+      "doanh thu tháng hiện tại",
+      "doanh thu tháng này tăng hay giảm",
+      "tháng này có doanh thu cao không",
+      "doanh thu tháng này đạt bao nhiêu phần trăm kế hoạch"
+    ],
+    "entities": ["month"],
+    "context": ["business", "timeframe"],
+    "response_templates": [
+      "Doanh thu tháng {month} là {revenue}₫.",
+      "Trong tháng {month}, hệ thống thu về {revenue}₫."
+    ],
+    "tags": ["revenue", "temporal"],
+    "confidence_threshold": 0.65
+  },
+  {
+    "intent": "revenue_compare",
+    "description": "So sánh doanh thu giữa hai tháng hoặc hai giai đoạn khác nhau.",
+    "examples": [
+      "so sánh doanh thu tháng này với tháng trước",
+      "tháng 10 và tháng 9 thì tháng nào cao hơn",
+      "doanh số tháng này có vượt tháng trước không",
+      "so sánh doanh thu hai tháng gần nhất",
+      "tháng trước và tháng này chênh lệch bao nhiêu",
+      "doanh thu tháng này tăng bao nhiêu phần trăm so với trước",
+      "tháng 8 bán tốt hơn tháng 9 không",
+      "tháng này lời hơn tháng trước chứ",
+      "doanh thu giữa tháng này và tháng trước thế nào",
+      "so sánh doanh thu tháng 7 và 8",
+      "tháng này có doanh thu cao hơn tháng trước không",
+      "so sánh doanh thu hai tháng vừa qua",
+      "tháng nào bán chạy hơn",
+      "so sánh doanh thu hai quý gần nhất",
+      "doanh thu tháng trước thấp hơn tháng này không",
+      "tổng chênh lệch doanh thu giữa hai tháng"
+    ],
+    "entities": ["month_1", "month_2"],
+    "context": ["business", "comparison"],
+    "response_templates": [
+      "Doanh thu tháng {month_1} là {revenue_1}₫, tháng {month_2} là {revenue_2}₫ — {trend}.",
+      "So với tháng {month_2}, doanh thu tháng {month_1} {trend_desc}."
+    ],
+    "tags": ["revenue", "compare", "analytics"],
+    "confidence_threshold": 0.7
+  },
+  {
+    "intent": "order_count",
+    "description": "Truy vấn tổng số lượng đơn hàng toàn hệ thống hoặc trong giai đoạn cụ thể.",
+    "examples": [
+      "tổng số đơn hàng",
+      "green nest có bao nhiêu đơn hàng",
+      "số lượng đơn hàng hiện tại",
+      "bao nhiêu đơn đã bán",
+      "đếm tổng đơn hàng",
+      "có bao nhiêu đơn đang xử lý",
+      "đơn hàng hôm nay là bao nhiêu",
+      "bao nhiêu đơn thành công",
+      "tổng số đơn hàng đã hoàn thành",
+      "đơn hàng chưa giao là bao nhiêu",
+      "shop có bao nhiêu đơn chờ xác nhận",
+      "bao nhiêu đơn hàng trong tháng này",
+      "số lượng đơn bị hủy",
+      "tổng order toàn hệ thống",
+      "đếm số đơn bán ra",
+      "số lượng đơn hàng mỗi ngày",
+      "đơn hàng gần đây nhất là bao nhiêu"
+    ],
+    "entities": [],
+    "context": ["business", "orders"],
+    "response_templates": [
+      "Tổng số đơn hàng hiện tại là {order_count}.",
+      "Hệ thống đang có {order_count} đơn hàng."
+    ],
+    "tags": ["orders", "count"],
+    "confidence_threshold": 0.6
+  },
+  {
+    "intent": "top_selling",
+    "description": "Truy vấn sản phẩm bán chạy nhất hoặc phổ biến nhất.",
+    "examples": [
+      "sản phẩm bán chạy nhất",
+      "mặt hàng phổ biến nhất",
+      "bán nhiều nhất",
+      "top sản phẩm bán chạy",
+      "mặt hàng nào đang hot nhất",
+      "sản phẩm nào được mua nhiều nhất",
+      "sản phẩm hot trend tháng này",
+      "sản phẩm bán chạy nhất tuần này",
+      "mặt hàng nào được khách hàng ưa chuộng",
+      "top 5 sản phẩm bán chạy nhất",
+      "sản phẩm nào có doanh số cao nhất",
+      "hàng nào đang cháy hàng",
+      "top sản phẩm bán nhanh nhất",
+      "mặt hàng nào đang được săn nhiều nhất",
+      "sản phẩm được đặt hàng nhiều nhất",
+      "sản phẩm best seller của green nest",
+      "hàng nào bán tốt nhất trong tháng này"
+    ],
+    "entities": [],
+    "context": ["product", "sales"],
+    "response_templates": [
+      "Sản phẩm bán chạy nhất hiện nay là {product_name}.",
+      "Top sản phẩm được mua nhiều nhất là {product_name}."
+    ],
+    "tags": ["product", "bestseller"],
+    "confidence_threshold": 0.6
+  },
+  {
+    "intent": "highest_price",
+    "description": "Truy vấn sản phẩm có giá cao nhất trong hệ thống.",
+    "examples": [
+      "sản phẩm đắt nhất",
+      "món hàng có giá cao nhất",
+      "sản phẩm nào giá cao nhất",
+      "hàng nào đắt đỏ nhất",
+      "sản phẩm cao cấp nhất",
+      "hàng nào có giá cao nhất hiện tại",
+      "sản phẩm premium nhất",
+      "đâu là sản phẩm mắc nhất",
+      "mặt hàng sang trọng nhất",
+      "đắt nhất hệ thống",
+      "sản phẩm có giá vượt 1 triệu",
+      "sản phẩm xa xỉ nhất của shop",
+      "hàng nào là dòng luxury",
+      "mặt hàng cao giá nhất trong danh mục",
+      "sản phẩm nào thuộc phân khúc cao cấp",
+      "sản phẩm có giá cao nhất hiện nay"
+    ],
+    "entities": [],
+    "context": ["product", "pricing"],
+    "response_templates": [
+      "Sản phẩm có giá cao nhất là {product_name} với giá {price}₫.",
+      "Mặt hàng đắt đỏ nhất hệ thống là {product_name}."
+    ],
+    "tags": ["product", "pricing"],
+    "confidence_threshold": 0.65
+  },
+  {
+    "intent": "unsold",
+    "description": "Truy vấn sản phẩm chưa được bán hoặc tồn kho chưa phát sinh đơn hàng.",
+    "examples": [
+      "sản phẩm chưa từng bán",
+      "hàng chưa được bán",
+      "mặt hàng nào chưa có đơn",
+      "sản phẩm chưa phát sinh đơn hàng",
+      "danh sách sản phẩm chưa bán được",
+      "hàng nào chưa có lượt mua",
+      "sản phẩm tồn kho chưa bán",
+      "mặt hàng nào bị ế",
+      "sản phẩm không ai mua",
+      "các sản phẩm chưa từng được đặt hàng",
+      "hàng nào còn tồn nhưng chưa bán",
+      "liệt kê hàng chưa từng có đơn",
+      "sản phẩm nào chưa được khách nào mua",
+      "danh sách sản phẩm chưa phát sinh doanh thu",
+      "hàng nào ế nhất trong kho",
+      "những sản phẩm chưa từng xuất bán"
+    ],
+    "entities": [],
+    "context": ["product", "inventory"],
+    "response_templates": [
+      "Các sản phẩm chưa từng bán gồm: {product_list}.",
+      "Danh sách hàng chưa có lượt mua: {product_list}."
+    ],
+    "tags": ["product", "inventory", "unsold"],
+    "confidence_threshold": 0.65
+  },
+  {
+    "intent": "loyal_customer",
+    "description": "Truy vấn khách hàng thân thiết hoặc mua nhiều nhất.",
+    "examples": [
+      "ai là khách hàng trung thành nhất",
+      "khách hàng nào mua nhiều nhất",
+      "khách hàng thân thiết nhất là ai",
+      "khách hàng nào ủng hộ nhiều nhất",
+      "ai là khách quen của shop",
+      "khách hàng nào có nhiều đơn hàng nhất",
+      "ai hay đặt hàng nhiều nhất",
+      "khách hàng vip của green nest",
+      "ai thường xuyên mua hàng nhất",
+      "khách hàng nào mua hàng đều đặn mỗi tháng",
+      "ai là người chi tiêu nhiều nhất",
+      "khách hàng nào có điểm thưởng cao nhất",
+      "người mua sắm tích cực nhất",
+      "ai là khách hàng gắn bó lâu nhất",
+      "top khách hàng thân thiết của shop",
+      "người mua hàng trung thành nhất green nest"
+    ],
+    "entities": [],
+    "context": ["customer", "loyalty"],
+    "response_templates": [
+      "Khách hàng trung thành nhất là {customer_name}.",
+      "Người mua hàng nhiều nhất là {customer_name}, với {order_count} đơn hàng."
+    ],
+    "tags": ["customer", "loyalty"],
+    "confidence_threshold": 0.7
+  },
+  {
+    "intent": "combo_new",
+    "description": "Truy vấn về các combo sản phẩm mới hoặc vừa ra mắt.",
+    "examples": [
+      "tháng này có combo mới không",
+      "combo mới trong tháng này",
+      "các combo mới nhất",
+      "combo nào vừa được thêm",
+      "shop có combo mới nào không",
+      "có combo ưu đãi nào mới không",
+      "combo giảm giá mới nhất",
+      "combo nào vừa tung ra thị trường",
+      "green nest vừa ra combo gì mới",
+      "combo nào hot nhất tháng này",
+      "các combo được thêm gần đây",
+      "combo đặc biệt mới nhất",
+      "danh sách combo mới của shop",
+      "combo sản phẩm mới ra mắt",
+      "combo khuyến mãi tháng này"
+    ],
+    "entities": ["month"],
+    "context": ["product", "promotion"],
+    "response_templates": [
+      "Combo mới trong tháng {month}: {combo_list}.",
+      "Các combo mới nhất bao gồm: {combo_list}."
+    ],
+    "tags": ["product", "combo", "promotion"],
+    "confidence_threshold": 0.6
+  },
+  {
+    "intent": "product_organic_count",
+    "description": "Đếm số lượng sản phẩm hữu cơ trong hệ thống.",
+    "examples": [
+      "green nest có bao nhiêu sản phẩm hữu cơ",
+      "bao nhiêu mặt hàng organic",
+      "đếm số sản phẩm organic",
+      "các sản phẩm đạt chứng nhận hữu cơ",
+      "shop có bao nhiêu hàng organic",
+      "bao nhiêu sản phẩm đạt chứng chỉ hữu cơ",
+      "tổng số hàng hữu cơ là bao nhiêu",
+      "green nest có nhiều sản phẩm hữu cơ không",
+      "liệt kê các sản phẩm hữu cơ",
+      "bao nhiêu sản phẩm được chứng nhận organic",
+      "shop có sản phẩm hữu cơ nào không",
+      "bao nhiêu phần trăm sản phẩm là hàng hữu cơ",
+      "có bao nhiêu loại hàng organic",
+      "danh sách các sản phẩm organic hiện có",
+      "thống kê sản phẩm hữu cơ của shop"
+    ],
+    "entities": [],
+    "context": ["product", "certification"],
+    "response_templates": [
+      "Tổng số sản phẩm hữu cơ là {organic_count}.",
+      "GreenNest hiện có {organic_count} sản phẩm được chứng nhận hữu cơ."
+    ],
+    "tags": ["product", "organic"],
+    "confidence_threshold": 0.6
+  },
+  {
+    "intent": "product_highest_rated",
+    "description": "Truy vấn sản phẩm có đánh giá cao nhất.",
+    "examples": [
+      "sản phẩm nào được đánh giá cao nhất",
+      "sản phẩm có phản hồi tốt nhất",
+      "đánh giá tốt nhất thuộc về sản phẩm nào",
+      "mặt hàng nào được khách hàng khen nhiều nhất",
+      "sản phẩm có rating cao nhất",
+      "top sản phẩm được đánh giá tốt nhất",
+      "sản phẩm nào được yêu thích nhất",
+      "hàng nào được chấm điểm cao nhất",
+      "đâu là sản phẩm có nhiều sao nhất",
+      "mặt hàng nào được khen nhiều nhất tháng này",
+      "sản phẩm nào có điểm đánh giá cao nhất hiện tại",
+      "sản phẩm nào được khách đánh giá 5 sao nhiều nhất",
+      "hàng nào được phản hồi tích cực nhất",
+      "top sản phẩm có review tốt nhất",
+      "sản phẩm có điểm trung bình cao nhất"
+    ],
+    "entities": [],
+    "context": ["product", "feedback"],
+    "response_templates": [
+      "Sản phẩm được đánh giá cao nhất hiện nay là {product_name} với {rating}⭐.",
+      "Khách hàng yêu thích nhất là {product_name}, điểm trung bình {rating}."
+    ],
+    "tags": ["product", "rating", "feedback"],
+    "confidence_threshold": 0.6
+  },
+  {
+    "intent": "cert_list",
+    "description": "Truy vấn các chứng nhận chất lượng mà GreenNest đạt được.",
+    "examples": [
+      "green nest có chứng nhận gì",
+      "những chứng nhận nào mà green nest đạt được",
+      "shop có chứng chỉ chất lượng nào",
+      "green nest đạt chuẩn nào",
+      "cửa hàng có chứng chỉ gì không",
+      "green nest có chứng nhận quốc tế không",
+      "liệt kê các chứng nhận của green nest",
+      "green nest được cấp chứng chỉ nào",
+      "shop đạt các tiêu chuẩn chất lượng nào",
+      "green nest có chứng nhận hữu cơ nào không",
+      "danh sách chứng nhận của cửa hàng",
+      "green nest có đạt chuẩn an toàn thực phẩm không",
+      "shop có chứng chỉ nào uy tín",
+      "green nest được tổ chức nào công nhận",
+      "green nest đạt những chứng chỉ gì"
+    ],
+    "entities": [],
+    "context": ["certification"],
+    "response_templates": [
+      "GreenNest đạt các chứng nhận: {cert_list}.",
+      "Các chứng chỉ hiện có của GreenNest gồm: {cert_list}."
+    ],
+    "tags": ["certification"],
+    "confidence_threshold": 0.6
+  }
+]

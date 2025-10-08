@@ -1,3 +1,4 @@
+import json
 from .view_product import Product
 from .view_combo import Combo
 from django.core.paginator import Paginator
@@ -5,6 +6,13 @@ from django.db.models import Q
 from django.shortcuts import render
 from app.models import Coupon
 from decimal import Decimal
+from django.http import HttpRequest, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
+
+
+
 
 
 def productlist(request):
@@ -59,3 +67,9 @@ def applycoupon(cart, code):
 
     except Coupon.DoesNotExist:
         return None, "Không tìm thấy mã giảm giá."
+    
+
+
+
+
+

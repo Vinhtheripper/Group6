@@ -1,0 +1,20 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<p>Nhập câu hỏi bên dưới để nhận insight từ hệ thống:</p>
+
+<form method="post" style="margin-bottom:20px;">
+    {% csrf_token %}
+    <textarea name="message" rows="3" style="width:100%; border-radius:6px;" placeholder="Ví dụ: Tổng doanh thu tháng này là bao nhiêu?">{{ message|default_if_none:"" }}</textarea>
+    <br><br>
+    <button type="submit" class="button">Gửi</button>
+</form>
+
+{% if response %}
+<div style="background:#f9f9f9; padding:15px; border-radius:8px; border:1px solid #ddd;">
+    <strong>Trả lời:</strong>
+    <p style="white-space:pre-line;">{{ response }}</p>
+</div>
+{% endif %}
+{% endblock %}

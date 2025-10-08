@@ -94,19 +94,22 @@ def checkout(request):
 
             for item in cart.items.all():
                 if item.product:
+                    price = getattr(item.product, "final_price", None) or item.product.price
                     OrderItem.objects.create(
                         order=order,
                         product=item.product,
                         quantity=item.quantity,
-                        price=item.product.final_price
+                        price=price
                     )
                 elif item.combo:
+                    price = getattr(item.combo, "final_price", None) or item.combo.price
                     OrderItem.objects.create(
                         order=order,
                         combo=item.combo,
                         quantity=item.quantity,
-                        price=item.combo.final_price
-        )
+                        price=price
+                    )
+
 
             # Thanh toán
             Payment.objects.create(

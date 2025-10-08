@@ -3,6 +3,17 @@ from django.dispatch import receiver
 from .models import Payment, Order, Customer, User
 import secrets
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from app.models import Product
+
+
+
+
+
+
+
+
 @receiver(post_save, sender=Payment)
 def update_order_status(sender, instance, **kwargs):
     order = instance.order
@@ -31,3 +42,7 @@ def ensure_referral_code(sender, instance, created, **kwargs):
     if created and not instance.referral_code:
         instance.referral_code = _gen_ref_code()
         instance.save(update_fields=["referral_code"])
+
+
+
+

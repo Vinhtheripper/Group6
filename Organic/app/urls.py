@@ -1,4 +1,5 @@
 from django.urls import path
+
 from . import views
 
 # Register your URL patterns here.
@@ -26,7 +27,6 @@ urlpatterns = [
     path('myaccount/edit/', views.editaccount, name='editaccount'),
     path('applycoupon/', views.applycoupon, name='applycoupon'),
     path('combo/<int:combo_id>/', views.combodetail, name='combodetail'),
-
 ]
 
 

@@ -72,10 +72,13 @@ class OrderItem(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
+    def save(self, *args, **kwargs):
+        if (not self.price or self.price == 0) and self.product:
+            self.price = getattr(self.product, "final_price", None) or self.product.price
+        elif (not self.price or self.price == 0) and self.combo:
+            self.price = getattr(self.combo, "final_price", None) or self.combo.price
+        super().save(*args, **kwargs)
+
     @property
     def get_total(self):
-        if self.combo:
-            return self.combo.final_price * self.quantity
-        elif self.product:
-            return self.product.final_price * self.quantity
-        return 0
+        return self.price * self.quantity
