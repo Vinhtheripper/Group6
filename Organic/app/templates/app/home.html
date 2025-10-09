@@ -54,70 +54,7 @@
   </div>
   <div class="grid">
     {% for product in new_products %}
-    <article class="card">
-      <a href="{% url 'productdetail' product.id %}" style="text-decoration:none; color:inherit;">
-        <div class="thumb">
-          {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100%; height:200px; object-fit:cover;">
-          {% else %}
-            <div class="seed" aria-hidden="true"></div>
-          {% endif %}
-        </div>
-        <div class="content">
-          <div class="badge-row" style="display:flex; flex-wrap:wrap; gap:6px; align-items:center;">
-            {% for cert in product.certifications.all %}
-              <div class="pill"
-                style="background: {{ cert.style_colors.bg }};
-                      color: {{ cert.style_colors.text }};
-                      border: 1px solid {{ cert.style_colors.border }};
-                      font-size:13px;
-                      padding:2px 8px;
-                      border-radius:999px;">
-                • {{ cert.name }}
-            </div>
-          {% endfor %}
-
-          {% if product.sale %}
-            <div class="pill"
-              style="background:#FFEBEE;
-                    color:#C62828;
-                    border:1px solid #EF9A9A;
-                    font-size:13px;
-                    padding:2px 8px;
-                    border-radius:999px;
-                    font-weight:600;">
-              Giảm {{ product.discount_percentage|floatformat:0 }}%
-            </div>
-          {% endif %}
-        </div>
-
-
-          <h3 style="margin:8px 0 6px">{{ product.name }}</h3>
-          <p class="subtle">{{ product.description|truncatewords:12 }}</p>
-
-          <div class="price" >
-            {% if product.sale %}
-              <strong>${{ product.final_price|floatformat:2 }}</strong>
-            {% else %}
-              <strong>${{ product.price }}</strong>
-            {% endif %}
-
-            <form method="post" action="{% url 'add_to_cart' product.id %}" class="add-to-cart-form">
-              {% csrf_token %}
-              <div class="add">
-                <div class="qty">
-                  <button type="button" class="qty-decrease">−</button>
-                  <span class="qty-display">1</span>
-                  <button type="button" class="qty-increase">+</button>
-                </div>
-                <input type="hidden" name="quantity" value="1" class="qty-input">
-                <button type="submit" class="btn-primary" style="padding:8px 12px">Thêm</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </a>
-    </article>
+    {% include 'app/productcard.html' %}
     {% endfor %}
   </div>
 </section>
