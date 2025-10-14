@@ -1,6 +1,6 @@
 {% extends "app/base.html" %}
 {% load static %}
-{% block title %}Tài khoản - GreenNest{% endblock %}
+{% block title %}Account - GreenNest{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'app/css/myaccount.css' %}">
@@ -14,10 +14,10 @@
   <aside class="account-sidebar">
     <h3>Menu</h3>
     <a href="{% url 'myaccount' %}?view=profile"
-       class="{% if active_tab == 'profile' %}active{% endif %}">Thông tin cá nhân</a>
+       class="{% if active_tab == 'profile' %}active{% endif %}">Personal Information</a>
     <a href="{% url 'myaccount' %}?view=orders"
-       class="{% if active_tab == 'orders' %}active{% endif %}">Đơn hàng của tôi</a>
-    <a href="{% url 'logout' %}">Đăng xuất</a>
+       class="{% if active_tab == 'orders' %}active{% endif %}">My Order</a>
+    <a href="{% url 'logout' %}">Log out</a>
   </aside>
 
   <!-- Content -->
@@ -25,7 +25,7 @@
 
     {% if active_tab == "profile" %}
     <div class="account-section account-info">
-      <h2>Thông tin cá nhân</h2>
+      <h2>Personal Information</h2>
 
       <form method="post" action="{% url 'editaccount' %}" enctype="multipart/form-data">
         {% csrf_token %}
@@ -37,11 +37,11 @@
 
         <div class="form-row">
           <div class="form-group">
-            <label>Họ</label>
+            <label>First Name</label>
             <input type="text" name="first_name" value="{{ request.user.first_name }}">
           </div>
           <div class="form-group">
-            <label>Tên</label>
+            <label>Last Name</label>
             <input type="text" name="last_name" value="{{ request.user.last_name }}">
           </div>
         </div>
@@ -52,22 +52,22 @@
         </div>
 
         <div class="form-group">
-          <label>Số điện thoại</label>
+          <label>Phone Number</label>
           <input type="tel" name="phone" value="{{ customer.phone|default:'' }}">
         </div>
 
-        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Lưu thay đổi</button>
+        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Save Changes</button>
       </form>
       <br>
       <div class="account-section"> 
-      <h2>Đơn hàng gần đây</h2> 
+      <h2>Recent Orders</h2> 
         {% if recent_orders %} 
         <table class="order-table"> 
           <thead> <tr> 
-            <th>Mã đơn</th> 
-            <th>Ngày đặt</th> 
-            <th>Trạng thái</th> 
-            <th>Tổng tiền</th> 
+            <th>Order Id</th> 
+            <th>Date</th> 
+            <th>Status</th> 
+            <th>Total</th> 
             <th></th> </tr>   
           </thead> 
           <tbody>   
@@ -77,13 +77,13 @@
               <td>{{ order.date_order|date:"d/m/Y" }}</td> 
               <td class="status">{{ order.get_status_display }}</td> 
               <td>${{ order.get_cart_total|floatformat:2 }}</td> 
-              <td><a href="{% url 'orderdetail' order.id %}">Xem</a></td> 
+              <td><a href="{% url 'orderdetail' order.id %}">Detail</a></td> 
             </tr> 
             {% endfor %} 
           </tbody> 
         </table> 
         {% else %} 
-          <p>Bạn chưa có đơn hàng nào.</p> 
+          <p>You have no orders yet.</p> 
         {% endif %} 
       </div> 
     </div>
@@ -93,15 +93,20 @@
 
     {% if active_tab == "orders" %}
     <div class="account-section">
-      <h2>Đơn hàng gần nhất</h2>
+      <h2>Most recent order</h2>
       {% if recent_order %}
       <div class="order-detail-card">
-        <p><strong>Ngày đặt:</strong> {{ recent_order.date_order|date:"d/m/Y H:i" }}</p>
-        <p><strong>Trạng thái:</strong> {{ recent_order.get_status_display }}</p>
+        <p><strong>Date:</strong> {{ recent_order.date_order|date:"d/m/Y H:i" }}</p>
+        <p><strong>Status:</strong> {{ recent_order.get_status_display }}</p>
         <hr>
         <table class="order-items" border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
           <thead>
-            <tr><th>Sản phẩm</th><th>SL</th><th>Giá</th><th>Tổng</th></tr>
+            <tr>
+              <th>Items</th>
+              <th>Number</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
           </thead>
           <tbody>
             {% for item in recent_order.orderitem_set.all %}
@@ -128,11 +133,11 @@
           </tbody>
         </table>
         <hr>
-        <p><strong>Tổng cộng:</strong> {{ recent_order.get_cart_total|floatformat:2 }}</p>
-        <a href="{% url 'orderdetail' recent_order.id %}" class="btn btn-primary">Xem chi tiết</a>
+        <p><strong>Total:</strong> {{ recent_order.get_cart_total|floatformat:2 }}</p>
+        <a href="{% url 'orderdetail' recent_order.id %}" class="btn btn-primary">More Detail</a>
       </div>
       {% else %}
-        <p>Bạn chưa có đơn hàng nào.</p>
+        <p>You have no orders yet.</p>
       {% endif %}
     </div>
     {% endif %}

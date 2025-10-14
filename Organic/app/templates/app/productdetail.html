@@ -9,7 +9,7 @@
   <!-- Product Detail -->
   <section class="container detail-wrapper">
     <div class="detail-img">
-      <!-- ảnh chính -->
+      <!-- Main Images -->
       <div class="slider">
         {% if product.images.all %}
           {% for img in product.images.all %}
@@ -24,7 +24,7 @@
         {% endif %}
       </div>
 
-      <!-- thumbnail: nằm riêng dưới slider -->
+      <!-- thumbnail -->
       <div class="thumbnails thumbnails-bottom">
         {% for img in product.images.all %}
           <img src="{{ img.image.url }}" 
@@ -33,11 +33,6 @@
         {% endfor %}
       </div>
     </div>
-
-
-
-       
-
   
     </div>
     <div class="detail-info">
@@ -51,8 +46,8 @@
         {% endif %}
       </div>
       <div class="tabs">
-        <button class="tab-btn active" data-tab="desc">Mô tả</button>
-        <button class="tab-btn" data-tab="nutrition">Dinh dưỡng</button>
+        <button class="tab-btn active" data-tab="desc">Description</button>
+        <button class="tab-btn" data-tab="nutrition">Nutrition</button>
       </div>
 
       <div class="tab-content active" id="desc">
@@ -67,7 +62,7 @@
                   <button type="button" class="qty-increase">+</button>
                 </div>
           <input type="hidden" name="quantity" value="1" class="qty-input">
-          <button type="submit" class="btn-primary" style="padding:14px 18px">🛒 Thêm vào giỏ</button>
+          <button type="submit" class="btn-primary" style="padding:14px 18px">🛒 Add to cart</button>
           </div>
       </form>
     </div>
@@ -78,14 +73,14 @@
           <table class="nutrition-table">
             <tr><td>Calo</td><td>{{ product.nutrition.calories }} kcal</td></tr>
             <tr><td>Protein</td><td>{{ product.nutrition.protein }} g</td></tr>
-            <tr><td>Chất béo</td><td>{{ product.nutrition.fat }} g</td></tr>
+            <tr><td>Fat</td><td>{{ product.nutrition.fat }} g</td></tr>
             <tr><td>Carbohydrate</td><td>{{ product.nutrition.carbs }} g</td></tr>
-            <tr><td>Chất xơ</td><td>{{ product.nutrition.fiber }} g</td></tr>
-            <tr><td>Đường</td><td>{{ product.nutrition.sugar }} g</td></tr>
+            <tr><td>Fiber</td><td>{{ product.nutrition.fiber }} g</td></tr>
+            <tr><td>Sugar</td><td>{{ product.nutrition.sugar }} g</td></tr>
             <tr><td>Natri</td><td>{{ product.nutrition.sodium }} mg</td></tr>
           </table>
         {% else %}
-          <p class="subtle">Chưa có thông tin dinh dưỡng cho sản phẩm này.</p>
+          <p class="subtle">There is no nutritional information for this product..</p>
         {% endif %}
       </div>
 
@@ -95,7 +90,7 @@
 
   <!-- Related Products -->
   <section class="container related">
-  <h2>Sản phẩm liên quan</h2>
+  <h2>Related products</h2>
   <div class="grid">
     {% for rp in related_products %}
       <article class="card">
@@ -123,7 +118,7 @@
         </a>
       </article>
     {% empty %}
-      <p class="subtle">Không có sản phẩm liên quan.</p>
+      <p class="subtle">No related products.</p>
     {% endfor %}
   </div>
 </section>

@@ -1,18 +1,20 @@
-
 .nutrition-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 16px;
   font-size: 15px;
 }
+
 .nutrition-table td {
   border: 1px solid var(--gray);
   padding: 8px 12px;
 }
+
 .nutrition-table td:first-child {
   font-weight: bold;
   background: #f9f9f9;
 }
+
 .tabs {
   display: flex;
   gap: 12px;
@@ -46,7 +48,8 @@
 .detail-img {
   flex: 1;
   display: flex;
-  flex-direction: column; /* ép nội dung con xếp dọc */
+  flex-direction: column;
+  /* ép nội dung con xếp dọc */
   align-items: center;
 }
 
@@ -61,9 +64,11 @@
 .slide {
   display: none;
 }
+
 .slide.active {
   display: block;
 }
+
 .slide img {
   width: 100%;
   height: auto;
@@ -75,7 +80,7 @@
 
 .thumb-wrapper {
   position: relative;
-  max-width: 220px; 
+  max-width: 220px;
   margin: 12px auto 0;
   overflow: hidden;
 }
@@ -104,13 +109,17 @@
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   cursor: pointer;
   font-size: 20px;
   padding: 4px 8px;
   border-radius: 4px;
 }
 
-.thumb-nav.prev { left: -35px; }
-.thumb-nav.next { right: -35px; }
+.thumb-nav.prev {
+  left: -35px;
+}
 
+.thumb-nav.next {
+  right: -35px;
+}

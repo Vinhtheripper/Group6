@@ -8,12 +8,6 @@ from django.dispatch import receiver
 from app.models import Product
 
 
-
-
-
-
-
-
 @receiver(post_save, sender=Payment)
 def update_order_status(sender, instance, **kwargs):
     order = instance.order

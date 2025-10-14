@@ -48,7 +48,7 @@ class CartItem(models.Model):
             return f"{self.product.name} x {self.quantity}"
         elif self.combo:
             return f"Combo: {self.combo.name} x {self.quantity}"
-        return "Item không xác định"
+        return "Item undefined"
 
     @property
     def item_name(self):
@@ -56,7 +56,7 @@ class CartItem(models.Model):
             return f"Combo: {self.combo.name}"
         elif self.product:
             return self.product.name
-        return "Không xác định"
+        return "Undefined"
 
     @property
     def item_price(self):

@@ -50,23 +50,23 @@ def applycoupon(cart, code):
     try:
         coupon = Coupon.objects.get(code=code.strip(), active=True)
         if not coupon.is_valid():
-            return None, "Mã giảm giá đã hết hạn hoặc không hợp lệ."
+            return None, "The coupon code has expired or is invalid."
 
         if Decimal(cart.total) < coupon.min_order_value:
-            return None, "Giá trị đơn hàng chưa đạt mức tối thiểu để áp dụng mã này."
+            return None, "The order value has not reached the minimum amount to apply this code."
 
         if coupon.discount_type == "percent":
             discount = Decimal(cart.total) * (coupon.discount_value / Decimal(100))
         elif coupon.discount_type == "fixed":
             discount = coupon.discount_value
         else:
-            return None, "Loại mã giảm giá không hợp lệ."
+            return None, "Invalid coupon code type."
 
         discount = min(discount, Decimal(cart.total))
         return discount, None
 
     except Coupon.DoesNotExist:
-        return None, "Không tìm thấy mã giảm giá."
+        return None, "No coupon code found."
     
 
 

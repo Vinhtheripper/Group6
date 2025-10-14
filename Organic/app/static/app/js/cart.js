@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       quantity = Math.max(1, newQty);
       display.textContent = quantity;
 
-      // Gọi API update (Django view update_quantity)
+      // (Django view update_quantity)
       fetch(`/cart/update/${itemId}/${newQty > quantity ? "increase" : "decrease"}/`)
         .then(() => location.reload());
     }

@@ -64,4 +64,4 @@ class Nutrition(models.Model):
     sodium = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return f"Dinh dưỡng của {self.product.name}"
+        return f"Nutritions of {self.product.name}"

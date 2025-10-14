@@ -1,27 +1,27 @@
 {% extends "app/base.html" %}
 {% load static %}
-{% block title %}GreenNest – Hành trình từ nông trại đến bàn ăn{% endblock %}
+{% block title %}GreenNest – Journey from farm to table{% endblock %}
 {% block content %}
 
 <section class="container farm-wrapper">
-  <!-- Bản đồ -->
+  <!-- Map -->
   <div class="farm-map">
-    <img src="{% static 'app/images/map2.' %}" alt="Bản đồ nông trại Việt Nam">
+    <img src="{% static 'app/images/map2.' %}" alt="Vietnam Farm Map">
     
-    <!-- Marker (vị trí farm) -->
+    <!-- Marker () -->
     <div class="marker" style="top:30%; left:40%;" data-farm="dalat">🌱</div>
     <div class="marker" style="top:55%; left:60%;" data-farm="longan">🍊</div>
     <div class="marker" style="top:50%; left:25%;" data-farm="lamdong">🥬</div>
   </div>
 
-  <!-- Khung thông tin -->
+  <!-- Information frame -->
   <div class="farm-info" id="farmInfo">
     <img src="{% static 'app/images/farms/dalat.jpg' %}" class="farm-photo" alt="Farm">
     <div class="farm-body">
       <span class="badge">VietGAP, USDA Organic</span>
-      <h2>Nông trại Đà Lạt</h2>
-      <p>Nằm trên cao nguyên Lâm Viên, khí hậu mát mẻ quanh năm. Chuyên rau củ quả hữu cơ: xà lách, cà chua bi, dâu tây...</p>
-      <a href="#" class="btn btn-primary">Khám phá nông trại</a>
+      <h2>Da Lat Farm</h2>
+      <p>Located on Lam Vien plateau, cool climate all year round. Specializing in organic vegetables and fruits: lettuce, cherry tomatoes, strawberries...</p>
+      <a href="#" class="btn btn-primary">Explore the farm</a>
     </div>
   </div>
 </section>

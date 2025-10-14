@@ -69,7 +69,7 @@
   
   <!-- Top bar -->
   <div class="bar">
-    <div class="container">Sản phẩm organic được chứng nhận</div>
+    <div class="container">Certified organic products</div>
   </div>
 
   <!-- Header / Navbar -->
@@ -86,14 +86,14 @@
               <path d="M21 21l-3.9-3.9" stroke="#777" stroke-width="2" stroke-linecap="round"/>
               <circle cx="11" cy="11" r="7" stroke="#777" stroke-width="2" fill="none"/>
             </svg>
-            <input type="text" name="q" placeholder="Tìm trái cây, rau, hạt..." value="{{ request.GET.q|default:'' }}">
+            <input type="text" name="q" placeholder="Find fruits, vegetables, nuts..." value="{{ request.GET.q|default:'' }}">
           </form>
         </div>
 
         <a class="icon-btn" href="{% url 'cart' %}">🛒</a>
         <div class="profile">
           {% if request.user.is_authenticated %}
-            <!-- Nếu đã login -->
+            <!-- login -->
             <img src="{% if request.user.customer.customer_image %}{{ request.user.customer.customer_image.url }}{% else %}{% static 'app/images/avtmacdinh.jpeg' %}{% endif %}" 
                 alt="Avatar" class="avatar">
             <div class="dropdown">
@@ -101,7 +101,7 @@
               <a href="{% url 'logout' %}">Logout</a>
             </div>
           {% else %}
-            <!-- Nếu chưa login -->
+            <!-- not login -->
             <a href="{% url 'auth' %}">
               <h3>Login</h3>
             </a>
@@ -123,14 +123,14 @@
     <div class="container foot">
       <div>
         <div class="brand"><div class="logo">G</div><strong>GreenNest</strong></div>
-        <p class="subtle">Cửa hàng thực phẩm hữu cơ thân thiện môi trường. Chúng tôi tin vào sự minh bạch và tươi sạch.</p>
+        <p class="subtle">Environmentally friendly organic food store. We believe in transparency and freshness.</p>
       </div>
       <div>
-        <h4>Liên hệ</h4>
+        <h4>Contact</h4>
         <p class="subtle">support@greennest.vn<br/>0900 123 456</p>
       </div>
       <div>
-        <h4>Theo dõi</h4>
+        <h4>Follow</h4>
         <p class="subtle">Facebook • Instagram • TikTok</p>
       </div>
     </div>

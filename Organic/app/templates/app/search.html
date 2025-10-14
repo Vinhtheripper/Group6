@@ -1,14 +1,14 @@
 {% extends "app/base.html" %}
 {% load static %}
 
-{% block title %}Kết quả tìm kiếm{% endblock %}
+{% block title %}Greenest-search{% endblock %}
 
 {% block content %}
 
 <section class="container" style="margin:28px 0;">
-  <h1 style="font-size:28px;">Kết quả tìm kiếm</h1>
+  <h1 style="font-size:28px;">Search results</h1>
   {% if query %}
-    <p class="subtle">Từ khóa: <strong>{{ query }}</strong> • Tìm thấy {{ results|length }} sản phẩm</p>
+    <p class="subtle">Key Word: <strong>{{ query }}</strong> • There are {{ results|length }} items</p>
   {% endif %}
 </section>
 
@@ -21,7 +21,7 @@
       {% endfor %}
     </div>
   {% else %}
-    <p style="color:var(--muted); text-align:center; margin:40px 0;">Không tìm thấy sản phẩm nào.</p>
+    <p style="color:var(--muted); text-align:center; margin:40px 0;">No products found.</p>
   {% endif %}
 </section>
 

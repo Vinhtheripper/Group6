@@ -4,10 +4,32 @@
 {% block title %}{{ combo.name }} – GreenNest Combo{% endblock %}
 
 {% block content %}
+
 <link rel="stylesheet" href="{% static 'app/css/detail.css' %}">
+<style>
+.combo-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.combo-product {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fafafa;
+  text-align: center;
+}
+.combo-product img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+</style>
 
 <section class="container detail-wrapper">
-  <!-- Ảnh và thông tin combo -->
+  <!-- Images and inf combo -->
   <div class="detail-img">
     <div class="slider">
       {% if combo.image %}
@@ -36,12 +58,12 @@
     </div>
 
     <div class="tabs">
-      <button class="tab-btn active" data-tab="desc">Mô tả</button>
-      <button class="tab-btn" data-tab="products">Sản phẩm trong combo</button>
+      <button class="tab-btn active" data-tab="desc">Description</button>
+      <button class="tab-btn" data-tab="products">Products in combo</button>
     </div>
 
     <div class="tab-content active" id="desc">
-      <p>{{ combo.description|default:"Chưa có mô tả cho combo này." }}</p>
+      <p>{{ combo.description|default:"There is no description for this combo yet." }}</p>
 
       <form method="post" action="{% url 'add_combo_to_cart' combo.id %}" style="margin-top:16px;">
         {% csrf_token %}
@@ -53,7 +75,7 @@
           </div>
           <input type="hidden" name="quantity" value="1" class="qty-input">
           <button type="submit" class="btn-primary" style="padding:14px 18px">
-            🛒 Thêm combo vào giỏ
+            🛒 Add combo to cart
           </button>
         </div>
       </form>
@@ -66,21 +88,21 @@
             <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
             <div>
               <h4>{{ item.product.name }}</h4>
-              <p>Số lượng: {{ item.quantity }}</p>
-              <p>Giá: ${{ item.product.price|floatformat:2 }}</p>
+              <p>Quantity: {{ item.quantity }}</p>
+              <p>Price: ${{ item.product.price|floatformat:2 }}</p>
             </div>
           </div>
         {% empty %}
-          <p class="subtle">Combo này hiện chưa có sản phẩm nào.</p>
+          <p class="subtle">This combo currently has no products.</p>
         {% endfor %}
       </div>
     </div>
   </div>
 </section>
 
-<!-- Gợi ý các combo khác -->
+<!-- Other Combos -->
 <section class="container related">
-  <h2>Combo khác</h2>
+  <h2>Other Combos </h2>
   <div class="grid">
     {% for cb in related_combos %}
       <article class="card">
@@ -97,32 +119,12 @@
         </a>
       </article>
     {% empty %}
-      <p class="subtle">Không có combo liên quan.</p>
+      <p class="subtle">No combo involved.</p>
     {% endfor %}
   </div>
 </section>
 
 <script src="{% static 'app/js/detail.js' %}"></script>
 
-<style>
-.combo-products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-.combo-product {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  background: #fafafa;
-  text-align: center;
-}
-.combo-product img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 6px;
-}
-</style>
+
 {% endblock %}

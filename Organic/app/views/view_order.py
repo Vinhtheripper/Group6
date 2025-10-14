@@ -14,7 +14,7 @@ from .view_utils import applycoupon
 def checkout(request):
     cart = get_or_create_cart(request)
     if not cart.items.exists():
-        messages.warning(request, "Giỏ hàng của bạn đang trống.")
+        messages.warning(request, "Your shopping cart is empty.")
         return redirect("cart")
 
     discount = Decimal(0)
@@ -39,8 +39,7 @@ def checkout(request):
                 messages.warning(request, error)
                 discount = Decimal(0)
             else:
-                messages.success(request, f"Áp dụng mã {coupon_code} thành công! Giảm {discount:,.0f}đ.")
-                # Lưu session để nhớ mã
+                messages.success(request, f"Apply {coupon_code} Successfull! Discount ${discount:,.0f}.")
                 request.session["coupon_code"] = coupon_code
                 request.session["discount_amount"] = float(discount)
             return redirect("checkout")
@@ -124,7 +123,7 @@ def checkout(request):
             for key in ["coupon_code", "discount_amount"]:
                 request.session.pop(key, None)
 
-            messages.success(request, f"Đặt hàng thành công! Giảm {discount:,.0f}đ.")
+            messages.success(request, f"Order successful! Discount ${discount:,.0f}.")
             return redirect("success", order_id=order.id)
         
     return render(request, "app/checkout.html", {

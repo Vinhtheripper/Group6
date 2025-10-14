@@ -11,27 +11,27 @@
 <section class="hero">
   <div class="container hero-wrap">
     <div class="hero-card">
-      <span class="eyebrow">100% Hữu cơ – Giao nhanh trong ngày</span>
-      <h1>Ăn sạch, sống xanh với thực phẩm <span style="color:var(--green)">ORGANIC</span></h1>
-      <p>Chọn lọc từ nông trại đạt chuẩn, quy trình lạnh khép kín, nhãn mác minh bạch.
-         Hãy bắt đầu giỏ hàng lành mạnh ngay hôm nay.</p>
+      <span class="eyebrow">100% Organic – Same Day Delivery</span>
+      <h1>Eat clean, live green with food <span style="color:var(--green)">ORGANIC</span></h1>
+      <p>Selected from standard farms, closed cold process, transparent labels.
+         Start your healthy shopping cart today.</p>
       <div style="display:flex; gap:10px; margin-top:16px">
-        <a class="btn btn-primary" href="{% url 'productlist' %}">Mua ngay</a>
-        <a class="btn btn-ghost" href="{% url 'aboutus' %}">Vì sao chọn GreenNest?</a>
+        <a class="btn btn-primary" href="{% url 'productlist' %}">Buy Now</a>
+        <a class="btn btn-ghost" href="{% url 'aboutus' %}">Why choose GreenNest?</a>
       </div>
 
       <div class="chips">
-        <span class="chip">🥦 Rau củ</span>
-        <span class="chip">🍎 Trái cây</span>
-        <span class="chip">🌾 Ngũ cốc & hạt</span>
-        <span class="chip">🥛 Sữa & chế phẩm</span>
+        <span class="chip">🥦 Vegetable</span>
+        <span class="chip">🍎 Fruit</span>
+        <span class="chip">🌾 Cereals & seeds</span>
+        <span class="chip">🥛 Milk and products</span>
       </div>
 
       <div class="highlights">
-        <div class="badge"><span class="dot"></span>Canh tác không hoá chất</div>
-        <div class="badge"><span class="dot" style="background:var(--orange)"></span>Đóng gói thân thiện</div>
-        <div class="badge"><span class="dot" style="background:var(--brown)"></span>Truy xuất nguồn gốc</div>
-        <div class="badge"><span class="dot" style="background:#7e7e7e"></span>Hoàn tiền 100%</div>
+        <div class="badge"><span class="dot"></span>Chemical-free farming</div>
+        <div class="badge"><span class="dot" style="background:var(--orange)"></span>Friendly packaging</div>
+        <div class="badge"><span class="dot" style="background:var(--brown)"></span>Traceability</div>
+        <div class="badge"><span class="dot" style="background:#7e7e7e"></span>100% Refund</div>
       </div>
     </div>
 
@@ -46,11 +46,11 @@
   </div>
 </section>
 
-<!-- Sản phẩm mới -->
+<!-- New Products -->
 <section id="products" class="container">
   <div class="section-head">
-    <h2>Sản phẩm mới</h2>
-    <a class="btn" style="border:1px solid var(--gray); background:white" href="{% url 'productlist' %}">Xem tất cả →</a>
+    <h2>New Products</h2>
+    <a class="btn" style="border:1px solid var(--gray); background:white" href="{% url 'productlist' %}">See all products →</a>
   </div>
   <div class="grid">
     {% for product in new_products %}
@@ -67,10 +67,10 @@
       <div class="leaf">%</div>
       <div>
         <h3 style="margin:0 0 4px; color:var(--green)">
-          Mã giảm giá: <strong id="couponCode">{{ current_coupon.code }}</strong>
+          Discount code: <strong id="couponCode">{{ current_coupon.code }}</strong>
         </h3>
         <p class="subtle">
-          {{ current_coupon.description|default:"Nhập mã để được ưu đãi đặc biệt!" }}
+          {{ current_coupon.description|default:"Enter code for special offer!" }}
         </p>
       </div>
     </div>
@@ -79,7 +79,7 @@
       type="button" 
       onclick="copyCoupon()"
     >
-      Sao chép mã
+      Copy the code
     </button>
   </div>
 </section>
@@ -87,24 +87,24 @@
 
 
 <section id="about" class="container">
-  <div class="section-head"><h2>Cam kết của chúng tôi</h2></div>
+  <div class="section-head"><h2>Our Commitment</h2></div>
   <div class="grid" style="grid-template-columns:repeat(3,1fr)">
     <div class="card" style="border-color:var(--gray)">
       <div class="content">
-        <h3>Chuỗi lạnh & tươi sạch</h3>
-        <p class="subtle">Bảo quản 0–4°C từ kho đến tay bạn. Bao bì giấy tái chế, mực in đậu nành.</p>
+        <h3>Cold chain & Fresh</h3>
+        <p class="subtle">Store at 0–4°C from warehouse to your door. Recycled paper packaging, soy ink.</p>
       </div>
     </div>
     <div class="card" style="border-color:var(--gray)">
       <div class="content">
-        <h3>Truy xuất nguồn gốc</h3>
-        <p class="subtle">Mỗi sản phẩm đều có mã lô, nông trại, và ngày thu hoạch rõ ràng.</p>
+        <h3>Traceability</h3>
+        <p class="subtle">Each product has a clear batch code, farm, and harvest date.</p>
       </div>
     </div>
     <div class="card" style="border-color:var(--gray)">
       <div class="content">
-        <h3>Đổi trả dễ dàng</h3>
-        <p class="subtle">Không hài lòng? Hoàn tiền 100% trong 48 giờ, không cần giải thích.</p>
+        <h3>Easy returns</h3>
+        <p class="subtle">Not satisfied? 100% refund within 48 hours, no explanation required.</p>
       </div>
     </div>
   </div>
@@ -116,7 +116,7 @@
   function copyCoupon() {
     const code = document.getElementById('couponCode').innerText;
     navigator.clipboard.writeText(code);
-    alert(`Đã sao chép mã: ${code}`);
+    alert(`Code copied: ${code}`);
   }
 </script>
 

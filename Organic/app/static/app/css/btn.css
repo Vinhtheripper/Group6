@@ -3,16 +3,18 @@
     background: var(--green);
     color: white;
     box-shadow: var(--shadow-soft);
-    border: none;          
-    outline: none !important; 
+    border: none;
+    outline: none !important;
 }
+
 .btn.btn-primary:hover,
 .btn-primary:hover {
     transform: translateY(-2px);
     filter: saturate(110%);
 }
+
 .btn.btn-primary:focus,
 .btn-primary:focus {
     outline: none !important;
-    box-shadow: var(--shadow-soft); 
+    box-shadow: var(--shadow-soft);
 }

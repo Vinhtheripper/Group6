@@ -36,7 +36,7 @@ class Certification(models.Model):
 
     @property
     def style_colors(self):
-        """Trả về 3 màu: nền, chữ, viền"""
+        
         mapping = {
             "pill-green": {
                 "bg": "#eef7e8",

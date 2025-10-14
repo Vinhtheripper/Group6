@@ -42,8 +42,8 @@ def editaccount(request):
                 customer.customer_image = request.FILES["customer_image"]
             customer.save()
 
-        messages.success(request, "Cập nhật thông tin thành công!")
-        return redirect("myaccount")  # reload lại trang chính
+
+        return redirect("myaccount")  
 
     return redirect("myaccount")
 
@@ -65,15 +65,15 @@ def authpage(request):
 
             # Kiểm tra trùng mật khẩu
             if password1 != password2:
-                messages.error(request, "Mật khẩu không trùng khớp.")
+                messages.error(request, "Passwords do not match.")
                 return render(request, "app/auth.html", {"active_form": "register"})
 
             # Kiểm tra trùng username hoặc email
             if User.objects.filter(username=username).exists():
-                messages.error(request, "Tên đăng nhập đã tồn tại.")
+                messages.error(request, "The username already exists.")
                 return render(request, "app/auth.html", {"active_form": "register"})
             if User.objects.filter(email=email).exists():
-                messages.error(request, "Email đã được sử dụng.")
+                messages.error(request, "Email is already in use.")
                 return render(request, "app/auth.html", {"active_form": "register"})
 
             # Tạo user
@@ -89,7 +89,7 @@ def authpage(request):
             full_name = f"{first_name} {last_name}".strip() or username
             Customer.objects.get_or_create(user=user, defaults={"name": full_name})
 
-            messages.success(request, "Đăng ký thành công! Vui lòng đăng nhập.")
+            messages.success(request, "Registration successful! Please log in.")
             return render(request, "app/auth.html", {"active_form": "login"})
 
         # Nếu là đăng nhập
@@ -101,7 +101,7 @@ def authpage(request):
                 user_obj = User.objects.get(email=identifier)
                 username = user_obj.username
             except User.DoesNotExist:
-                messages.error(request, "Email không tồn tại.")
+                messages.error(request, "Email does not exist.")
                 return render(request, "app/auth.html", {"active_form": "login"})
         else:
             username = identifier
@@ -111,7 +111,7 @@ def authpage(request):
             login(request, user)
             return redirect('home')
 
-        messages.error(request, "Sai tài khoản hoặc mật khẩu.")
+        messages.error(request, "Wrong account or password.")
         return render(request, "app/auth.html", {"active_form": "login"})
 
     # Mặc định hiển thị login

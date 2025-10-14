@@ -33,7 +33,7 @@
                   padding:2px 8px;
                   border-radius:999px;
                   font-weight:600;">
-            Giảm {{ product.discount_percentage|floatformat:0 }}%
+            Discount {{ product.discount_percentage|floatformat:2 }}%
           </div>
         {% endif %}
       </div>
@@ -57,7 +57,7 @@
               <button type="button" class="qty-increase">+</button>
             </div>
             <input type="hidden" name="quantity" value="1" class="qty-input">
-            <button type="submit" class="btn-primary" style="padding:8px 12px">Thêm</button>
+            <button type="submit" class="btn-primary" style="padding:8px 12px">Add</button>
           </div>
         </form>
       </div>

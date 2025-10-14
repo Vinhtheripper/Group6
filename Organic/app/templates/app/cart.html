@@ -1,21 +1,21 @@
 {% extends "app/base.html" %}
 {% load static %}
 
-{% block title %}Giỏ hàng – GreenNest{% endblock %}
+{% block title %}Cart – GreenNest{% endblock %}
 
 {% block content %}
 <section class="container" style="margin:28px 0;">
-  <h1 style="font-size:32px; margin-bottom:8px;">Giỏ hàng</h1>
+  <h1 style="font-size:32px; margin-bottom:8px;">Shopping cart</h1>
 </section>
 
 <section class="container">
   <table class="cart-table">
     <thead>
       <tr>
-        <th>Sản phẩm</th>
-        <th>Giá</th>
-        <th>Số lượng</th>
-        <th>Tạm tính</th>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Tem calculated</th>
         <th></th>
       </tr>
     </thead>
@@ -54,7 +54,7 @@
       {% else %}
         <tr>
           <td colspan="5" style="text-align:center; color:var(--gray); padding:20px 0;">
-            Giỏ hàng của bạn đang trống.
+            Your shopping cart is empty.
           </td>
         </tr>
       {% endif %}
@@ -65,21 +65,21 @@
 <!-- Tổng kết -->
 <section class="container">
   <div class="cart-summary">
-    <h3>Tổng đơn hàng</h3>
+    <h3>Total Order</h3>
     <div class="summary-row">
-      <span>Tổng số mặt hàng:</span>
+      <span>Total items:</span>
       <span>{{ cart.items.count }}</span>  
     </div>
     <div class="summary-row">
-      <span>Tạm tính:</span>
+      <span>Tem calculated:</span>
       <span>${{ cart.subtotal|floatformat:2 }}</span>
     </div>
     <div class="summary-row">
-      <strong>Tổng cộng:</strong>
+      <strong>Total:</strong>
       <strong>${{ cart.total|floatformat:2 }}</strong>
     </div>
     <a href="{% url 'checkout' %}" class="btn btn-primary" style="margin-top:16px; display:block; text-align:center;">
-      Thanh toán
+      Payment
     </a>
   </div>
 </section>

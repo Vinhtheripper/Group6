@@ -16,20 +16,25 @@
   <section class="container order-wrapper">
     <!-- Left -->
     <div class="order-card">
-      <h2>Đơn hàng {{ order.id }}</h2>
+      <h2>Order {{ order.id }}</h2>
       <div class="order-status">
-        <p><strong>Ngày đặt:</strong> {{ order.date_order|date:"d/m/Y H:i" }}</p>
-        <p><strong>Trạng thái:</strong> {{ order.get_status_display }}</p>
+        <p><strong>Date:</strong> {{ order.date_order|date:"d/m/Y H:i" }}</p>
+        <p><strong>Status:</strong> {{ order.get_status_display }}</p>
         <div class="progress">
-          <div class="progress-step {{ s1 }}"><div class="circle"></div><p>Đã đặt</p></div>
-          <div class="progress-step {{ s2 }}"><div class="circle"></div><p>Đang xử lý</p></div>
-          <div class="progress-step {{ s3 }}"><div class="circle"></div><p>Đã xác nhận</p></div>
-          <div class="progress-step {{ s4 }}"><div class="circle"></div><p>Hoàn tất</p></div>
+          <div class="progress-step {{ s1 }}"><div class="circle"></div><p>Ordered</p></div>
+          <div class="progress-step {{ s2 }}"><div class="circle"></div><p>Processing</p></div>
+          <div class="progress-step {{ s3 }}"><div class="circle"></div><p>Confirmed</p></div>
+          <div class="progress-step {{ s4 }}"><div class="circle"></div><p>Completed</p></div>
         </div>
       </div>
       <table class="order-table">
         <thead>
-          <tr><th>Sản phẩm</th><th>SL</th><th>Giá</th><th>Tổng</th></tr>
+          <tr>
+            <th>Items</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
         </thead>
         <tbody>
         {% for item in order.orderitem_set.all %}
@@ -47,7 +52,7 @@
             <td>${{ item.get_total|floatformat:2 }}</td>
           </tr>
         {% empty %}
-          <tr><td colspan="4" class="subtle">Không có sản phẩm nào trong đơn hàng.</td></tr>
+          <tr><td colspan="4" class="subtle">There are no products in the order.</td></tr>
         {% endfor %}
       </tbody>
       </table>
@@ -55,21 +60,21 @@
 
     <!-- Right -->
     <div class="order-card">
-      <h2>Tóm tắt</h2>
-      <div class="summary-row"><span>Tạm tính</span><span>${{ order.get_cart_total|floatformat:2 }}</span></div>
-      <div class="summary-row"><span>Phí ship</span><span>{% if order.delivery %} {{ order.delivery.get_status_display }} {% else %}Miễn phí{% endif %}</span></div>
+      <h2>Order Summary</h2>
+      <div class="summary-row"><span>Tem calculated</span><span>${{ order.get_cart_total|floatformat:2 }}</span></div>
+      <div class="summary-row"><span>Shipping cost</span><span>{% if order.delivery %} {{ order.delivery.get_status_display }} {% else %}Free{% endif %}</span></div>
       <div class="summary-row">
-        <span>Thanh toán:</span>
+        <span>Payment Status:</span>
         <span>
           {% if order.payment %}
             {{ order.payment.get_status_display }}
           {% else %}
-            Chưa có thanh toán
+            No payment yet
           {% endif %}
         </span>
       </div>
 
-      <div class="summary-row"><strong>Tổng cộng</strong><strong>${{ order.get_cart_total|floatformat:2 }}</strong></div>
+      <div class="summary-row"><strong>Total</strong><strong>${{ order.get_cart_total|floatformat:2 }}</strong></div>
       
     </div>
   </section>
