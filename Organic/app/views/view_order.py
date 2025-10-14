@@ -1,6 +1,5 @@
 from .view_cart import get_or_create_cart
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
 from app.models import  Order, OrderItem, ShippingAddress,Payment, Customer, Coupon
 from django.contrib.auth.decorators import login_required
 from django.utils.crypto import get_random_string

@@ -1,0 +1,90 @@
+# =========================================
+# 🧠 FLASK / PYTHON PROJECT IGNORE TEMPLATE
+# Project: Libra Bookstore
+# =========================================
+
+# 🧱 Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.pyenv/
+
+# 🧹 Python cache & compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 🧾 Database files (SQLite, instance)
+instance/
+*.db
+*.sqlite3
+
+# 🧰 Flask / Werkzeug logs
+*.log
+*.pot
+*.pid
+*.bak
+
+# 🧑‍💻 IDE / Editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 🧱 macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# 🧾 Environment & config secrets
+.env
+.env.*
+*.key
+*.pem
+
+# 🧮 Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+
+# 🧩 PyInstaller
+*.manifest
+*.spec
+
+# 📦 Jupyter & notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# 🧾 Coverage / test reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+*.cover
+coverage.xml
+nosetests.xml
+test-results/
+
+# 📸 Flask upload folders (optional)
+static/uploads/
+uploads/
+
+# 🪄 Frontend build outputs (if you later add React/Vue)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
