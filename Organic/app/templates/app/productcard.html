@@ -33,7 +33,7 @@
                   padding:2px 8px;
                   border-radius:999px;
                   font-weight:600;">
-            Discount {{ product.discount_percentage|floatformat:2 }}%
+            Sale {{ product.discount_percentage|floatformat:0 }}%
           </div>
         {% endif %}
       </div>
