@@ -16,3 +16,7 @@ def policy(request):
 
 def contact(request):
     return render(request, 'app/contact.html')
+
+
+def index(request):
+    return render(request, 'app/index.html')

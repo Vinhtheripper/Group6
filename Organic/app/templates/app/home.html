@@ -1,123 +1,387 @@
 {% extends "app/base.html" %}
 {% load static %}
-
 {% block title %}GreenNest – Organic Market{% endblock %}
 
 {% block content %}
 
+<link rel="stylesheet" href="{% static 'app/css/homepage.css' %}">
 
+<style>
+/* NEW PRODUCTS SECTION */
+#products {
+    padding: 60px 0;
+}
+
+#products .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#products .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    justify-items: center;
+    width: 90%;
+    margin: 0 auto;
+    
+}
+
+
+
+
+</style>
 
 <!-- Hero -->
-<section class="hero">
-  <div class="container hero-wrap">
-    <div class="hero-card">
-      <span class="eyebrow">100% Organic – Same Day Delivery</span>
-      <h1>Eat clean, live green with food <span style="color:var(--green)">ORGANIC</span></h1>
-      <p>Selected from standard farms, closed cold process, transparent labels.
-         Start your healthy shopping cart today.</p>
-      <div style="display:flex; gap:10px; margin-top:16px">
-        <a class="btn btn-primary" href="{% url 'productlist' %}">Buy Now</a>
-        <a class="btn btn-ghost" href="{% url 'aboutus' %}">Why choose GreenNest?</a>
-      </div>
 
-      <div class="chips">
-        <span class="chip">🥦 Vegetable</span>
-        <span class="chip">🍎 Fruit</span>
-        <span class="chip">🌾 Cereals & seeds</span>
-        <span class="chip">🥛 Milk and products</span>
-      </div>
+<section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    
+                    <span class="badge-text">100% Organic & Fresh</span>
+                </div>
 
-      <div class="highlights">
-        <div class="badge"><span class="dot"></span>Chemical-free farming</div>
-        <div class="badge"><span class="dot" style="background:var(--orange)"></span>Friendly packaging</div>
-        <div class="badge"><span class="dot" style="background:var(--brown)"></span>Traceability</div>
-        <div class="badge"><span class="dot" style="background:#7e7e7e"></span>100% Refund</div>
-      </div>
-    </div>
+                <h1 class="hero-title">
+                    Eat Better,<br>
+                    <span class="hero-title-highlight">Live Healthier</span>
+                </h1>
 
-    <div class="hero-visual">
-      <div class="card">
-        <div class="ph"></div>
-        <div class="ph orange"></div>
-        <div class="ph brown"></div>
-        <div class="ph"></div>
-      </div>
-    </div>
-  </div>
-</section>
+                <p class="hero-description">
+                    Farm-fresh organic meals delivered to your door. No prep, no mess, just pure nutrition.
+                </p>
+
+                <div class="hero-cta-group">
+                    <a href="{% url 'productlist' %}" class="btn-hero-primary">
+                        <span>Shop Now</span>
+                        <i class="lni lni-arrow-right"></i>
+                    </a>
+                    <a href="#meal-planner" class="btn-hero-secondary">
+                        <span>Plan Your Meals</span>
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Happy Customers</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Organic</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Delivery</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-image-card">
+                    <img src="{% static 'app/images/banner3.jpg' %}" alt="Fresh Organic Salad Bowl" class="hero-main-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         VALUE PROPOSITIONS - Why Choose Us
+         ========================================== -->
+    <section class="value-props-section">
+        <div class="container">
+            <div class="value-props-grid">
+                <div class="value-prop-card">
+                    <div class="prop-icon">🌿</div>
+                    <h3 class="prop-title">100% Organic</h3>
+                    <p class="prop-text">Certified organic ingredients from local farms</p>
+                </div>
+                <div class="value-prop-card">
+                    <div class="prop-icon">👨‍🍳</div>
+                    <h3 class="prop-title">Chef-Crafted</h3>
+                    <p class="prop-text">Expertly prepared by professional chefs</p>
+                </div>
+                <div class="value-prop-card">
+                    <div class="prop-icon">🚚</div>
+                    <h3 class="prop-title">Fast Delivery</h3>
+                    <p class="prop-text">Fresh meals delivered within 24 hours</p>
+                </div>
+                <div class="value-prop-card">
+                    <div class="prop-icon">💚</div>
+                    <h3 class="prop-title">Eco-Friendly</h3>
+                    <p class="prop-text">Sustainable packaging, zero waste</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 <!-- New Products -->
-<section id="products" class="container">
-  <div class="section-head">
-    <h2>New Products</h2>
-    <a class="btn" style="border:1px solid var(--gray); background:white" href="{% url 'productlist' %}">See all products →</a>
-  </div>
-  <div class="grid">
-    {% for product in new_products %}
-    {% include 'app/productcard.html' %}
-    {% endfor %}
+<section id="products" class="section-header-product">
+  <div class="section-header-center">
+                <h2 class="section-title">This Week's New Items</h2>
+                <p class="section-subtitle">Handpicked meals that our customers love</p>
+            </div>
+                <div class="grid">
+                    {% for product in new_products %}
+                    {% include 'app/productcard.html' %}
+                    {% endfor %}
+                </div>
+                <br><br>
+                <div class="section-cta">
+                <a href="{% url 'productlist' %}" class="btn-view-all">
+                    <span>View All Products</span>
+                    <i class="lni lni-arrow-right"></i>
+                </a>
+            </div>
+</section>
+
+
+
+<section class="voucher-section">
+  <div class="container">
+    <div class="section-header-center">
+      <h2 class="section-title">💎 Exclusive Deals & Offers</h2>
+      <p class="section-subtitle">Grab your discount before it’s gone!</p>
+    </div>
+
+    <div class="vouchers-grid">
+      {% for voucher in vouchers %}
+      <div class="voucher-card {% if current_coupon and current_coupon.id == voucher.id %}highlight{% endif %}">
+        {% if current_coupon and current_coupon.id == voucher.id %}
+        <div class="active-badge">🔥 Active Now</div>
+        {% endif %}
+
+        <div class="voucher-content">
+          <div class="voucher-header">
+            <div class="voucher-icon">
+              {% if current_coupon and current_coupon.id == voucher.id %}
+              🔥
+              {% else %}
+              🎁
+              {% endif %}
+            </div>
+            <div class="voucher-info">
+              <h3 class="voucher-title">{{ voucher.name|default:"Special Offer" }}</h3>
+              <p class="voucher-desc">{{ voucher.description|default:"Enjoy this exclusive deal!" }}</p>
+            </div>
+          </div>
+
+          <div class="voucher-body">
+            <div class="discount-amount">
+              {% if voucher.discount_amount %}
+              {{ voucher.discount_amount }}% OFF
+              {% else %}
+              Discount Available
+              {% endif %}
+            </div>
+            <div class="voucher-details">
+              {% if voucher.min_spend %}
+              <div class="detail-item">
+                <span class="detail-icon">💰</span>
+                <span class="detail-text">Min. spend ${{ voucher.min_spend }}</span>
+              </div>
+              {% endif %}
+              {% if voucher.expiry_date %}
+              <div class="detail-item">
+                <span class="detail-icon">📅</span>
+                <span class="detail-text">Valid until {{ voucher.expiry_date }}</span>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="voucher-footer">
+            <div class="voucher-code-wrapper">
+              <span class="code-label">Code:</span>
+              <span class="voucher-code" data-code="{{ voucher.code }}">{{ voucher.code }}</span>
+            </div>
+            <button class="btn-copy-code" data-code="{{ voucher.code }}">
+              <i class="lni lni-files"></i>
+              <span>Copy</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p class="no-voucher">No vouchers available at the moment.</p>
+      {% endfor %}
+    </div>
   </div>
 </section>
 
 
-{% if current_coupon %}
-<section class="container">
-  <div class="cta">
-    <div class="left">
-      <div class="leaf">%</div>
-      <div>
-        <h3 style="margin:0 0 4px; color:var(--green)">
-          Discount code: <strong id="couponCode">{{ current_coupon.code }}</strong>
-        </h3>
-        <p class="subtle">
-          {{ current_coupon.description|default:"Enter code for special offer!" }}
-        </p>
-      </div>
-    </div>
-    <button 
-      class="btn btn-primary" 
-      type="button" 
-      onclick="copyCoupon()"
-    >
-      Copy the code
-    </button>
-  </div>
-</section>
-{% endif %}
+    <!-- ==========================================
+         MEAL PLANNER AUTOMATION - Redesigned
+         ========================================== -->
+    <section class="meal-planner-section" id="meal-planner">
+        <div class="container">
+            <div class="planner-layout">
+                <!-- Left Side: Info & Benefits -->
+                <div class="planner-info">
+                    <div class="info-badge">
+                        <span class="badge-icon">🤖</span>
+                        <span class="badge-text">Smart Meal Planning</span>
+                    </div>
 
+                    <h2 class="planner-title">Automate Your Weekly Meals</h2>
+                    <p class="planner-subtitle">Answer a few questions and let us create your perfect meal plan</p>
 
-<section id="about" class="container">
-  <div class="section-head"><h2>Our Commitment</h2></div>
-  <div class="grid" style="grid-template-columns:repeat(3,1fr)">
-    <div class="card" style="border-color:var(--gray)">
-      <div class="content">
-        <h3>Cold chain & Fresh</h3>
-        <p class="subtle">Store at 0–4°C from warehouse to your door. Recycled paper packaging, soy ink.</p>
-      </div>
-    </div>
-    <div class="card" style="border-color:var(--gray)">
-      <div class="content">
-        <h3>Traceability</h3>
-        <p class="subtle">Each product has a clear batch code, farm, and harvest date.</p>
-      </div>
-    </div>
-    <div class="card" style="border-color:var(--gray)">
-      <div class="content">
-        <h3>Easy returns</h3>
-        <p class="subtle">Not satisfied? 100% refund within 48 hours, no explanation required.</p>
-      </div>
-    </div>
-  </div>
-</section>
+                    <div class="planner-benefits">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">⏰</div>
+                            <div class="benefit-content">
+                                <h4>Save Time</h4>
+                                <p>No more meal planning stress</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🎯</div>
+                            <div class="benefit-content">
+                                <h4>Personalized</h4>
+                                <p>Tailored to your preferences</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">💰</div>
+                            <div class="benefit-content">
+                                <h4>Save Money</h4>
+                                <p>Reduce food waste by 40%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trust-indicators">
+                        <div class="trust-item">
+                            <span class="trust-number">10,000+</span>
+                            <span class="trust-label">Active Plans</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-number">4.9★</span>
+                            <span class="trust-label">Average Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Meal Planner Form -->
+                <div class="planner-form-container">
+                    <form class="meal-planner-form" id="mealPlannerForm">
+                        <div class="form-header">
+                            <h3 class="form-title">Create Your Plan</h3>
+                            <p class="form-subtitle">Takes less than 2 minutes</p>
+                        </div>
+
+                        <div class="form-step active" data-step="1">
+                            <div class="form-group">
+                                <label class="form-label">How many meals per week?</label>
+                                <div class="meals-selector">
+                                    <button type="button" class="meal-option" data-value="5">
+                                        <span class="option-number">5</span>
+                                        <span class="option-label">Meals</span>
+                                    </button>
+                                    <button type="button" class="meal-option active" data-value="10">
+                                        <span class="option-number">10</span>
+                                        <span class="option-label">Meals</span>
+                                        <span class="option-badge">Popular</span>
+                                    </button>
+                                    <button type="button" class="meal-option" data-value="15">
+                                        <span class="option-number">15</span>
+                                        <span class="option-label">Meals</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Dietary preferences</label>
+                                <div class="checkbox-grid">
+                                    <label class="checkbox-card">
+                                        <input type="checkbox" name="diet" value="vegetarian">
+                                        <span class="checkbox-icon">🥬</span>
+                                        <span class="checkbox-label">Vegetarian</span>
+                                    </label>
+                                    <label class="checkbox-card">
+                                        <input type="checkbox" name="diet" value="vegan">
+                                        <span class="checkbox-icon">🌱</span>
+                                        <span class="checkbox-label">Vegan</span>
+                                    </label>
+                                    <label class="checkbox-card">
+                                        <input type="checkbox" name="diet" value="keto">
+                                        <span class="checkbox-icon">🥑</span>
+                                        <span class="checkbox-label">Keto</span>
+                                    </label>
+                                    <label class="checkbox-card">
+                                        <input type="checkbox" name="diet" value="paleo">
+                                        <span class="checkbox-icon">🥩</span>
+                                        <span class="checkbox-label">Paleo</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-step" data-step="2">
+                            <div class="form-group">
+                                <label class="form-label">What's your goal?</label>
+                                <div class="goal-selector">
+                                    <label class="goal-card">
+                                        <input type="radio" name="goal" value="weight-loss">
+                                        <div class="goal-content">
+                                            <span class="goal-icon">📉</span>
+                                            <span class="goal-title">Weight Loss</span>
+                                            <span class="goal-desc">Calorie-controlled meals</span>
+                                        </div>
+                                    </label>
+                                    <label class="goal-card">
+                                        <input type="radio" name="goal" value="muscle-gain">
+                                        <div class="goal-content">
+                                            <span class="goal-icon">💪</span>
+                                            <span class="goal-title">Muscle Gain</span>
+                                            <span class="goal-desc">High protein options</span>
+                                        </div>
+                                    </label>
+                                    <label class="goal-card">
+                                        <input type="radio" name="goal" value="maintenance">
+                                        <div class="goal-content">
+                                            <span class="goal-icon">⚖️</span>
+                                            <span class="goal-title">Maintenance</span>
+                                            <span class="goal-desc">Balanced nutrition</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Email address</label>
+                                <input type="email" class="form-input" placeholder="your@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn-form-prev" style="display: none;">
+                                <i class="lni lni-arrow-left"></i>
+                                <span>Back</span>
+                            </button>
+                            <button type="button" class="btn-form-next">
+                                <span>Continue</span>
+                                <i class="lni lni-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="form-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 50%;"></div>
+                            </div>
+                            <span class="progress-text">Step 1 of 2</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
 <script src="{% static 'app/js/home.js' %}"></script>
 
-<script>
-  function copyCoupon() {
-    const code = document.getElementById('couponCode').innerText;
-    navigator.clipboard.writeText(code);
-    alert(`Code copied: ${code}`);
-  }
-</script>
 
 {% endblock %}

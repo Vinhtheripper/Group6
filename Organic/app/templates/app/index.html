@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to GreenNest - Organic & Fresh Food</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #spline-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        iframe {
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Overlay Navigation */
+        .overlay-nav {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(124, 179, 66, 0.2);
+        }
+
+        .nav-btn {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #7CB342;
+            border-radius: 25px;
+            color: #3E2723;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(124, 179, 66, 0.15);
+        }
+
+        .nav-btn:hover {
+            background: #7CB342;
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(124, 179, 66, 0.3);
+        }
+
+        .nav-btn.primary {
+            background: #FFB74D;
+            border-color: #FFB74D;
+            color: white;
+        }
+
+        .nav-btn.primary:hover {
+            background: #FFA726;
+            border-color: #FFA726;
+        }
+
+        /* Logo Overlay */
+        .logo-overlay {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(124, 179, 66, 0.2);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #7CB342, #558B2F);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #3E2723;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: #7CB342;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .overlay-nav {
+                flex-direction: column;
+                bottom: 30px;
+                gap: 12px;
+                padding: 15px;
+            }
+
+            .nav-btn {
+                padding: 12px 24px;
+                font-size: 14px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .logo-overlay {
+                top: 20px;
+                left: 20px;
+                padding: 12px 20px;
+            }
+
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="spline-container">
+        <!-- Spline 3D Scene -->
+        <iframe src='https://my.spline.design/r4xbot-pPreFCJYiCDy4lQDYTQ7pqsm/' frameborder='0' width='100%'
+            height='100%'></iframe>
+
+        <!-- Logo Overlay -->
+        <div class="logo-overlay">
+            <div class="logo-icon">🌿</div>
+            <div class="logo-text">Green<span>Nest</span></div>
+        </div>
+
+        <!-- Interactive Navigation Overlay -->
+        <div class="overlay-nav">
+            <a href="{% url 'home' %}" class="nav-btn primary">
+                <span>🛒</span> Shop Products
+            </a>
+            <a href="blog.html" class="nav-btn">
+                <span>📖</span> Our Blog
+            </a>
+            <a href="login.html" class="nav-btn">
+                <span>👤</span> Sign In
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

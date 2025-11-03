@@ -1,161 +1,219 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{% block title %}Organic Project{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'app/css/main.css' %}">
-  <link rel="stylesheet" href="{% static 'app/css/btn.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenNest - Organic & Fresh Food Store</title>
+    <link rel="stylesheet" href="{% static 'app/css/header_footer.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/neo_brutalism_global.css' %}">
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css">
 </head>
-<style>
-/* profile dropdown */
-.profile {
-  position: relative;
-  display: inline-block;
-}
 
-.avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-/* Dropdown */
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;         
-  right: 0;
-  background: white;
-  border: 1px solid var(--gray);
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  min-width: 160px;
-  z-index: 99;
-  padding-top: 6px;  
-}
-
-.profile:hover .dropdown,
-.dropdown:hover {
-  display: block;
-}
-
-.profile::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  height: 8px; 
-}
-
-/* Link */
-.dropdown a {
-  display: block;
-  padding: 10px 14px;
-  color: var(--text);
-  font-size: 14px;
-  text-decoration: none;
-}
-
-.dropdown a:hover {
-  background: #f5f5f5;
-  color: var(--green);
-}
-</style>
 <body>
-  
-  <!-- Top bar -->
-  <div class="bar">
-    <div class="container">Certified organic products</div>
-  </div>
-
-  <!-- Header / Navbar -->
-  <header>
-    <div class="container nav">
-      <a class="brand" href="{% url 'home' %}">
-        <div class="logo">G</div>
-        <span>GreenNest</span>
-      </a>
-      <nav class="nav-right">
-        <div class="search">
-          <form method="get" action="{% url 'search' %}" style="display:flex; align-items:center; gap:8px;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M21 21l-3.9-3.9" stroke="#777" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="11" cy="11" r="7" stroke="#777" stroke-width="2" fill="none"/>
-            </svg>
-            <input type="text" name="q" placeholder="Find fruits, vegetables, nuts..." value="{{ request.GET.q|default:'' }}">
-          </form>
-        </div>
-
-        <a class="icon-btn" href="{% url 'cart' %}">🛒</a>
-        <div class="profile">
-          {% if request.user.is_authenticated %}
-            <!-- login -->
-            <img src="{% if request.user.customer.customer_image %}{{ request.user.customer.customer_image.url }}{% else %}{% static 'app/images/avtmacdinh.jpeg' %}{% endif %}" 
-                alt="Avatar" class="avatar">
-            <div class="dropdown">
-              <a href="{% url 'myaccount' %}">My Account</a>
-              <a href="{% url 'logout' %}">Logout</a>
-            </div>
-          {% else %}
-            <!-- not login -->
-            <a href="{% url 'auth' %}">
-              <h3>Login</h3>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="{% url 'home' %}" class="logo">
+                <div class="logo-icon">🌿</div>
+                <span class="logo-text">Green<span>Nest</span></span>
             </a>
-          {% endif %}
+
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li class="nav-item active">
+                        <a href="{% url 'home' %}" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="#" class="nav-link">
+                            Products <i class="lni lni-chevron-down"></i> </a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-grid">
+                                <div class="mega-menu-column">
+                                    <h4>🥬 Fresh Produce</h4>
+                                    <ul>
+                                        <li><a href="#">Organic Vegetables</a></li>
+                                        <li><a href="#">Fresh Fruits</a></li>
+                                        <li><a href="#">Salad Greens</a></li>
+                                        <li><a href="#">Herbs & Spices</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-column">
+                                    <h4>🥛 Dairy & Eggs</h4>
+                                    <ul>
+                                        <li><a href="#">Organic Milk</a></li>
+                                        <li><a href="#">Cheese Selection</a></li>
+                                        <li><a href="#">Fresh Yogurt</a></li>
+                                        <li><a href="#">Free-Range Eggs</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-column">
+                                    <h4>🍞 Bakery & Grains</h4>
+                                    <ul>
+                                        <li><a href="#">Artisan Bread</a></li>
+                                        <li><a href="#">Organic Rice</a></li>
+                                        <li><a href="#">Pasta & Noodles</a></li>
+                                        <li><a href="#">Breakfast Cereals</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Promotions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Our Stories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-tools">
+                <div class="header-search">
+                    <form action="{% url 'search' %}" method="GET" class="search-form">
+                        <input type="text" name="q" placeholder="Search..." class="search-input"
+                            value="{{ request.GET.q|default:'' }}">
+                        <button type=" submit" class="search-btn" aria-label="Submit search">
+                            <i class="lni lni-search-alt"></i> </button>
+                    </form>
+                </div>
+
+                <div class="wishlist-wrapper">
+                    <a href="#" class="icon-btn" aria-label="Wishlist">
+                        <i class="lni lni-heart"></i> <span class="badge">3</span>
+                    </a>
+                    <div class="wishlist-dropdown">
+                        <h4>Wishlist</h4>
+                        <div class="wishlist-items">
+                            <p class="empty-wishlist-msg">Your wishlist is empty</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-wrapper">
+                    <a href="{% url 'cart' %}" class="icon-btn" aria-label="Shopping Cart">
+                        <i class="lni lni-cart"></i> <span class="badge">{{ cart.items.count|default:0 }}</span>
+                    </a>
+                </div>
+                <div class="user-wrapper">
+                    {% if request.user.is_authenticated %}
+                    <a href="#" class="icon-btn" aria-label="Account">
+                        <i class="lni lni-user"></i>
+                    </a>
+                    <div class="user-dropdown">
+                        <h4>My Account</h4>
+                        <ul class="user-menu">
+                            <li><a href="{% url 'myaccount' %}"><i class="lni lni-user"></i> My Profile</a></li>
+                            <li><a href="{% url 'logout' %}"><i class="lni lni-exit"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                    {% else %}
+                    <!-- not login -->
+                    <a href="{% url 'auth' %}">
+                        <h4>Login</h4>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
+    </header>
 
-      </nav>
-    </div>
-  </header>
- 
-  <!-- Main content -->
-  <main>
-    {% block content %}{% endblock %}
-  </main>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
 
+    <footer class="newsletter-footer">
+        <div class="footer-container">
+            <div class="footer-links-side">
+                <div class="footer-column">
+                    <h4 class="footer-links-title">Our Product</h4>
+                    <ul>
+                        <li><a href="#">Meal Kits</a></li>
+                        <li><a href="#">Ready To Eat</a></li>
+                        <li><a href="#">Grocery</a></li>
+                        <li><a href="#">Frozen Meals</a></li>
+                        <li><a href="#">Why Plants</a></li>
+                        <li><a href="#">All Recipes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-links-title">Help</h4>
+                    <ul>
+                        <li><a href="#">Plans</a></li>
+                        <li><a href="#">Recycle</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-links-title">Connect</h4>
+                    <ul>
+                        <li><a href="#">Refer and Earn</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Partnerships</a></li>
+                        <li><a href="#">Affiliate Program</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container foot">
-      <div>
-        <div class="brand"><div class="logo">G</div><strong>GreenNest</strong></div>
-        <p class="subtle">Environmentally friendly organic food store. We believe in transparency and freshness.</p>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <p class="subtle">support@greennest.vn<br/>0900 123 456</p>
-      </div>
-      <div>
-        <h4>Follow</h4>
-        <p class="subtle">Facebook • Instagram • TikTok</p>
-      </div>
-    </div>
-    <div class="credits"></div>
-  </footer>
+            <div class="footer-content-side">
+                <h2 class="footer-title">Get to Know Us Better</h2>
+                <p class="footer-description">Join our newsletter and save 10% off your first order</p>
 
-  <!-- Scripts -->
-  <script>
-  
-    window.addEventListener("beforeunload", () => {
-      localStorage.setItem(location.pathname + "_scroll", window.scrollY);
-    });
+                <form class="newsletter-form">
+                    <input type="email" class="email-input" placeholder="Email Address" required>
+                    <button type="submit" class="join-button">JOIN</button>
+                </form>
 
-    window.addEventListener("load", () => {
-      const key = location.pathname + "_scroll";
-      const pos = localStorage.getItem(key);
-      if (pos) {
-        window.scrollTo(0, pos);
-        localStorage.removeItem(key);
-      }
-    });
+                <p class="error-message" style="display: none;">Please enter your email address.</p>
+
+                <div class="social-media-section">
+                    <p class="social-title">Follow us on social media</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" aria-label="Instagram">
+                            <i class="lni lni-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Facebook">
+                            <i class="lni lni-facebook"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="TikTok">
+                            <i class="lni lni-tiktok"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="YouTube">
+                            <i class="lni lni-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     
-  </script>
 
-  {% block scripts %}{% endblock %}
+
+    <script>
+
+        window.addEventListener("beforeunload", () => {
+            localStorage.setItem(location.pathname + "_scroll", window.scrollY);
+        });
+
+        window.addEventListener("load", () => {
+            const key = location.pathname + "_scroll";
+            const pos = localStorage.getItem(key);
+            if (pos) {
+                window.scrollTo(0, pos);
+                localStorage.removeItem(key);
+            }
+        });
+
+
+    </script>
+
+    {% block scripts %}{% endblock %}
 </body>
+
 </html>

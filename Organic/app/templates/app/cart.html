@@ -4,84 +4,212 @@
 {% block title %}Cart – GreenNest{% endblock %}
 
 {% block content %}
-<section class="container" style="margin:28px 0;">
-  <h1 style="font-size:32px; margin-bottom:8px;">Shopping cart</h1>
-</section>
 
-<section class="container">
-  <table class="cart-table">
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Tem calculated</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
+<link rel="stylesheet" href="{% static 'app/css/cart.css' %}"> 
+<link rel="stylesheet" href="{% static 'app/css/product_card.css' %}"> 
+<link rel="stylesheet" href="{% static 'app/css/neo_brutalism_global.css' %}"> 
+<link rel="stylesheet" href="{% static 'app/css/cart.css' %}"> 
+<style>
+.cart-item input[type="checkbox"] {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid black;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.15s ease;
+}
+
+.cart-item input[type="checkbox"]:checked {
+  background-color: #f8df00; /* vàng highlight */
+}
+
+.cart-item input[type="checkbox"]:checked::after {
+  content: "✔";
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+}
+
+.sticky-sidebar {
+    position: sticky;
+    top: calc(var(--header-height) + var(--spacing-lg));
+    height: fit-content;
+}
+
+/* Áp dụng đồng bộ layout container */
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 60px; /* giống phần navbar */
+}
+
+</style>
+<!-- CART HERO --> 
+<section class="cart-hero"> 
+<div class="container"> 
+  <div class="hero-content"> 
+  <div class="badge-organic">🛒 Your Cart</div> 
+    <h1 class="hero-title">Shopping Cart</h1> 
+      <p class="hero-subtitle"> 
+    <span class="item-count">{{ cart.items.count }} items</span> ready for checkout </p> 
+  </div> 
+</div> 
+</section> <!-- CART MAIN SECTION --> 
+<section class="cart-main-section"> 
+  <div class="container"> 
+  <div class="cart-grid">
+  <!-- LEFT: CART ITEMS -->
+  <div class="cart-items-wrapper">
+    <!-- Action Bar -->
+    <div class="cart-actions-bar">
+      <button class="btn btn-outline btn-sm" onclick="window.location.href='{% url 'productlist' %}'">
+        <i class="lni lni-arrow-left"></i>
+        Continue Shopping
+      </button>
+        <form method="post" action="{% url 'clear_or_remove_selected' %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-ghost btn-sm clear-cart-btn" 
+                  onclick="return confirm('Are you sure you want to clear the cart?')">
+            <i class="lni lni-trash-can"></i> Clear Cart
+          </button>
+    </div>
+
+    <!-- CART ITEMS -->
+    <div class="cart-items-list">
       {% if cart.items.all %}
         {% for item in cart.items.all %}
-          <tr>
-            <td style="display:flex; align-items:center; gap:12px;">
+          <div class="cart-item">
+            <div class="item-image-wrapper">
               {% if item.product %}
-                <a href="{% url 'productdetail' item.product.id %}">
-                  <img src="{{ item.product.image.url }}" class="cart-thumb" alt="{{ item.product.name }}">
-                </a>
-                <strong><span>{{ item.product.name }}</span></strong>
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="item-image">
               {% elif item.combo %}
-                <a href="{% url 'combodetail' item.combo.id %}">
-                  <img src="{{ item.combo.image.url }}" class="cart-thumb" alt="{{ item.combo.name }}">
-                </a>
-                <strong> {{ item.combo.name }} </strong>
+                <img src="{{ item.combo.image.url }}" alt="{{ item.combo.name }}" class="item-image">
               {% endif %}
-            </td>
+            </div>
 
-            <td>${{ item.item_price|floatformat:2 }}</td>
-
-            <td>
-              <div class="qty-control">
-                <a href="{% url 'update_quantity' item.id 'decrease' %}" class="qty-btn">−</a>
-                <span>{{ item.quantity }}</span>
-                <a href="{% url 'update_quantity' item.id 'increase' %}" class="qty-btn">+</a>
+            <div class="item-details">
+              {% if item.product %}
+                <h3 class="item-title">{{ item.product.name }}</h3>
+                <p class="item-description">{{ item.product.price }}</p>
+              {% elif item.combo %}
+                <h3 class="item-title">{{ item.combo.name }}</h3>
+                <p class="item-description">{{ item.combo.final_price|floatformat:2 }}</p>
+              {% endif %}
+              <label class="custom-checkbox">
+                <input type="checkbox" name="selected_items" value="{{ item.id }}">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            
+            <div class="item-actions">
+            
+              <div class="quantity-control">
+                <a href="{% url 'update_quantity' item.id 'decrease' %}" class="qty-btn minus">−</a>
+                <input type="number" value="{{ item.quantity }}" readonly class="qty-input">
+                <a href="{% url 'update_quantity' item.id 'increase' %}" class="qty-btn plus">+</a>
               </div>
-            </td>
-
-            <td>${{ item.subtotal|floatformat:2 }}</td>
-            <td><a href="{% url 'remove_item' item.id %}" style="color:black;">✕</a></td>
-          </tr>
+              
+              <div class="item-price-wrapper">
+                <span class="item-price">${{ item.subtotal|floatformat:2 }}</span>
+              </div>
+              <a href="{% url 'remove_item' item.id %}" class="btn-remove" title="Remove item">
+                <i class="lni lni-close"></i>
+              </a>
+              
+            </div>
+            
+          </div>
+          
         {% endfor %}
       {% else %}
-        <tr>
-          <td colspan="5" style="text-align:center; color:var(--gray); padding:20px 0;">
-            Your shopping cart is empty.
-          </td>
-        </tr>
+        <p style="text-align:center; color:var(--gray); padding:32px 0;">
+          Your shopping cart is empty.
+        </p>
       {% endif %}
-    </tbody>
-  </table>
-</section>
+    </div>
+    </form>
+     </div>
+  <!-- RIGHT: CHECKOUT SUMMARY -->
+  <div class="checkout-sidebar sticky-sidebar ">
+    <div class="summary-card">
+      <h2 class="summary-title">Order Summary</h2>
+      <div class="summary-details">
+        <div class="summary-row">
+          <span>Subtotal ({{ cart.items.count }} items)</span>
+          <span class="amount">${{ cart.subtotal|floatformat:2 }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span class="amount shipping-free">FREE</span>
+        </div>
+      </div>
+      <div class="summary-total">
+        <span class="total-label">TOTAL</span>
+        <span class="total-amount">${{ cart.total|floatformat:2 }} USD</span>
+      </div>
 
-<!-- Tổng kết -->
-<section class="container">
-  <div class="cart-summary">
-    <h3>Total Order</h3>
-    <div class="summary-row">
-      <span>Total items:</span>
-      <span>{{ cart.items.count }}</span>  
+      <a href="{% url 'checkout' %}" class="btn btn-primary btn-checkout">
+        <span>Proceed to Checkout</span>
+        <i class="lni lni-arrow-right"></i>
+      </a>
+
+      <div class="checkout-info">
+        <p><i class="lni lni-lock"></i> Secure checkout guaranteed</p>
+        <p><i class="lni lni-information"></i> Taxes calculated at checkout</p>
+      </div>
     </div>
-    <div class="summary-row">
-      <span>Tem calculated:</span>
-      <span>${{ cart.subtotal|floatformat:2 }}</span>
+
+    <!-- TRUST BADGES -->
+    <div class="trust-badges">
+      <div class="trust-item">
+        <i class="lni lni-shield"></i>
+        <span>Safe Payment</span>
+      </div>
+      <div class="trust-item">
+        <i class="lni lni-delivery"></i>
+        <span>Free Delivery</span>
+      </div>
+      <div class="trust-item">
+        <i class="lni lni-reload"></i>
+        <span>Easy Returns</span>
+      </div>
     </div>
-    <div class="summary-row">
-      <strong>Total:</strong>
-      <strong>${{ cart.total|floatformat:2 }}</strong>
-    </div>
-    <a href="{% url 'checkout' %}" class="btn btn-primary" style="margin-top:16px; display:block; text-align:center;">
-      Payment
-    </a>
   </div>
-</section>
+</div>
+</div> 
+</section> 
+<!-- FEATURES SECTION --> 
+<section class="cart-features-section"> 
+  <div class="container"> 
+    <div class="features-grid"> 
+      <div class="feature-card"> 
+      <div class="feature-icon">🚚</div> 
+        <h3 class="feature-title">Delivery Days</h3> 
+          <p class="feature-text">Displayed in your account</p> 
+        </div> 
+    <div class="feature-card"> 
+      <div class="feature-icon">🎁</div> 
+        <h3 class="feature-title">Gift & Coupon Codes</h3> 
+          <p class="feature-text">Applied at checkout</p> 
+      </div> 
+    <div class="feature-card"> 
+      <div class="feature-icon">❄️</div> 
+        <h3 class="feature-title">Delivers Cool & Fresh</h3> 
+          <p class="feature-text">GUARANTEED</p> 
+        </div> 
+    <div class="feature-card"> 
+      <div class="feature-icon">📅</div> 
+        <h3 class="feature-title">No Commitments</h3> 
+          <p class="feature-text">Skip or cancel anytime</p> 
+      </div> 
+    </div> 
+  </div> 
+</section> 
 
 {% endblock %}

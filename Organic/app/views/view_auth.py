@@ -7,8 +7,7 @@ from django.contrib import messages
 from app.models import Customer, Order
 from app.models import ChangePasswordForm
 from django.contrib.auth import authenticate, login, logout,update_session_auth_hash
-
-
+from .view_cart import get_or_create_cart
 
 @login_required
 def myaccount(request):
@@ -16,12 +15,14 @@ def myaccount(request):
     customer = getattr(request.user, "customer", None)
     recent_orders = Order.objects.filter(customer=customer).order_by("-date_order")[:3]
     recent_order = Order.objects.filter(customer=customer).order_by("-date_order").first()
+    cart = get_or_create_cart(request)
 
     return render(request, "app/myaccount.html", {
         "customer": customer,
         "recent_orders": recent_orders,
         "recent_order": recent_order,
         "active_tab": view_mode,
+        "cart": cart,
     })
 
 

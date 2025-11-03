@@ -1,149 +1,506 @@
 {% extends "app/base.html" %}
 {% load static %}
-{% block title %}Account - GreenNest{% endblock %}
+{% block title %}GreenNest – Organic Market{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'app/css/myaccount.css' %}">
 
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css">
 
+    <!-- Google Fonts - Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{% static 'app/css/profile.css' %}">
 
+    <!-- Main Content -->
+    <main class="profile-main">
+        <div class="profile-container">
+            <!-- Profile Sidebar -->
+            <div class="profile-sidebar">
+                <div class="user-brief">
+                    <div class="user-avatar-container">
+                        <img src="{% if customer.customer_image %}{{ customer.customer_image.url }}{% else %}{% static 'app/images/avtmacdinh.jpeg' %}{% endif %}"
+                            alt="User Avatar" class="user-avatar">
+                        <button class="change-avatar-btn" id="changeAvatarBtn">
+                            <i class="lni lni-reload"></i>
+                        </button>
+                    </div>
+                    <h3 class="user-name">Sarah Johnson</h3>
+                    <p class="user-email">{{ request.user.email }}</p>
+                </div>
 
+                <div class="profile-navigation">
+                    <a href="#" class="nav-item active" data-section="my-profile">
+                        <i class="fas fa-user-circle"></i> My Profile
+                    </a>
+                    <a href="#" class="nav-item" data-section="orders">
+                        <i class="fas fa-shopping-bag"></i> Order History
+                    </a>
+                    <a href="#" class="nav-item" data-section="ai-menu-history">
+                        <i class="fas fa-utensils"></i> AI Menu History
+                    </a>
+                    <a href="login.html" class="nav-item logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
 
-<section class="container account-wrapper">
-  <!-- Sidebar -->
-  <aside class="account-sidebar">
-    <h3>Menu</h3>
-    <a href="{% url 'myaccount' %}?view=profile"
-       class="{% if active_tab == 'profile' %}active{% endif %}">Personal Information</a>
-    <a href="{% url 'myaccount' %}?view=orders"
-       class="{% if active_tab == 'orders' %}active{% endif %}">My Order</a>
-    <a href="{% url 'logout' %}">Log out</a>
-  </aside>
+            <!-- Profile Content -->
+            <div class="profile-content">
+                <!-- My Profile Section -->
+                <section class="content-section active" id="my-profile">
+                    <div class="section-header">
+                        <h2>My Profile</h2>
+                        <button class="edit-btn" id="editProfileBtn">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                    </div>
 
-  <!-- Content -->
-  <div class="account-content">
+                    <div class="profile-info">
+                        <div class="info-card">
+                            <div class="info-row">
+                                <span class="info-label">First Name</span>
+                                <span class="info-value">{{ request.user.first_name }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Last Name</span>
+                                <span class="info-value">{{ request.user.last_name }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Email</span>
+                                <span class="info-value">{{ request.user.email }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Mobile</span>
+                                <span class="info-value">{{ customer.phone|default:'' }}</span>
+                            </div>
+                        </div>
+                    </div>
 
-    {% if active_tab == "profile" %}
-    <div class="account-section account-info">
-      <h2>Personal Information</h2>
+                    <button class="change-password-btn" id="changePasswordBtn">
+                        <i class="fas fa-lock"></i> Change Password
+                    </button>
+                </section>
 
-      <form method="post" action="{% url 'editaccount' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="avatar-wrapper">
-          <img src="{% if customer.customer_image %}{{ customer.customer_image.url }}{% else %}{% static 'app/images/avtmacdinh.jpeg' %}{% endif %}"
-               alt="Avatar" class="profile-avatar">
-          <input type="file" name="customer_image" accept="image/*">
+                <!-- Order History Section -->
+                <section class="content-section" id="orders">
+                    <div class="section-header">
+                        <h2>Order History</h2>
+
+                    </div>
+
+                    <div class="orders-list">
+                        <div class="order-card">
+                            <div class="order-header">
+                                <span class="order-id">#{{ recent_order.id }}</span>
+                                <span class="order-date">{{ recent_order.date_order|date:"d/m/Y H:i" }}</span>
+                                <span class="order-status delivered">{{ recent_order.get_status_display }}</span>
+                            </div>
+                            {% for item in recent_order.orderitem_set.all %}
+                            <div class="order-items">
+                                <div class="order-item">
+                                    {% if item.product %}
+                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="item-image">
+                                    {% elif item.combo %}
+                                        <img src="{{ item.combo.image.url }}" alt="{{ item.combo.name }}" class="item-image">
+                                    {% else %}
+                                        <span>No image available</span>
+                                    {% endif %}
+                                    <div class="item-info">
+                                        <h4>
+                                            {% if item.product %}
+                                            {{ item.product.name }}
+                                            {% elif item.combo %}
+                                            {{ item.combo.name }}
+                                            {% endif %}
+                                        </h4>
+                                        <span class="item-quantity">{{ item.quantity }}</span>
+                                    </div>
+                                    <span class="item-price">${{ item.get_total|floatformat:2 }}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class="order-footer">
+                                <span class="order-total">Total: ${{ recent_order.get_cart_total|floatformat:2 }}</span>
+                                <button class="btn-details btn-small">
+                                    <i class="fas fa-eye"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Add more order cards as needed -->
+                    </div>
+                </section>
+
+                <!-- AI Menu History Section (New) -->
+                <section class="content-section" id="ai-menu-history">
+                    <div class="section-header">
+                        <h2>AI Menu History</h2>
+                        <button class="reorder-btn">
+                            <i class="fas fa-sync-alt"></i> Generate New Menu
+                        </button>
+                    </div>
+
+                    <div class="orders-list"> <!-- Reuse the same structure as Order History for similar layout -->
+                        <div class="order-card"> <!-- Reuse order-card class for consistency -->
+                            <div class="order-header">
+                                <span class="order-id">#AI-001</span> <!-- Change to AI Menu ID -->
+                                <span class="order-date">October 20, 2023</span>
+                                <span class="order-status generated">GENERATED</span>
+                                <!-- Custom status for AI menus -->
+                            </div>
+                            <div class="order-items"> <!-- List menu items similar to order items -->
+                                <div class="order-item">
+                                    <img src="../static/image/breakfast.jpg" alt="AI Suggested Breakfast"
+                                        class="item-image">
+                                    <div class="item-info">
+                                        <h4>Avocado Toast with Eggs</h4>
+                                        <span class="item-quantity">Breakfast Suggestion</span>
+                                    </div>
+                                    <span class="item-price">450 cal</span>
+                                    <!-- Use calories or other metrics instead of price -->
+                                </div>
+                                <div class="order-item">
+                                    <img src="../static/image/lunch.jpg" alt="AI Suggested Lunch" class="item-image">
+                                    <div class="item-info">
+                                        <h4>Quinoa Salad Bowl</h4>
+                                        <span class="item-quantity">Lunch Suggestion</span>
+                                    </div>
+                                    <span class="item-price">600 cal</span>
+                                </div>
+                                <div class="order-item">
+                                    <img src="../static/image/dinner.jpg" alt="AI Suggested Dinner" class="item-image">
+                                    <div class="item-info">
+                                        <h4>Grilled Salmon with Veggies</h4>
+                                        <span class="item-quantity">Dinner Suggestion</span>
+                                    </div>
+                                    <span class="item-price">700 cal</span>
+                                </div>
+                            </div>
+                            <div class="order-footer">
+                                <span class="order-total">Total Calories: 1750</span> <!-- Adjusted for menu context -->
+                                <button class="reorder-btn btn-small">
+                                    <i class="fas fa-sync-alt"></i> Regenerate
+                                </button>
+                                <button class="btn-details btn-small">
+                                    <i class="fas fa-eye"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Add more AI menu cards as needed -->
+                    </div>
+                </section>
+            </div>
         </div>
+    </main>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" name="first_name" value="{{ request.user.first_name }}">
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" name="last_name" value="{{ request.user.last_name }}">
-          </div>
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="editProfileModal">
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+            <h2>Edit Profile</h2>
+            <form id="editProfileForm" method="post" action="{% url 'editaccount' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="fullName">First Name</label>
+                    <input type="text" name="first_name" value="{{ request.user.first_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="fullName">Last Name</label>
+                    <input type="text" name="last_name" value="{{ request.user.last_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" value="{{ request.user.email }}">
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" name="phone" value="{{ customer.phone|default:'' }}">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </div>
         </div>
-
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" name="email" value="{{ request.user.email }}">
-        </div>
-
-        <div class="form-group">
-          <label>Phone Number</label>
-          <input type="tel" name="phone" value="{{ customer.phone|default:'' }}">
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Save Changes</button>
-      </form>
-      <br>
-      <div class="account-section"> 
-      <h2>Recent Orders</h2> 
-        {% if recent_orders %} 
-        <table class="order-table"> 
-          <thead> <tr> 
-            <th>Order Id</th> 
-            <th>Date</th> 
-            <th>Status</th> 
-            <th>Total</th> 
-            <th></th> </tr>   
-          </thead> 
-          <tbody>   
-            {% for order in recent_orders %} 
-            <tr> 
-              <td>#{{ order.id }}</td> 
-              <td>{{ order.date_order|date:"d/m/Y" }}</td> 
-              <td class="status">{{ order.get_status_display }}</td> 
-              <td>${{ order.get_cart_total|floatformat:2 }}</td> 
-              <td><a href="{% url 'orderdetail' order.id %}">Detail</a></td> 
-            </tr> 
-            {% endfor %} 
-          </tbody> 
-        </table> 
-        {% else %} 
-          <p>You have no orders yet.</p> 
-        {% endif %} 
-      </div> 
     </div>
-    {% endif %}
-    
-    
 
-    {% if active_tab == "orders" %}
-    <div class="account-section">
-      <h2>Most recent order</h2>
-      {% if recent_order %}
-      <div class="order-detail-card">
-        <p><strong>Date:</strong> {{ recent_order.date_order|date:"d/m/Y H:i" }}</p>
-        <p><strong>Status:</strong> {{ recent_order.get_status_display }}</p>
-        <hr>
-        <table class="order-items" border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
-          <thead>
-            <tr>
-              <th>Items</th>
-              <th>Number</th>
-              <th>Price</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in recent_order.orderitem_set.all %}
-            <tr>
-              <td>
-                {% if item.product %}
-                  {{ item.product.name }}
-                {% elif item.combo %}
-                  {{ item.combo.name }}
-                {% endif %}
-              </td>
-              <td>{{ item.quantity }}</td>
-              <td>
-                {% if item.product %}
-                  ${{ item.product.final_price|floatformat:2 }}
-                {% elif item.combo %}
-                  ${{ item.combo.final_price|floatformat:2 }}
-                {% endif %}
-              </td>
-              <td>${{ item.get_total|floatformat:2 }}</td>
-            </tr>
-            {% endfor %}
-
-          </tbody>
-        </table>
-        <hr>
-        <p><strong>Total:</strong> {{ recent_order.get_cart_total|floatformat:2 }}</p>
-        <a href="{% url 'orderdetail' recent_order.id %}" class="btn btn-primary">More Detail</a>
-      </div>
-      {% else %}
-        <p>You have no orders yet.</p>
-      {% endif %}
+    <!-- Change Avatar Modal -->
+    <div class="modal" id="changeAvatarModal">
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+            <h2>Change Avatar</h2>
+            <div class="avatar-upload">
+                <img src="{% if customer.customer_image %}{{ customer.customer_image.url }}{% else %}{% static 'app/images/avtmacdinh.jpeg' %}{% endif %}"
+                    alt="Current Avatar" id="avatarPreview" class="avatar-preview">
+                <input id="avatarUpload" type="file" name="customer_image" accept="image/*">
+                <label for="avatarUpload" class="upload-btn">Choose Image</label>
+            </div>
+            <div class="modal-actions">
+                <button type="submit" class="save-btn">Upload</button>
+            </div>
+        </div>
     </div>
-    {% endif %}
+    </form>
 
-  </div>
-</section>
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+            <h2>Change Password</h2>
+            <form id="changePasswordForm">
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="save-btn">Change Password</button>
+                    <button type="button" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Detail Modal -->
+    <div class="modal" id="orderDetailModal">
+        <div class="modal-content order-detail-modal">
+            <div class="modal-header">
+                <h2>Order Details #{{ recent_order.id }}</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="order-detail-tabs">
+                    <button class="tab-btn active" data-tab="order">Order Details</button>
+                    <button class="tab-btn" data-tab="activities">Activities</button>
+                    <button class="tab-btn" data-tab="notes">Notes</button>
+                </div>
+
+                <div class="order-detail-content">
+                    <!-- Order Details Tab -->
+                    <div class="tab-panel active" id="order-panel">
+                        <div class="order-items-detail">
+                            {% for item in recent_order.orderitem_set.all %}
+                            <div class="order-item detail-item">
+                                {% if item.product %}
+                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="item-image">
+                                {% elif item.combo %}
+                                    <img src="{{ item.combo.image.url }}" alt="{{ item.combo.name }}" class="item-image">
+                                {% else %}
+                                    <span>No image available</span>
+                                {% endif %}
+
+                                <div class="item-info">
+                                    <h4>
+                                        {% if item.product %}
+                                        {{ item.product.name }}
+                                        {% elif item.combo %}
+                                        {{ item.combo.name }}
+                                        <span class="combo-tag"></span>
+                                        {% endif %}
+                                    </h4>
+                                    <span class="item-quantity">Quantity: {{ item.quantity }}</span>
+                                </div>
+                                <span class="item-price">${{ item.get_total|floatformat:2 }}</span>
+                            </div>
+                            {% empty %}
+                            <tr><td colspan="4" class="subtle">There are no products in the order.</td></tr>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Activities Tab -->
+                    <div class="tab-panel" id="activities-panel">
+                        <div class="activities-timeline">
+                            <div class="activity-item">
+                                <div class="activity-icon completed">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>Ready to Pickup</h4>
+                                    <p>Order #GN-8752 is ready for pickup</p>
+                                    <span class="activity-time">11:00 AM, Oct 18, 2023</span>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon completed">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>Order Processed</h4>
+                                    <p>Your order has been processed</p>
+                                    <span class="activity-time">10:30 AM, Oct 18, 2023</span>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon completed">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>Payment Confirmed</h4>
+                                    <p>Payment of $40.47 has been confirmed</p>
+                                    <span class="activity-time">10:00 AM, Oct 18, 2023</span>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon completed">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>Order Placed</h4>
+                                    <p>Your order has been placed successfully</p>
+                                    <span class="activity-time">09:30 AM, Oct 18, 2023</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Notes Tab -->
+                    <div class="tab-panel" id="notes-panel">
+                        <div class="order-notes">
+                            <div class="note-header">
+                                <h3>Order Notes</h3>
+                            </div>
+                            <div class="note-content">
+                                <p>Ship All The Ordered Items Together By Friday And Send You An Email Please Check.
+                                    Thanks!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Menu Detail Modal -->
+    <div class="modal" id="aiMenuDetailModal">
+        <div class="modal-content order-detail-modal">
+            <div class="modal-header">
+                <h2>AI Menu Details #AI-001</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Breakfast</th>
+                            <th>Lunch</th>
+                            <th>Dinner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monday</td>
+                            <td>Oatmeal with Fruits</td>
+                            <td>Chicken Salad</td>
+                            <td>Grilled Fish</td>
+                        </tr>
+                        <tr>
+                            <td>Tuesday</td>
+                            <td>Smoothie Bowl</td>
+                            <td>Vegetable Stir Fry</td>
+                            <td>Beef Stew</td>
+                        </tr>
+                        <tr>
+                            <td>Wednesday</td>
+                            <td>Eggs and Toast</td>
+                            <td>Quinoa Bowl</td>
+                            <td>Pasta Primavera</td>
+                        </tr>
+                        <tr>
+                            <td>Thursday</td>
+                            <td>Yogurt Parfait</td>
+                            <td>Lentil Soup</td>
+                            <td>Roasted Vegetables</td>
+                        </tr>
+                        <tr>
+                            <td>Friday</td>
+                            <td>Avocado Toast</td>
+                            <td>Turkey Wrap</td>
+                            <td>Salmon with Greens</td>
+                        </tr>
+                        <tr>
+                            <td>Saturday</td>
+                            <td>Pancakes</td>
+                            <td>Burger</td>
+                            <td>Pizza</td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td>French Toast</td>
+                            <td>Roast Dinner</td>
+                            <td>Stir Fry Noodles</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container">
+        <div class="toast success">
+            <div class="toast-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast-content">
+                <p>Profile updated successfully!</p>
+            </div>
+            <button class="toast-close">&times;</button>
+        </div>
+    </div>
+
+    <!-- Footer (reusing from HomePage) -->
+    <footer class="newsletter-footer">
+        <!-- Footer content here, similar to HomePage.html -->
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{% static 'app/js/main.js' %}"></script>
+    <script>
+        // === ORDER HISTORY: View Details === //
+        document.querySelectorAll('#orders .btn-details').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                document.getElementById('orderDetailModal').classList.add('active');
+            });
+        });
+
+        // === AI MENU HISTORY: View Details === //
+        document.querySelectorAll('#ai-menu-history .btn-details').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                document.getElementById('aiMenuDetailModal').classList.add('active');
+            });
+        });
+
+        // === Đóng tất cả modal khi bấm nút close === //
+        document.querySelectorAll('.modal .close-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                this.closest('.modal').classList.remove('active');
+            });
+        });
+
+        // === (Tùy chọn) Đóng modal khi click ngoài nội dung === //
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function (e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+    </script>
 
 
 {% endblock %}

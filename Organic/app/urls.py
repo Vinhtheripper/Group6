@@ -4,7 +4,8 @@ from . import views
 
 # Register your URL patterns here.
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.index, name='index'),
+    path('home', views.home, name='home'),
     path('cart/', views.cart, name='cart'),
     path('cart/add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
     path('cart/add/combo/<int:combo_id>/', views.add_combo_to_cart, name='add_combo_to_cart'),
@@ -19,7 +20,6 @@ urlpatterns = [
     path('policy/', views.policy, name='policy'),
     path('contact/', views.contact, name='contact'),
     path('checkout/', views.checkout, name='checkout'),
-    path('orderdetail/<int:order_id>/', views.orderdetail, name='orderdetail'),
     path('myaccount/', views.myaccount, name='myaccount'),
     path('search/', views.search, name='search'),
     path('auth/', views.authpage, name='auth'),
@@ -27,6 +27,7 @@ urlpatterns = [
     path('myaccount/edit/', views.editaccount, name='editaccount'),
     path('applycoupon/', views.applycoupon, name='applycoupon'),
     path('combo/<int:combo_id>/', views.combodetail, name='combodetail'),
+    path("cart/clear-or-remove/", views.clear_or_remove_selected, name="clear_or_remove_selected"),
 ]
 
 

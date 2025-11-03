@@ -1,0 +1,904 @@
+/* ==========================================
+   LOGIN PAGE - NEO-BRUTALISM STYLE
+   Bold, Colorful, Playful Design
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ==========================================
+   GLOBAL RESET
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ==========================================
+   BODY & BACKGROUND
+   ========================================== */
+body {
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Decorative Background Blobs */
+body::before {
+    content: '';
+    position: fixed;
+    top: -15%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 230, 0, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    animation: floatBlob 15s ease-in-out infinite;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -15%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(46, 125, 50, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    animation: floatBlob 12s ease-in-out infinite reverse;
+}
+
+@keyframes floatBlob {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -30px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-30px, 30px) scale(0.9);
+    }
+}
+
+/* ==========================================
+   CONTAINER - NEO-BRUTALISM CARD
+   ========================================== */
+.container {
+    background-color: #ffffff;
+    border-radius: 32px;
+    border: 5px solid #0A0A0A;
+    box-shadow: 12px 12px 0 0 #0A0A0A;
+    position: relative;
+    overflow: hidden;
+    width: 900px;
+    max-width: 100%;
+    min-height: 600px;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.container:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 16px 16px 0 0 #0A0A0A;
+}
+
+/* ==========================================
+   TYPOGRAPHY - NEO-BRUTALISM
+   ========================================== */
+.container p {
+    font-size: 13px;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+    margin: 8px 0;
+    color: #0A0A0A;
+    font-weight: 600;
+}
+
+.container span {
+    font-size: 12px;
+    color: #495057;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.container a {
+    color: #2E7D32;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 8px 0;
+    transition: all 0.2s ease;
+    font-weight: 700;
+    position: relative;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.container a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #FFE600;
+    border: 2px solid #0A0A0A;
+    transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.container a:hover::after {
+    width: 100%;
+}
+
+.container a:hover {
+    color: #1B5E20;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   BUTTONS - NEO-BRUTALISM STYLE
+   ========================================== */
+.container button {
+    background: #FFE600;
+    color: #0A0A0A;
+    font-size: 14px;
+    padding: 15px 45px;
+    border: 4px solid #0A0A0A;
+    border-radius: 28px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 5px 5px 0 0 #0A0A0A;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.container button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.container button:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+.container button:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 0 #0A0A0A;
+}
+
+.container button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 #0A0A0A;
+}
+
+/* Hidden Button (for toggle panel) */
+.container button.hidden {
+    background-color: #FFFFFF;
+    border-color: #0A0A0A;
+    color: #0A0A0A;
+    box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.3);
+}
+
+.container button.hidden:hover {
+    background-color: #FFE600;
+    box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 0.4);
+}
+
+.container button.hidden:active {
+    box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================
+   FORMS LAYOUT - MORE SPACIOUS
+   ========================================== */
+.container form {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 40px 40px;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Form Title - ONE LINE */
+.form-container h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #0A0A0A;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.form-container h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50%;
+    height: 5px;
+    background: #FFE600;
+    border: 3px solid #0A0A0A;
+    border-radius: 3px;
+}
+
+/* ==========================================
+   INPUT WRAPPER & SCROLLABLE AREA
+   ========================================== */
+.input-wrapper {
+    width: 100%;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+}
+
+/* Sign Up Form - More Space for Scrollable Area */
+.sign-up .input-wrapper {
+    max-height: 340px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 8px 8px 8px 0;
+    margin: 12px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #2E7D32 transparent;
+    flex: 1;
+}
+
+/* Sign In Form - Static Height */
+.sign-in .input-wrapper {
+    padding: 8px 0;
+    margin: 12px 0;
+    gap: 18px;
+}
+
+/* Custom Scrollbar - Webkit */
+.sign-up .input-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sign-up .input-wrapper::-webkit-scrollbar-thumb {
+    background: #2E7D32;
+    border: 2px solid #0A0A0A;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.sign-up .input-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #1B5E20;
+}
+
+.sign-up .input-wrapper::-webkit-scrollbar-track {
+    background: #F5F5F5;
+    border: 2px solid #E0E0E0;
+    border-radius: 4px;
+}
+
+/* ==========================================
+   INPUT FIELDS - MORE COMFORTABLE
+   ========================================== */
+.container input {
+    background-color: #F8F9FA;
+    border: 3px solid #0A0A0A;
+    margin: 0;
+    padding: 16px 20px;
+    font-size: 15px;
+    border-radius: 16px;
+    width: 100%;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight: 600;
+    color: #0A0A0A;
+    flex-shrink: 0;
+    box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.container input::placeholder {
+    color: #ADB5BD;
+    font-weight: 600;
+}
+
+.container input:focus {
+    border-color: #2E7D32;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.15), 3px 3px 0 0 #2E7D32;
+    transform: translateY(-2px);
+}
+
+.container input:hover {
+    border-color: #495057;
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   FORM CONTAINERS - ANIMATION
+   ========================================== */
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.sign-in {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.container.active .sign-in {
+    transform: translateX(100%);
+}
+
+.sign-up {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.active .sign-up {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: slideIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(0) scale(0.9);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: translateX(50%) scale(0.95);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(100%) scale(1);
+    }
+}
+
+/* ==========================================
+   SOCIAL ICONS - MORE COMPACT & HIGHER
+   ========================================== */
+.social-icons {
+    margin: 16px 0 12px 0;
+    flex-shrink: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons a {
+    border: 3px solid #0A0A0A;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    color: #0A0A0A;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 3px 3px 0 0 #0A0A0A;
+}
+
+.social-icons a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #2E7D32;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+    z-index: 0;
+}
+
+.social-icons a:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.social-icons a i {
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 0 #0A0A0A;
+}
+
+.social-icons a:hover i {
+    color: #FFFFFF;
+}
+
+.social-icons a:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 0 #0A0A0A;
+}
+
+/* ==========================================
+   TOGGLE PANEL - NEO-BRUTALISM GRADIENT
+   ========================================== */
+.toggle-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border-radius: 0;
+    z-index: 1000;
+    border-left: 5px solid #0A0A0A;
+}
+
+.container.active .toggle-container {
+    transform: translateX(-100%);
+    border-left: none;
+    border-right: 5px solid #0A0A0A;
+}
+
+/* Bold Gradient Background */
+.toggle {
+    background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 50%, #66BB6A 100%);
+    height: 100%;
+    color: #FFFFFF;
+    position: relative;
+    left: -100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.15);
+}
+
+.container.active .toggle {
+    transform: translateX(50%);
+}
+
+/* Decorative Pattern */
+.toggle::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -15%;
+    width: 400px;
+    height: 400px;
+    background: repeating-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.05) 0px,
+            rgba(255, 255, 255, 0.05) 10px,
+            transparent 10px,
+            transparent 20px);
+    border-radius: 50%;
+    animation: rotatePattern 20s linear infinite;
+}
+
+.toggle::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -10%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255, 230, 0, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes rotatePattern {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* ==========================================
+   TOGGLE PANELS CONTENT
+   ========================================== */
+.toggle-panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 48px;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.toggle-panel h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+}
+
+.toggle-panel p {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    line-height: 1.7;
+    font-size: 15px;
+    margin-bottom: 24px;
+}
+
+.toggle-left {
+    transform: translateX(-200%);
+}
+
+.container.active .toggle-left {
+    transform: translateX(0);
+}
+
+.toggle-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.active .toggle-right {
+    transform: translateX(200%);
+}
+
+/* ==========================================
+   LOADING & DISABLED STATES
+   ========================================== */
+@keyframes shimmer {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+.container button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    animation: shimmer 2s ease-in-out infinite;
+    transform: none !important;
+    box-shadow: 3px 3px 0 0 #0A0A0A !important;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+@media (max-width: 992px) {
+    .container {
+        width: 700px;
+        min-height: 580px;
+        border-width: 4px;
+        box-shadow: 10px 10px 0 0 #0A0A0A;
+    }
+
+    .toggle-panel h1 {
+        font-size: 2.4rem;
+    }
+
+    .form-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .container form {
+        padding: 36px 36px;
+    }
+
+    .sign-up .input-wrapper {
+        max-height: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        min-height: 620px;
+        box-shadow: 8px 8px 0 0 #0A0A0A;
+    }
+
+    .toggle-container {
+        display: none;
+    }
+
+    .sign-in,
+    .sign-up {
+        width: 100%;
+    }
+
+    .container.active .sign-in {
+        transform: translateX(0);
+        opacity: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .container.active .sign-up {
+        transform: translateX(0);
+    }
+
+    .container form {
+        padding: 32px 28px;
+    }
+
+    .sign-up .input-wrapper {
+        max-height: 360px;
+    }
+
+    .form-container h1 {
+        font-size: 1.7rem;
+    }
+
+    .social-icons a {
+        width: 42px;
+        height: 42px;
+    }
+
+    .container input {
+        padding: 15px 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        border-radius: 24px;
+        min-height: 580px;
+        border-width: 4px;
+        box-shadow: 6px 6px 0 0 #0A0A0A;
+    }
+
+    .container:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0 0 #0A0A0A;
+    }
+
+    .container form {
+        padding: 28px 24px;
+    }
+
+    .container button {
+        padding: 13px 36px;
+        font-size: 13px;
+        border-width: 3px;
+    }
+
+    .form-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .sign-up .input-wrapper {
+        max-height: 320px;
+    }
+
+    .container input {
+        padding: 14px 16px;
+        font-size: 14px;
+        border-width: 3px;
+    }
+
+    .social-icons {
+        gap: 8px;
+    }
+
+    .social-icons a {
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+    }
+
+    .social-icons a i {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        border-radius: 20px;
+        min-height: 560px;
+    }
+
+    .container form {
+        padding: 24px 20px;
+    }
+
+    .form-container h1 {
+        font-size: 1.3rem;
+    }
+
+    .container p {
+        font-size: 12px;
+    }
+
+    .container input {
+        padding: 13px 15px;
+    }
+
+    .input-wrapper {
+        gap: 14px;
+    }
+
+    .sign-up .input-wrapper {
+        max-height: 300px;
+        gap: 14px;
+    }
+}
+
+/* ==========================================
+   ACCESSIBILITY - FOCUS STATES
+   ========================================== */
+.container button:focus-visible,
+.container input:focus-visible,
+.social-icons a:focus-visible,
+.container a:focus-visible {
+    outline: 4px solid #FFE600;
+    outline-offset: 3px;
+}
+
+/* ==========================================
+   ADDITIONAL ENHANCEMENTS
+   ========================================== */
+
+/* Or Divider */
+.container span.or-divider {
+    position: relative;
+    margin: 12px 0;
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    color: #495057;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.container span.or-divider::before,
+.container span.or-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: calc(50% - 35px);
+    height: 2px;
+    background: #E0E0E0;
+    border: 2px solid #0A0A0A;
+}
+
+.container span.or-divider::before {
+    left: 0;
+}
+
+.container span.or-divider::after {
+    right: 0;
+}
+
+/* Success Message (if needed) */
+.success-message {
+    background: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 16px;
+    border: 3px solid #0A0A0A;
+    box-shadow: 3px 3px 0 0 #0A0A0A;
+    font-weight: 700;
+    margin: 12px 0;
+    animation: slideIn 0.4s ease;
+}
+
+/* Error Message (if needed) */
+.error-message {
+    background: #FF6B35;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 16px;
+    border: 3px solid #0A0A0A;
+    box-shadow: 3px 3px 0 0 #0A0A0A;
+    font-weight: 700;
+    margin: 12px 0;
+    animation: slideIn 0.4s ease;
+}
+
+/* ==========================================
+   ADDITIONAL FORM ELEMENTS SPACING
+   ========================================== */
+
+/* Terms & Conditions Checkbox (if needed) */
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0;
+    flex-shrink: 0;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border: 3px solid #0A0A0A;
+    border-radius: 6px;
+}
+
+.checkbox-wrapper label {
+    font-size: 12px;
+    color: #495057;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Extra spacing for Sign In form */
+.sign-in form {
+    justify-content: center;
+}
+
+/* Extra spacing for Sign Up form */
+.sign-up form {
+    justify-content: flex-start;
+}

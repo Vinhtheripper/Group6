@@ -70,4 +70,18 @@ def remove_item(request, item_id):
     item = get_object_or_404(CartItem, id=item_id, cart=cart)
     item.delete()
     return HttpResponseRedirect(reverse("cart") + "#cart")
+
+
+def clear_or_remove_selected(request):
+    cart = get_or_create_cart(request)
+    selected_ids = request.POST.getlist("selected_items")
+
+    if selected_ids:
+        # Nếu người dùng có chọn item → chỉ xoá các item đó
+        CartItem.objects.filter(cart=cart, id__in=selected_ids).delete()
+    else:
+        # Nếu không chọn gì → xoá toàn bộ giỏ hàng
+        cart.items.all().delete()
+
+    return redirect("cart")
     

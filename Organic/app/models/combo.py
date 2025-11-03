@@ -11,7 +11,7 @@ class Combo(models.Model):
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to="combos/", null=True, blank=True)
     discount_percentage = models.FloatField(default=0)
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # giá gốc tổng hợp
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)  
     stock = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -20,11 +20,13 @@ class Combo(models.Model):
 
     @property
     def original_price(self):
+        
         total = sum(item.product.price * item.quantity for item in self.comboitem_set.all())
         return Decimal(total).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
 
     @property
     def final_price(self):
+        
         total = self.original_price
         discount = (total * Decimal(self.discount_percentage)) / 100
         return (total - discount).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
@@ -32,6 +34,15 @@ class Combo(models.Model):
     @property
     def type(self):
         return "combo"
+
+    def save(self, *args, **kwargs):
+        
+        super().save(*args, **kwargs)  # lưu tạm để có ID
+        total = Decimal("0.00")
+        for item in self.comboitem_set.all():
+            total += item.product.price * item.quantity
+        self.price = total.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+        super().save(update_fields=["price"])
 
 class ComboItem(models.Model):
     combo = models.ForeignKey(Combo, on_delete=models.CASCADE)

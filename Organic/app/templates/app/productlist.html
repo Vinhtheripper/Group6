@@ -1,90 +1,183 @@
 {% extends "app/base.html" %}
 {% load static %}
 
-{% block title %}GreenNest – Organic Market{% endblock %}
+{% block title %}GreenNest – Product List{% endblock %}
 
 {% block content %}
-<section class="container" style="margin:28px 0;">
-  <h1 style="font-size:32px; margin-bottom:10px;">Product List & Combo</h1>
-  <p class="subtle">Fresh organic food and economical combo from GreenNest.</p>
-</section>
 
-<!-- ===================== Items ===================== -->
-<section class="container">
-  <h2 style="margin-bottom:16px;">🥦 Items</h2>
-  <div class="grid">
-    {% for product in page_object %}
-      {% include 'app/productcard.html' %}
-    {% empty %}
-      <p class="subtle">There are no products to display.</p>
-    {% endfor %}
-  </div>
+<link rel="stylesheet" href="{% static 'app/css/productlist.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/product_card.css' %}">
+ <link rel="stylesheet" href="{% static 'app/css/neo_brutalism_global.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/checkout.css' %}">
+<style>
+/* Áp dụng đồng bộ layout container */
+.product-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 60px; /* giống phần navbar */
+}
+</style>
+  
+  <section class="product-hero"> 
+  <div class="hero-container-full">
+   <h1 class="hero-title">Our Products</h1>
+    <p class="subtle">Explore our organic products and healthy combos.</p> 
+    </div> 
+    </section>
 
-  <!-- Divide Page -->
-  <div class="pagination">
-    {% if page_object.has_previous %}
-      <a href="?page={{ page_object.previous_page_number }}">←</a>
-    {% endif %}
-    {% for num in page_object.paginator.page_range %}
-      {% if page_object.number == num %}
-        <a href="?page={{ num }}" class="active">{{ num }}</a>
-      {% else %}
-        <a href="?page={{ num }}">{{ num }}</a>
-      {% endif %}
-    {% endfor %}
-    {% if page_object.has_next %}
-      <a href="?page={{ page_object.next_page_number }}">→</a>
-    {% endif %}
-  </div>
-</section>
+  <main class="product-main"> 
+  <!-- ========== HERO SECTION ========== --> 
+   
+    <!-- ========== PAGE WRAPPER ========== --> 
+<div class="page-wrapper">
+    <!-- LEFT SIDE – PRODUCT LIST -->
+<div class="product-section">
+  <!-- CATEGORY NAV -->
+  <nav class="category-nav">
+    <div class="category-container">
+      <button class="filter-toggle"><i class="lni lni-funnel"></i></button>
+      <div class="category-scroll-wrapper">
+        <a href="{% url 'productlist' %}" class="category-link {% if not selected_category %}active{% endif %}">All</a>
+        {% for cat in categories %}
+          <a href="?category={{ cat.id }}" 
+             class="category-link {% if selected_category == cat.id|stringformat:'s' %}active{% endif %}">
+            {{ cat.name }}
+          </a>
+        {% endfor %}
+        <a href="#combo-section" class="category-link">Combos</a>
+      </div>
+    </div>
+  </nav>
 
+  <!-- PRODUCT CONTENT -->
+  <div class="product-content">
+    <div class="content-container">
 
-<!-- ===================== COMBO ===================== -->
-<section class="container" style="margin-top:48px;">
-  <h2 style="margin-bottom:16px;"> Promotional combos</h2>
-  <div class="grid">
-    {% for combo in combos %}
-      <article class="card">
-        <a href="{% url 'combodetail' combo.id %}" style="text-decoration:none; color:inherit;">
-          <div class="thumb">
-            {% if combo.image %}
-              <img src="{{ combo.image.url }}" alt="{{ combo.name }}" style="width:100%; height:200px; object-fit:cover;">
+      <!-- PRODUCT COLLECTION -->
+      <section id="fresh-produce" class="product-collection">
+        <h2 class="collection-title">All Products</h2>
+
+        <div class="product-grid">
+          {% for product in page_object %}
+            {% include 'app/productcard.html' %}
+          {% empty %}
+            <p class="subtle">There are no products in this category.</p>
+          {% endfor %}
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="pagination">
+          {% if page_object.has_previous %}
+            <a href="?page={{ page_object.previous_page_number }}">←</a>
+          {% endif %}
+          {% for num in page_object.paginator.page_range %}
+            {% if page_object.number == num %}
+              <a href="?page={{ num }}" class="active">{{ num }}</a>
             {% else %}
-              <div class="seed" aria-hidden="true"></div>
+              <a href="?page={{ num }}">{{ num }}</a>
             {% endif %}
-          </div>
-          <div class="content">
-            <div class="pill" style="background:#E8F5E9; color:#2E7D32; border:1px solid #A5D6A7;">
-              Discount {{ combo.discount_percentage }}%
-            </div>
-            <h3 style="margin:8px 0 6px;">{{ combo.name }}</h3>
-            <p class="subtle">{{ combo.description|truncatewords:12 }}</p>
-            <div class="price">
-              <strong>${{ combo.final_price|floatformat:2 }}</strong>
-              <span style="text-decoration:line-through; color:gray; font-size:14px;">
-                ${{ combo.original_price|floatformat:2 }}
-              </span>
-            </div>
-            <form method="post" action="{% url 'add_combo_to_cart' combo.id %}" class="add-to-cart-form">
-              {% csrf_token %}
-              <div class="add" style="margin-top:8px; align-items:center; gap:10px;">
-                <div class="qty">
-                  <button type="button" class="qty-decrease">−</button>
-                  <span class="qty-display">1</span>
-                  <button type="button" class="qty-increase">+</button>
-                </div>
-                <input type="hidden" name="quantity" value="1" class="qty-input">
-                <button type="submit" class="btn-primary" style="padding:8px 12px;">Add</button>
-              </div>
-            </form>
-          </div>
-        </a>
-      </article>
-    {% empty %}
-      <p class="subtle">No combos have been created yet.</p>
-    {% endfor %}
-  </div>
-</section>
+          {% endfor %}
+          {% if page_object.has_next %}
+            <a href="?page={{ page_object.next_page_number }}">→</a>
+          {% endif %}
+        </div>
+      </section>
 
-<script src="{% static 'app/js/home.js' %}"></script>
+      <!-- COMBO SECTION -->
+      <section id="combo-section" class="product-collection" style="margin-top:48px;">
+        <h2 class="collection-title">Promotional Combos</h2>
+        <div class="product-grid">
+          {% for combo in combos %}
+            <article class="product-card combo-card">
+              <a href="{% url 'combodetail' combo.id %}" style="text-decoration:none; color:inherit;">
+                <div class="card-image">
+                  {% if combo.image %}
+                    <img src="{{ combo.image.url }}" alt="{{ combo.name }}" class="product-img">
+                  {% else %}
+                    <img src="{% static 'image/placeholder.jpg' %}" alt="No image" class="product-img">
+                  {% endif %}
+                  <div class="badge-row">
+                    <div class="badge-left">
+                      <span class="badge-tag" style="background:#E8F5E9; color:#2E7D32; border-color:#000;">Combo</span>
+                    </div>
+                    <div class="badge-right">
+                      <span class="badge-tag sale">-{{ combo.discount_percentage }}%</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-info">
+                  <h3 class="product-name">{{ combo.name }}</h3>
+                  <p class="subtle">{{ combo.description|truncatewords:12 }}</p>
+                  <form method="post" action="{% url 'add_combo_to_cart' combo.id %}" class="add-to-cart-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="btn-add-cart">
+                      <span class="btn-text">Add</span>
+                      <strong>${{ combo.final_price|floatformat:2 }}</strong>
+                    </button>
+                  </form>
+                </div>
+              </a>
+            </article>
+          {% empty %}
+            <p class="subtle">No combos have been created yet.</p>
+          {% endfor %}
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- RIGHT SIDE – CART SIDEBAR -->
+<aside class="sticky-sidebar">
+  <div class="cart-summary">
+    <div class="order-detail-content">
+                    <!-- Order Details Tab -->
+                      <div class="tab-panel active" id="order-panel">
+                          <div class="summary-product-list">
+                          {% for item in cart.items.all %}
+                            <div class="summary-product-item">
+                              <div class="product-image-wrapper">
+                                {% if item.product %}
+                                  <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                {% elif item.combo %}
+                                  <img src="{{ item.combo.image.url }}" alt="{{ item.combo.name }}" >
+                                {% endif %}
+                                <span class="quantity-badge">{{ item.quantity }}</span>
+                              </div>
+                              <div class="product-info">
+                              {% if item.product %}
+                                <h4 class="product-name">{{ item.product.name }}</h4>
+                                <p class="product-desc">{{ item.product.price }}</p>
+                                {% elif item.combo %}
+                                <h4 class="product-name">{{ item.combo.name }}</h4>
+                                <p class="product-desc">{{ item.combo.final_price|floatformat:2 }}</p>
+                                {% endif %}
+                              </div>
+                              <div class="product-price">
+                                <span class="final-price">${{ item.subtotal|floatformat:2 }}</span>
+                              </div>
+                            </div>
+                          {% empty %}
+                            <p>Your cart is empty.</p>
+                          {% endfor %}
+                        </div>
+                          </div>
+                      </div>
+                      <div class="cart-footer">
+                        <div class="cart-total">
+                          <span>Subtotal:</span>
+                          <strong>${{ cart.subtotal|floatformat:2 }}</strong>
+                        </div>
+                        <a href="{% url 'checkout' %}" class="btn btn-primary btn-checkout">
+                          <span>Checkout</span>
+                          <i class="lni lni-arrow-right"></i>
+                        </a>
+                      </div>
+                    
+</aside>
+
+</main> 
 {% endblock %}

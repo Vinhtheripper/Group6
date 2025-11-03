@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.shortcuts import render
 from app.models import Coupon
 from decimal import Decimal
+from .view_cart import get_or_create_cart
 
 
 
@@ -15,7 +16,7 @@ from decimal import Decimal
 def productlist(request):
     products = Product.objects.all().order_by('-created_at')
     combos = Combo.objects.all()
-
+    cart = get_or_create_cart(request)
     paginator = Paginator(products, 12)
     page_number = request.GET.get('page')
     page_object = paginator.get_page(page_number)
@@ -23,12 +24,14 @@ def productlist(request):
     return render(request, "app/productlist.html", {
         "page_object": page_object,  
         "combos": combos,
+        "cart": cart,
     })
 
 
 def search(request):
     query = request.GET.get("q", "").strip()
     results = []
+    cart = get_or_create_cart(request)
 
     if query:
         results = Product.objects.filter(
@@ -41,6 +44,7 @@ def search(request):
     return render(request, "app/search.html", {
         "query": query,
         "results": results,
+        "cart": cart,
     })
 
 def applycoupon(cart, code):
