@@ -26,7 +26,7 @@
                             <i class="lni lni-reload"></i>
                         </button>
                     </div>
-                    <h3 class="user-name">Sarah Johnson</h3>
+                    <h3 class="user-name">{{ request.user.last_name }}</h3>
                     <p class="user-email">{{ request.user.email }}</p>
                 </div>
 
@@ -223,13 +223,17 @@
                     <button type="submit" class="save-btn">Save Changes</button>
                 </div>
         </div>
+        
     </div>
+    </form>
 
     <!-- Change Avatar Modal -->
     <div class="modal" id="changeAvatarModal">
         <div class="modal-content">
             <button class="close-btn">&times;</button>
             <h2>Change Avatar</h2>
+            <form id="editProfileForm" method="post" action="{% url 'changeavatar' %}" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="avatar-upload">
                 <img src="{% if customer.customer_image %}{{ customer.customer_image.url }}{% else %}{% static 'app/images/avtmacdinh.jpeg' %}{% endif %}"
                     alt="Current Avatar" id="avatarPreview" class="avatar-preview">
@@ -240,8 +244,9 @@
                 <button type="submit" class="save-btn">Upload</button>
             </div>
         </div>
+        </form>
     </div>
-    </form>
+    
 
     <!-- Change Password Modal -->
     <div class="modal" id="changePasswordModal">

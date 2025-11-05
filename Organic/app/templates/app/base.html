@@ -21,52 +21,20 @@
 
             <nav class="navbar">
                 <ul class="nav-menu">
-                    <li class="nav-item active">
+                    <li class="nav-item {% if request.path == '/' %}active{% endif %}">
                         <a href="{% url 'home' %}" class="nav-link">Home</a>
                     </li>
-                    <li class="nav-item has-dropdown">
-                        <a href="#" class="nav-link">
-                            Products <i class="lni lni-chevron-down"></i> </a>
-                        <div class="mega-menu">
-                            <div class="mega-menu-grid">
-                                <div class="mega-menu-column">
-                                    <h4>🥬 Fresh Produce</h4>
-                                    <ul>
-                                        <li><a href="#">Organic Vegetables</a></li>
-                                        <li><a href="#">Fresh Fruits</a></li>
-                                        <li><a href="#">Salad Greens</a></li>
-                                        <li><a href="#">Herbs & Spices</a></li>
-                                    </ul>
-                                </div>
-                                <div class="mega-menu-column">
-                                    <h4>🥛 Dairy & Eggs</h4>
-                                    <ul>
-                                        <li><a href="#">Organic Milk</a></li>
-                                        <li><a href="#">Cheese Selection</a></li>
-                                        <li><a href="#">Fresh Yogurt</a></li>
-                                        <li><a href="#">Free-Range Eggs</a></li>
-                                    </ul>
-                                </div>
-                                <div class="mega-menu-column">
-                                    <h4>🍞 Bakery & Grains</h4>
-                                    <ul>
-                                        <li><a href="#">Artisan Bread</a></li>
-                                        <li><a href="#">Organic Rice</a></li>
-                                        <li><a href="#">Pasta & Noodles</a></li>
-                                        <li><a href="#">Breakfast Cereals</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <li class="nav-item {% if '/productlist' in request.path %}active{% endif %}">
+                        <a href="{% url 'productlist' %}" class="nav-link">Product</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">Promotions</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Our Stories</a>
+                    <li class="nav-item {% if '/blog' in request.path %}active{% endif %}">
+                        <a href="{% url 'blog' %}" class="nav-link">Our Stories</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Contact</a>
+                    <li class="nav-item {% if '/contact' in request.path %}active{% endif %}">
+                        <a href="{% url 'contact' %}" class="nav-link">Contact</a>
                     </li>
                 </ul>
             </nav>
@@ -82,16 +50,15 @@
                 </div>
 
                 <div class="wishlist-wrapper">
-                    <a href="#" class="icon-btn" aria-label="Wishlist">
-                        <i class="lni lni-heart"></i> <span class="badge">3</span>
+                    <a href="#" class="icon-btn wishlist-icon" aria-label="Wishlist">
+                        <i class="lni lni-heart"></i> <span class="badge wishlist-count">0</span>
                     </a>
                     <div class="wishlist-dropdown">
                         <h4>Wishlist</h4>
-                        <div class="wishlist-items">
-                            <p class="empty-wishlist-msg">Your wishlist is empty</p>
-                        </div>
+                        <div class="wishlist-items"></div>
                     </div>
                 </div>
+
 
                 <div class="cart-wrapper">
                     <a href="{% url 'cart' %}" class="icon-btn" aria-label="Shopping Cart">
@@ -129,7 +96,7 @@
         <div class="footer-container">
             <div class="footer-links-side">
                 <div class="footer-column">
-                    <h4 class="footer-links-title">Our Product</h4>
+                    <h4 class="footer-links-title">Product</h4>
                     <ul>
                         <li><a href="#">Meal Kits</a></li>
                         <li><a href="#">Ready To Eat</a></li>
@@ -192,9 +159,7 @@
         </div>
     </footer>
 
-    
-
-
+    <script src="{% static 'app/js/wishlist.js' %}"></script>
     <script>
 
         window.addEventListener("beforeunload", () => {
@@ -209,8 +174,7 @@
                 localStorage.removeItem(key);
             }
         });
-
-
+        
     </script>
 
     {% block scripts %}{% endblock %}

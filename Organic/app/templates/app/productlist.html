@@ -1,8 +1,6 @@
 {% extends "app/base.html" %}
 {% load static %}
-
 {% block title %}GreenNest – Product List{% endblock %}
-
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'app/css/productlist.css' %}">
@@ -18,12 +16,16 @@
 }
 </style>
   
-  <section class="product-hero"> 
-  <div class="hero-container-full">
-   <h1 class="hero-title">Our Products</h1>
-    <p class="subtle">Explore our organic products and healthy combos.</p> 
-    </div> 
-    </section>
+  <section class="cart-hero"> 
+<div class="container"> 
+  <div class="hero-content"> 
+  <div class="badge-organic">🛒 Your Cart</div> 
+    <h1 class="hero-title">Product List</h1> 
+      <p class="hero-subtitle"> 
+    <span class="item-count">Our items</span> ready for checkout </p> 
+  </div> 
+</div> 
+</section> 
 
   <main class="product-main"> 
   <!-- ========== HERO SECTION ========== --> 
@@ -37,7 +39,6 @@
     <div class="category-container">
       <button class="filter-toggle"><i class="lni lni-funnel"></i></button>
       <div class="category-scroll-wrapper">
-        <a href="{% url 'productlist' %}" class="category-link {% if not selected_category %}active{% endif %}">All</a>
         {% for cat in categories %}
           <a href="?category={{ cat.id }}" 
              class="category-link {% if selected_category == cat.id|stringformat:'s' %}active{% endif %}">
@@ -55,7 +56,13 @@
 
       <!-- PRODUCT COLLECTION -->
       <section id="fresh-produce" class="product-collection">
-        <h2 class="collection-title">All Products</h2>
+        <h2 class="collection-title">
+        {% if selected_category %}
+          {{ selected_category.name }}
+        {% else %}
+          All Products
+        {% endif %}
+      </h2>
 
         <div class="product-grid">
           {% for product in page_object %}
@@ -64,23 +71,7 @@
             <p class="subtle">There are no products in this category.</p>
           {% endfor %}
         </div>
-
-        <!-- PAGINATION -->
-        <div class="pagination">
-          {% if page_object.has_previous %}
-            <a href="?page={{ page_object.previous_page_number }}">←</a>
-          {% endif %}
-          {% for num in page_object.paginator.page_range %}
-            {% if page_object.number == num %}
-              <a href="?page={{ num }}" class="active">{{ num }}</a>
-            {% else %}
-              <a href="?page={{ num }}">{{ num }}</a>
-            {% endif %}
-          {% endfor %}
-          {% if page_object.has_next %}
-            <a href="?page={{ page_object.next_page_number }}">→</a>
-          {% endif %}
-        </div>
+        
       </section>
 
       <!-- COMBO SECTION -->
@@ -107,7 +98,6 @@
                 </div>
                 <div class="card-info">
                   <h3 class="product-name">{{ combo.name }}</h3>
-                  <p class="subtle">{{ combo.description|truncatewords:12 }}</p>
                   <form method="post" action="{% url 'add_combo_to_cart' combo.id %}" class="add-to-cart-form">
                     {% csrf_token %}
                     <input type="hidden" name="quantity" value="1">

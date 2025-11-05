@@ -28,6 +28,7 @@ urlpatterns = [
     path('applycoupon/', views.applycoupon, name='applycoupon'),
     path('combo/<int:combo_id>/', views.combodetail, name='combodetail'),
     path("cart/clear-or-remove/", views.clear_or_remove_selected, name="clear_or_remove_selected"),
+    path("changeavatar/", views.changeavatar, name="changeavatar"),
 ]
 
 

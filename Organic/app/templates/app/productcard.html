@@ -1,7 +1,6 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'app/css/product_card.css' %}">
 
-
 <article class="product-card">
   <a href="{% url 'productdetail' product.id %}" style="text-decoration:none; color:inherit;">
     <div class="card-image">
@@ -31,11 +30,20 @@
         </div>
       </div>
 
-      <button class="quick-view-btn">Quick View</button>
+
+      <button class="wishlist-btn"
+                data-id="{{ product.id }}"
+                data-name="{{ product.name }}"
+                data-image="{% if product.image %}{{ product.image.url }}{% else %}{% static 'image/placeholder.jpg' %}{% endif %}"
+                data-price="{% if product.sale %}{{ product.final_price|floatformat:2 }}{% else %}{{ product.price|floatformat:2 }}{% endif %}">
+          <i class="lni lni-heart"></i>
+        </button>
     </div>
 
     <div class="card-info">
       <h3 class="product-name">{{ product.name }}</h3>
+      <!-- Heart Button -->
+        
 
       <div class="product-nutrients">
         {% if product.calories %}
@@ -64,3 +72,5 @@
     </div>
   </a>
 </article>
+
+

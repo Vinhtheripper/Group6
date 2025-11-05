@@ -29,6 +29,26 @@
     
 }
 
+.prop-icon {
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto 12px;
+}
+
+
+.sale-icon {
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto 12px;
+}
+
+
 
 
 
@@ -40,7 +60,6 @@
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-badge">
-                    
                     <span class="badge-text">100% Organic & Fresh</span>
                 </div>
 
@@ -96,24 +115,25 @@
         <div class="container">
             <div class="value-props-grid">
                 <div class="value-prop-card">
-                    <div class="prop-icon">🌿</div>
+                    <img src="{% static 'app/images/truck.png' %}" alt="Truck Icon" class="prop-icon">
+                    <h3 class="prop-title">100% Organic</h3>
+                    <p class="prop-text">Certified organic ingredients from local farms</p>
+                </div>
+
+                <div class="value-prop-card">
+                    <img src="{% static 'app/images/phone.png' %}" alt="Truck Icon" class="prop-icon">
                     <h3 class="prop-title">100% Organic</h3>
                     <p class="prop-text">Certified organic ingredients from local farms</p>
                 </div>
                 <div class="value-prop-card">
-                    <div class="prop-icon">👨‍🍳</div>
-                    <h3 class="prop-title">Chef-Crafted</h3>
-                    <p class="prop-text">Expertly prepared by professional chefs</p>
+                    <img src="{% static 'app/images/leaf.png' %}" alt="Truck Icon" class="prop-icon">
+                    <h3 class="prop-title">100% Organic</h3>
+                    <p class="prop-text">Certified organic ingredients from local farms</p>
                 </div>
                 <div class="value-prop-card">
-                    <div class="prop-icon">🚚</div>
-                    <h3 class="prop-title">Fast Delivery</h3>
-                    <p class="prop-text">Fresh meals delivered within 24 hours</p>
-                </div>
-                <div class="value-prop-card">
-                    <div class="prop-icon">💚</div>
-                    <h3 class="prop-title">Eco-Friendly</h3>
-                    <p class="prop-text">Sustainable packaging, zero waste</p>
+                    <img src="{% static 'app/images/mail.png' %}" alt="Truck Icon" class="prop-icon">
+                    <h3 class="prop-title">100% Organic</h3>
+                    <p class="prop-text">Certified organic ingredients from local farms</p>
                 </div>
             </div>
         </div>
@@ -144,24 +164,22 @@
 <section class="voucher-section">
   <div class="container">
     <div class="section-header-center">
-      <h2 class="section-title">💎 Exclusive Deals & Offers</h2>
+      <h2 class="section-title">Exclusive Deals & Offers</h2>
       <p class="section-subtitle">Grab your discount before it’s gone!</p>
     </div>
 
     <div class="vouchers-grid">
       {% for voucher in vouchers %}
       <div class="voucher-card {% if current_coupon and current_coupon.id == voucher.id %}highlight{% endif %}">
-        {% if current_coupon and current_coupon.id == voucher.id %}
-        <div class="active-badge">🔥 Active Now</div>
-        {% endif %}
+        
 
         <div class="voucher-content">
           <div class="voucher-header">
             <div class="voucher-icon">
               {% if current_coupon and current_coupon.id == voucher.id %}
-              🔥
+                    <img src="{% static 'app/images/truck.png' %}" alt="Truck Icon" class="sale-icon">
               {% else %}
-              🎁
+                    <img src="{% static 'app/images/mail.png' %}" alt="Truck Icon" class="sale-icon">
               {% endif %}
             </div>
             <div class="voucher-info">
@@ -223,7 +241,7 @@
                 <!-- Left Side: Info & Benefits -->
                 <div class="planner-info">
                     <div class="info-badge">
-                        <span class="badge-icon">🤖</span>
+                        
                         <span class="badge-text">Smart Meal Planning</span>
                     </div>
 
@@ -232,21 +250,27 @@
 
                     <div class="planner-benefits">
                         <div class="benefit-item">
-                            <div class="benefit-icon">⏰</div>
+                            <div class="benefit-icon">
+                            <img src="{% static 'app/images/clock.png' %}" alt="Truck Icon" class="sale-icon">
+                            </div>
                             <div class="benefit-content">
                                 <h4>Save Time</h4>
                                 <p>No more meal planning stress</p>
                             </div>
                         </div>
                         <div class="benefit-item">
-                            <div class="benefit-icon">🎯</div>
+                            <div class="benefit-icon">
+                            <img src="{% static 'app/images/up.png' %}" alt="Truck Icon" class="sale-icon">
+                            </div>
                             <div class="benefit-content">
                                 <h4>Personalized</h4>
                                 <p>Tailored to your preferences</p>
                             </div>
                         </div>
                         <div class="benefit-item">
-                            <div class="benefit-icon">💰</div>
+                            <div class="benefit-icon">
+                            <img src="{% static 'app/images/money.png' %}" alt="Truck Icon" class="sale-icon">
+                            </div>
                             <div class="benefit-content">
                                 <h4>Save Money</h4>
                                 <p>Reduce food waste by 40%</p>

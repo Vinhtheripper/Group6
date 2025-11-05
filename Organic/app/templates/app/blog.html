@@ -1,21 +1,58 @@
 {% extends "app/base.html" %}
 
+{% load static %}
 {% block title %}GreenNest – Organic Market{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'app/css/blog.css' %}">
+<style>
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+</style>
+
+   
 
 
+    
+    <!-- CATEGORY FILTER -->
+    <section class="blog-categories">
+        <div class="container">
+            <div class="category-pills">
+                <button class="category-pill active" data-category="all">All Posts</button>
+                <button class="category-pill" data-category="recipes">Recipes</button>
+                <button class="category-pill" data-category="health">Health</button>
+                <button class="category-pill" data-category="gardening">Gardening</button>
+                <button class="category-pill" data-category="sustainability">Sustainability</button>
+            </div>
+        </div>
+    </section>
 
-  <section class="container blog-grid">
-    <article class="blog-card">
-      <img src="https://picsum.photos/400/250?salad" alt="Salad">
-      <div class="content">
-        <h3>5 healthy salad recipes with organic vegetables</h3>
-        <p>Use organic vegetables to make fresh salads every day.</p>
-        <a href="#" class="btn btn-ghost">Read more</a>
-      </div>
-    </article>
-  </section>
+    <!-- BLOG GRID -->
+    
+    <section class="blog-grid-section">
+    <div class="container">
+        <div class="container">
+            <div id="blog-grid" class="blog-grid">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading articles...</p>
+                </div>
+            </div>
+            
+            <div class="pagination-container">
+                <button class="btn btn-outline" id="load-more">Load More Articles</button>
+            </div>
+        </div>
+    </div>
+    </section>
+    
+    <script src="{% static 'app/js/blog.js' %}"></script>
+
+   
 
 {% endblock %}
 

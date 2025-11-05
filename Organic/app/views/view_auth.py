@@ -26,7 +26,6 @@ def myaccount(request):
     })
 
 
-@login_required
 def editaccount(request):
     user = request.user
     customer = getattr(user, "customer", None)
@@ -39,15 +38,27 @@ def editaccount(request):
 
         if customer:
             customer.phone = request.POST.get("phone", "")
-            if request.FILES.get("customer_image"):
-                customer.customer_image = request.FILES["customer_image"]
             customer.save()
 
-
-        return redirect("myaccount")  
-
+        messages.success(request, "Profile updated successfully!")
     return redirect("myaccount")
 
+def changeavatar(request):
+    customer = getattr(request.user, "customer", None)
+    if not customer:
+        messages.error(request, "Customer profile not found.")
+        return redirect("myaccount")
+
+    if request.method == "POST":
+        avatar = request.FILES.get("customer_image")
+        if avatar:
+            customer.customer_image = avatar
+            customer.save()
+            messages.success(request, "Avatar updated successfully!")
+        else:
+            messages.error(request, "Please select an image to upload.")
+
+    return redirect("myaccount")
 
 def authpage(request):
     if request.user.is_authenticated:

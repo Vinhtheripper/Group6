@@ -3,7 +3,8 @@ from .view_product import Product
 from .view_combo import Combo
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from app.models import Category
 from app.models import Coupon
 from decimal import Decimal
 from .view_cart import get_or_create_cart
@@ -14,17 +15,31 @@ from .view_cart import get_or_create_cart
 
 
 def productlist(request):
-    products = Product.objects.all().order_by('-created_at')
+    categories = Category.objects.all().order_by("name")
+    selected_category_id = request.GET.get("category")
+
+    if selected_category_id:
+        # Lọc theo category
+        products = Product.objects.filter(category__id=selected_category_id).order_by('-created_at')
+        selected_category = get_object_or_404(Category, id=selected_category_id)
+    else:
+        # Nếu không chọn category nào thì có thể chọn mặc định
+        selected_category = None
+        products = Product.objects.all().order_by('-created_at')  
+
     combos = Combo.objects.all()
     cart = get_or_create_cart(request)
+
     paginator = Paginator(products, 12)
     page_number = request.GET.get('page')
     page_object = paginator.get_page(page_number)
 
     return render(request, "app/productlist.html", {
-        "page_object": page_object,  
+        "categories": categories,
+        "page_object": page_object,
         "combos": combos,
         "cart": cart,
+        "selected_category": selected_category_id,
     })
 
 

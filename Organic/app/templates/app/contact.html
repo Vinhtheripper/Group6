@@ -1,0 +1,273 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}Cart – GreenNest{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'app/css/contact.css' %}">
+    <style>
+    .container {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 60px;
+        }
+
+    .sale-icon {
+            width: 80px;
+            height: 90px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0 auto 12px;
+        }
+    </style>
+
+    
+
+    <!-- CONTACT HERO -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge-organic">📬 Get In Touch</div>
+                <h1 class="hero-title">Let's Talk About Organic Living</h1>
+                <p class="hero-subtitle">Have questions about our products or organic lifestyle? We're here to help you live healthier!</p>
+            </div>
+        </div>
+    </section>
+    <main class="container">
+
+    <!-- CONTACT MAIN SECTION -->
+    <section class="contact-main-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- LEFT: CONTACT INFO -->
+                <div class="contact-info-side">
+                    <div class="info-header">
+                        <h2 class="section-title">Information About Us</h2>
+                    </div>
+
+                    <!-- Address Card -->
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="lni lni-map-marker"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3 class="info-title">Visit Our Store</h3>
+                            <p class="info-text">
+                                University of Economics and Law - VNU-HCM<br>
+                                669 National Route 1, Quarter 1, Linh Xuan Ward,<br>
+                                Thu Duc City, Ho Chi Minh City, Vietnam
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Email Card -->
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="lni lni-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3 class="info-title">Email Us</h3>
+                            <p class="info-text">
+                                <a href="mailto:greennest@uel.edu.vn">greennest@uel.edu.vn</a><br>
+                                <a href="mailto:support@greennest.vn">support@greennest.vn</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Phone Card -->
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="lni lni-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3 class="info-title">Call Us</h3>
+                            <p class="info-text">
+                                Hotline: <a href="tel:+842837242157">(028) 3724 2157</a><br>
+                                Mobile: <a href="tel:+84901234567">+84 90 123 4567</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Opening Hours Card -->
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="lni lni-alarm-clock"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3 class="info-title">Opening Hours</h3>
+                            <p class="info-text">
+                                <strong>Monday - Friday:</strong> 9:30 AM - 6:00 PM<br>
+                                <strong>Saturday - Sunday:</strong> 9:30 AM - 4:00 PM<br>
+                                <strong>Public Holidays:</strong> Closed
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Map -->
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.231171163582!2d106.76933007570654!3d10.870008889284374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175270882827e63%3A0x8b3a150c3a217814!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBLaW5oIHThur8gLSBMdeG6rXQsIMSQ4bqhaSBo4buNYyBRdeG7kWMgZ2lhIFRQLkhDTQ!5e0!3m2!1svi!2s!4v1729483932714!5m2!1svi!2s" 
+                            width="100%" 
+                            height="350" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- RIGHT: CONTACT FORM -->
+                <div class="contact-form-side">
+                    <div class="form-header">
+                        <h2 class="section-title">Contact Us For Any Questions</h2>
+                        <p class="section-subtitle">Fill out the form below and we'll get back to you within 24 hours</p>
+                    </div>
+
+                    <form class="contact-form" id="contactForm">
+                        <!-- Name Input -->
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                class="form-input" 
+                                placeholder="Enter your name"
+                                required>
+                        </div>
+
+                        <!-- Email Input -->
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input" 
+                                placeholder="your.email@example.com"
+                                required>
+                        </div>
+
+                        <!-- Phone Input -->
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input 
+                                type="tel" 
+                                id="phone" 
+                                name="phone" 
+                                class="form-input" 
+                                placeholder="+84 xxx xxx xxx"
+                                required>
+                        </div>
+
+                        <!-- Subject Input -->
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject</label>
+                            <select id="subject" name="subject" class="form-input" required>
+                                <option value="">Select a topic</option>
+                                <option value="product">Product Inquiry</option>
+                                <option value="order">Order Status</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Message Textarea -->
+                        <div class="form-group">
+                            <label for="message" class="form-label">Your Message</label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                class="form-textarea" 
+                                rows="6" 
+                                placeholder="Tell us what you need help with..."
+                                required></textarea>
+                        </div>
+
+                        <!-- reCAPTCHA -->
+                        <div class="form-group">
+                            <div class="recaptcha-placeholder">
+                                <div class="recaptcha-box">
+                                    <input type="checkbox" id="captcha" required>
+                                    <label for="captcha">I'm not a robot</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <span>Send Message</span>
+                            <i class="lni lni-telegram-original"></i>
+                        </button>
+
+                        <!-- Success Message -->
+                        <div class="form-message success-message" style="display: none;">
+                            <i class="lni lni-checkmark-circle"></i>
+                            <p>Thank you! Your message has been sent successfully.</p>
+                        </div>
+
+                        <!-- Error Message -->
+                        <div class="form-message error-message" style="display: none;">
+                            <i class="lni lni-close-circle"></i>
+                            <p>Oops! Something went wrong. Please try again.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- WHY CHOOSE US SECTION -->
+    <section class="why-choose-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Why Shop With GreenNest?</h2>
+      <p class="section-subtitle">We're committed to bringing you the freshest organic products</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <img src="{% static 'app/images/trans.png' %}" alt="Truck Icon" class="sale-icon">
+        </div>
+        <h3 class="feature-title">Delivery Days</h3>
+        <p class="feature-text">Displayed in your account</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <img src="{% static 'app/images/gift.png' %}" alt="Gift Icon" class="sale-icon">
+        </div>
+        <h3 class="feature-title">Gift & Coupon Codes</h3>
+        <p class="feature-text">Applied at checkout</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <img src="{% static 'app/images/user.png' %}" alt="Fresh Icon" class="sale-icon">
+        </div>
+        <h3 class="feature-title">Delivers Cool & Fresh</h3>
+        <p class="feature-text">GUARANTEED</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <img src="{% static 'app/images/calendar.png' %}" alt="Calendar Icon" class="sale-icon">
+        </div>
+        <h3 class="feature-title">No Commitments</h3>
+        <p class="feature-text">Skip or cancel anytime</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+   
+
+
+
+{% endblock %}

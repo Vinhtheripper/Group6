@@ -10,12 +10,12 @@
     --secondary-color: #4CAF50;
     --accent-color: #FFE600;
     --accent-yellow: #FFE600;
-
+    
     /* Secondary Accents */
     --accent-orange: #FF6B35;
     --accent-pink: #FF69B4;
     --accent-blue: #3498DB;
-
+    
     /* Neutrals */
     --black: #0A0A0A;
     --white: #FFFFFF;
@@ -23,17 +23,17 @@
     --text-color-light: #666;
     --bg-color: #FFFFFF;
     --border-color: #E0E0E0;
-
+    
     /* Layout */
     --header-height: 80px;
     --font-family: 'Montserrat', sans-serif;
-
+    
     /* Shadows - Neo-Brutalism */
     --shadow-brutal-sm: 4px 4px 0 0 var(--black);
     --shadow-brutal-md: 6px 6px 0 0 var(--black);
     --shadow-brutal-lg: 8px 8px 0 0 var(--black);
     --shadow-brutal-xl: 12px 12px 0 0 var(--black);
-
+    
     /* Border Radius */
     --radius-sm: 8px;
     --radius-md: 16px;
@@ -42,7 +42,7 @@
     --radius-2xl: 28px;
     --radius-3xl: 32px;
     --radius-full: 9999px;
-
+    
     /* Borders */
     --border-width: 4px;
 }
@@ -178,8 +178,7 @@ ul {
 
 .mega-menu {
     position: absolute;
-    top: calc(100% + 5px);
-    /* Giảm khoảng cách để tạo vùng đệm */
+    top: calc(100% + 5px); /* Giáº£m khoáº£ng cÃ¡ch Ä‘á»ƒ táº¡o vÃ¹ng Ä‘á»‡m */
     left: 50%;
     transform: translate(-50%, 10px);
     background: var(--bg-color);
@@ -191,15 +190,13 @@ ul {
     visibility: hidden;
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
     border-top: 3px solid var(--primary-color);
-    pointer-events: none;
-    /* Tắt sự kiện chuột khi ẩn */
+    pointer-events: none; /* Táº¯t sá»± kiá»‡n chuá»™t khi áº©n */
 }
 
 .has-dropdown::after {
     content: '';
     position: absolute;
-    height: 25px;
-    /* Tạo vùng đệm vô hình */
+    height: 25px; /* Táº¡o vÃ¹ng Ä‘á»‡m vÃ´ hÃ¬nh */
     width: 100%;
     bottom: -25px;
     left: 0;
@@ -209,10 +206,8 @@ ul {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
-    transition-delay: 0s;
-    /* Hiển thị ngay lập tức khi hover */
-    pointer-events: auto;
-    /* Bật lại sự kiện chuột khi hiển thị */
+    transition-delay: 0s; /* Hiá»ƒn thá»‹ ngay láº­p tá»©c khi hover */
+    pointer-events: auto; /* Báº­t láº¡i sá»± kiá»‡n chuá»™t khi hiá»ƒn thá»‹ */
 }
 
 .mega-menu-grid {
@@ -315,8 +310,7 @@ ul {
 
 .cart-dropdown {
     position: absolute;
-    top: calc(100% + 5px);
-    /* Giảm khoảng cách để tạo vùng đệm */
+    top: calc(100% + 5px); /* Giáº£m khoáº£ng cÃ¡ch Ä‘á»ƒ táº¡o vÃ¹ng Ä‘á»‡m */
     right: 0;
     width: 320px;
     background: var(--bg-color);
@@ -327,15 +321,13 @@ ul {
     visibility: hidden;
     transform: translateY(10px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
-    pointer-events: none;
-    /* Tắt sự kiện chuột khi ẩn */
+    pointer-events: none; /* Táº¯t sá»± kiá»‡n chuá»™t khi áº©n */
 }
 
 .cart-wrapper::after {
     content: '';
     position: absolute;
-    height: 15px;
-    /* Tạo vùng đệm vô hình */
+    height: 15px; /* Táº¡o vÃ¹ng Ä‘á»‡m vÃ´ hÃ¬nh */
     width: 100%;
     bottom: -15px;
     left: 0;
@@ -345,10 +337,8 @@ ul {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    transition-delay: 0s;
-    /* Hiển thị ngay lập tức khi hover */
-    pointer-events: auto;
-    /* Bật lại sự kiện chuột khi hiển thị */
+    transition-delay: 0s; /* Hiá»ƒn thá»‹ ngay láº­p tá»©c khi hover */
+    pointer-events: auto; /* Báº­t láº¡i sá»± kiá»‡n chuá»™t khi hiá»ƒn thá»‹ */
 }
 
 /* Wishlist Dropdown Styles */
@@ -358,8 +348,7 @@ ul {
 
 .wishlist-dropdown {
     position: absolute;
-    top: calc(100% + 5px);
-    /* Khoảng cách nhỏ để tạo vùng đệm */
+    top: calc(100% + 5px); /* Khoáº£ng cÃ¡ch nhá» Ä‘á»ƒ táº¡o vÃ¹ng Ä‘á»‡m */
     right: 0;
     width: 320px;
     background: var(--bg-color);
@@ -370,16 +359,14 @@ ul {
     visibility: hidden;
     transform: translateY(10px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
-    pointer-events: none;
-    /* Tắt sự kiện chuột khi ẩn */
+    pointer-events: none; /* Táº¯t sá»± kiá»‡n chuá»™t khi áº©n */
     z-index: 1000;
 }
 
 .wishlist-wrapper::after {
     content: '';
     position: absolute;
-    height: 15px;
-    /* Tạo vùng đệm vô hình */
+    height: 15px; /* Táº¡o vÃ¹ng Ä‘á»‡m vÃ´ hÃ¬nh */
     width: 100%;
     bottom: -15px;
     left: 0;
@@ -389,10 +376,8 @@ ul {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    transition-delay: 0s;
-    /* Hiển thị ngay lập tức khi hover */
-    pointer-events: auto;
-    /* Bật lại sự kiện chuột khi hiển thị */
+    transition-delay: 0s; /* Hiá»ƒn thá»‹ ngay láº­p tá»©c khi hover */
+    pointer-events: auto; /* Báº­t láº¡i sá»± kiá»‡n chuá»™t khi hiá»ƒn thá»‹ */
 }
 
 .wishlist-dropdown h4 {
@@ -406,7 +391,6 @@ ul {
     color: var(--text-color-light);
     padding: 10px 0;
 }
-
 /* ==========================================
    NEWSLETTER FOOTER - NEO-BRUTALISM
    ========================================== */
@@ -431,8 +415,9 @@ ul {
 .footer-container {
     display: grid;
     grid-template-columns: 50% 50%;
-    max-width: 1400px;
+    max-width: 1300px;
     margin: 0 auto;
+    padding: 0 20px;
     position: relative;
     z-index: 1;
 }
@@ -441,40 +426,33 @@ ul {
 .footer-links-side {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 80px;
-    padding: 80px 40px 80px 100px;
+    gap: 20px;
+    padding: 80px 40px 80px 20px; 
     align-items: start;
 }
 
 .footer-column {
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 10px; /* Giáº£m khoáº£ng cÃ¡ch tá»« 20px xuá»‘ng 10px */
     min-width: 0;
 }
 
 .footer-links-title {
-    margin: 0 0 12px;
+    margin: 0 0 5px; 
     color: #ffffff;
     font-size: 1.35rem;
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     letter-spacing: 0.5px;
     position: relative;
-    padding-bottom: 10px;
+    padding-bottom: 5px; 
     white-space: nowrap;
     text-transform: uppercase;
 }
 
 .footer-links-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 4px;
-    background-color: var(--accent-yellow);
-    border-radius: var(--radius-sm);
+    content: none; /* Removed the yellow underline */
 }
 
 .footer-column ul {
@@ -505,7 +483,7 @@ ul {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 80px 120px 80px 60px;
+    padding: 80px 20px 80px 60px;
 }
 
 .footer-title {
@@ -545,8 +523,7 @@ ul {
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
     font-weight: 600;
-    box-shadow: none;
-    /* Xóa shadow mặc định */
+    box-shadow: none; /* XÃ³a shadow máº·c Ä‘á»‹nh */
     transition: all 0.3s ease;
 }
 
@@ -568,8 +545,7 @@ ul {
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: none;
-    /* Xóa shadow mặc định */
+    box-shadow: none; /* XÃ³a shadow máº·c Ä‘á»‹nh */
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
@@ -616,8 +592,7 @@ ul {
     color: #ffffff;
     font-size: 22px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: none;
-    /* Xóa shadow mặc định */
+    box-shadow: none; /* XÃ³a shadow máº·c Ä‘á»‹nh */
 }
 
 .social-icon:hover {
@@ -627,7 +602,54 @@ ul {
     box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.3);
 }
 
+/* Footer Copyright */
+.footer-copyright {
+    width: 100%;
+    
+    background: linear-gradient(135deg, #1d8e3f 0%, #1B5E20 100%);
+    padding: 25px 0;
+    text-align: center;
+    border-top: 3px solid rgba(0, 0, 0, 0.2);
+}
 
+.copyright-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.copyright-text {
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+    opacity: 0.95;
+}
+
+.footer-links {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    color: var(--accent-yellow);
+}
 
 /* User Dropdown Menu */
 .user-wrapper {
@@ -636,8 +658,7 @@ ul {
 
 .user-dropdown {
     position: absolute;
-    top: calc(100% + 5px);
-    /* Giảm khoảng cách để tạo vùng đệm */
+    top: calc(100% + 5px); /* Giáº£m khoáº£ng cÃ¡ch Ä‘á»ƒ táº¡o vÃ¹ng Ä‘á»‡m */
     right: 0;
     width: 220px;
     background: var(--bg-color);
@@ -650,15 +671,13 @@ ul {
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
     border-top: 3px solid var(--primary-color);
     z-index: 1000;
-    pointer-events: none;
-    /* Tắt sự kiện chuột khi ẩn */
+    pointer-events: none; /* Táº¯t sá»± kiá»‡n chuá»™t khi áº©n */
 }
 
 .user-wrapper::after {
     content: '';
     position: absolute;
-    height: 15px;
-    /* Tạo vùng đệm vô hình */
+    height: 15px; /* Táº¡o vÃ¹ng Ä‘á»‡m vÃ´ hÃ¬nh */
     width: 100%;
     bottom: -15px;
     left: 0;
@@ -668,10 +687,8 @@ ul {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    transition-delay: 0s;
-    /* Hiển thị ngay lập tức khi hover */
-    pointer-events: auto;
-    /* Bật lại sự kiện chuột khi hiển thị */
+    transition-delay: 0s; /* Hiá»ƒn thá»‹ ngay láº­p tá»©c khi hover */
+    pointer-events: auto; /* Báº­t láº¡i sá»± kiá»‡n chuá»™t khi hiá»ƒn thá»‹ */
 }
 
 .user-dropdown h4 {

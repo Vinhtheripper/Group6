@@ -42,11 +42,21 @@
     height: fit-content;
 }
 
-/* Áp dụng đồng bộ layout container */
+
 .container {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 60px; /* giống phần navbar */
+  padding: 0 60px;
+}
+
+
+.sale-icon {
+    width: 80px;
+    height: 90px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto 12px;
 }
 
 </style>
@@ -189,22 +199,30 @@
   <div class="container"> 
     <div class="features-grid"> 
       <div class="feature-card"> 
-      <div class="feature-icon">🚚</div> 
+      <div class="feature-icon">
+      <img src="{% static 'app/images/trans.png' %}" alt="Truck Icon" class="sale-icon">
+      </div> 
         <h3 class="feature-title">Delivery Days</h3> 
           <p class="feature-text">Displayed in your account</p> 
         </div> 
     <div class="feature-card"> 
-      <div class="feature-icon">🎁</div> 
+      <div class="feature-icon">
+      <img src="{% static 'app/images/gift.png' %}" alt="Truck Icon" class="sale-icon">
+      </div> 
         <h3 class="feature-title">Gift & Coupon Codes</h3> 
           <p class="feature-text">Applied at checkout</p> 
       </div> 
     <div class="feature-card"> 
-      <div class="feature-icon">❄️</div> 
+      <div class="feature-icon">
+      <img src="{% static 'app/images/user.png' %}" alt="Truck Icon" class="sale-icon">
+      </div> 
         <h3 class="feature-title">Delivers Cool & Fresh</h3> 
           <p class="feature-text">GUARANTEED</p> 
         </div> 
     <div class="feature-card"> 
-      <div class="feature-icon">📅</div> 
+      <div class="feature-icon">
+      <img src="{% static 'app/images/calendar.png' %}" alt="Truck Icon" class="sale-icon">
+      </div> 
         <h3 class="feature-title">No Commitments</h3> 
           <p class="feature-text">Skip or cancel anytime</p> 
       </div> 
