@@ -1,6 +1,6 @@
 # =========================================
-# 🧠 FLASK / PYTHON PROJECT IGNORE TEMPLATE
-# Project: Libra Bookstore
+# 🧠 PYTHON / FLASK / DJANGO PROJECT IGNORE TEMPLATE
+# Project: Libra Bookstore / GreenNest
 # =========================================
 
 # 🧱 Virtual environment
@@ -20,11 +20,16 @@ instance/
 *.db
 *.sqlite3
 
-# 🧰 Flask / Werkzeug logs
+# ⚙️ Django migration cache (optional)
+*/migrations/__pycache__/
+*/migrations/*.py[cod]
+
+# 🧰 Logs & temporary files
 *.log
 *.pot
 *.pid
 *.bak
+*.tmp
 
 # 🧑‍💻 IDE / Editor settings
 .vscode/
@@ -44,6 +49,8 @@ Icon?
 .env.*
 *.key
 *.pem
+config.json
+secrets.json
 
 # 🧮 Distribution / packaging
 build/
@@ -79,12 +86,21 @@ coverage.xml
 nosetests.xml
 test-results/
 
-# 📸 Flask upload folders (optional)
-static/uploads/
-uploads/
-
-# 🪄 Frontend build outputs (if you later add React/Vue)
+# 🪄 Frontend (React/Vue or Tailwind builds)
 node_modules/
-npm-debug.log
-yarn-error.log
+npm-debug.log*
+yarn-error.log*
 package-lock.json
+dist/
+build/
+staticfiles/
+
+# 📸 Media / uploads
+media/
+uploads/
+static/uploads/
+
+# 💾 Cache folders (optional)
+.cache/
+.pytest_cache/
+django_cache/
