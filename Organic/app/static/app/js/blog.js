@@ -105,27 +105,35 @@ function createBlogCard(article, index) {
 
     card.innerHTML = `
         <div class="blog-card-image">
-            <img src="${imageUrl}" 
-                 alt="${escapeHtml(article.title)}"
-                 onerror="this.src='https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80'">
-            <span class="blog-category-badge" style="background: ${CATEGORY_COLORS[category]}">
-                ${categoryDisplay}
-            </span>
+        <img src="${imageUrl}" 
+            alt="${escapeHtml(article.title)}"
+            onerror="this.src='https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80'">
+        <span class="blog-category-badge" style="background: ${CATEGORY_COLORS[category]}">
+            ${categoryDisplay}
+        </span>
+    </div>
+   
+    <div class="blog-card-content">
+         <br><br>
+        <h3 class="blog-card-title">${truncateText(article.title, 70)}</h3>
+        <p class="blog-card-excerpt">
+            ${truncateText(article.description || 'Discover more about this topic...', 140)}
+        </p>
+
+        <div class="blog-card-meta">
+            <span><i class="lni lni-calendar"></i> ${publishDate}</span>
+            <span><i class="lni lni-timer"></i> ${readTime} min read</span>
         </div>
-        <div class="blog-card-content">
-            <h3 class="blog-card-title">${truncateText(article.title, 70)}</h3>
-            <p class="blog-card-excerpt">${truncateText(article.description || 'Discover more about this topic...', 140)}</p>
-            <div class="blog-card-meta">
-                <span><i class="lni lni-calendar"></i> ${publishDate}</span>
-                <span><i class="lni lni-timer"></i> ${readTime} min read</span>
-            </div>
-            <div class="blog-card-footer">
-                <a href="${article.url}" target="_blank" rel="noopener noreferrer" class="read-more-btn">
-                    Read Article
-                    <i class="lni lni-arrow-right"></i>
-                </a>
-            </div>
+
+        <br><br>
+
+        <div class="blog-card-footer">
+            <a href="${article.url}" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+                Read Article <i class="lni lni-arrow-right"></i>
+            </a>
         </div>
+    </div>
+
     `;
 
     return card;

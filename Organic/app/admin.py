@@ -21,3 +21,11 @@ admin.site.register(Coupon)
 admin.site.register(Nutrition)
 
 
+
+
+admin.site.site_header = "Greenest"
+admin.site.site_title = "Admin Portal"
+admin.site.index_title = "Welcome to admin page. Manage your site here."
+
+
+

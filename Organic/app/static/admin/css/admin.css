@@ -1,0 +1,205 @@
+/* ===================================================
+   DJANGO ADMIN - EMERALD REBORN 🌿
+   Luxury Minimalist UI + Glass + Gradient
+   =================================================== */
+
+/* ===== GENERAL RESET ===== */
+:root {
+    --emerald: #2e7d32;
+    --mint: #a5d6a7;
+    --light-mint: #e8f5e9;
+    --white: #ffffff;
+    --text: #1b3d23;
+    --accent: #43a047;
+    --highlight: #00c853;
+    --bg-gradient: linear-gradient(180deg, #fdfefc 0%, #f3f8f5 40%, #e8f5e9 100%);
+    --shadow: 0 4px 14px rgba(46, 125, 50, 0.15);
+    --radius: 12px;
+}
+
+body {
+    background: var(--bg-gradient) !important;
+    font-family: "Manrope", "Inter", "Segoe UI", sans-serif;
+    color: var(--text) !important;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* ===== HEADER ===== */
+#header {
+    background: linear-gradient(90deg, #0b5137, #1a7431, #2ecc71);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+#branding h1 a {
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+#branding h1 a:hover {
+    color: #f1f8e9 !important;
+    text-shadow: 0 4px 12px rgba(76, 175, 80, 0.8);
+}
+
+#user-tools {
+    color: #c8e6c9 !important;
+}
+
+#user-tools a {
+    color: #d0f0d0 !important;
+    font-weight: 500;
+    padding: 0 8px;
+    border-radius: 6px;
+    transition: 0.2s ease;
+}
+
+#user-tools a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
+}
+
+/* ===== MODULES ===== */
+#content {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 1200px;
+    animation: fadeIn 0.5s ease;
+}
+
+/* ===== HEADINGS ===== */
+h1,
+h2,
+h3 {
+    color: var(--emerald) !important;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.module caption,
+.module h2 {
+    background: linear-gradient(90deg, var(--mint), var(--accent));
+    color: #fff !important;
+    padding: 10px 14px;
+    border-radius: 10px 10px 0 0;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ===== TABLES ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(46, 125, 50, 0.08);
+    background-color: var(--white);
+}
+
+th {
+    background: var(--light-mint);
+    color: var(--text);
+    font-weight: 600;
+    border-bottom: 2px solid #d6ecd7;
+}
+
+td {
+    border-bottom: 1px solid #f1f8f1;
+    padding: 10px 12px;
+}
+
+tr:hover td {
+    background: #f9fff9;
+}
+
+/* ===== BUTTONS ===== */
+.button,
+input[type=submit],
+input[type=button],
+.submit-row input {
+    background: linear-gradient(90deg, #66bb6a, #43a047);
+    border: none;
+    color: #fff !important;
+    font-weight: 600;
+    border-radius: var(--radius);
+    padding: 8px 20px;
+    box-shadow: 0 4px 12px rgba(102, 187, 106, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+}
+
+.button:hover,
+input[type=submit]:hover,
+input[type=button]:hover,
+.submit-row input:hover {
+    background: linear-gradient(90deg, #4caf50, #2e7d32);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(67, 160, 71, 0.4);
+}
+
+/* ===== INPUTS / FORMS ===== */
+input[type=text],
+select,
+textarea {
+    border: 1px solid #c8e6c9 !important;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #ffffff;
+    color: var(--text) !important;
+    transition: 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #66bb6a !important;
+    box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+}
+
+/* ===== LOGIN PAGE ===== */
+#login-form {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid #dcedc8;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(46, 125, 50, 0.15);
+    padding: 40px !important;
+    backdrop-filter: blur(12px);
+    animation: fadeIn 0.8s ease;
+}
+
+#login-form .submit-row input {
+    background: linear-gradient(90deg, #66bb6a, #2e7d32);
+    color: white !important;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
