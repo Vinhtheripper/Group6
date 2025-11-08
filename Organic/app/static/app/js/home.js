@@ -25,5 +25,39 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Handle copying voucher codes
+document.addEventListener('DOMContentLoaded', function () {
+  const copyButtons = document.querySelectorAll('.btn-copy-code');
+
+  copyButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const code = this.getAttribute('data-code');
+
+      
+      const textarea = document.createElement('textarea');
+      textarea.value = code;
+      document.body.appendChild(textarea);
+
+      
+      textarea.select();
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          
+          const originalText = this.innerHTML;
+          this.innerHTML = '<i class="lni lni-checkmark"></i><span>Copied!</span>';
+
+          
+          setTimeout(() => {
+            this.innerHTML = originalText;
+          }, 2000);
+        }
+      } catch (err) {
+        console.error('Failed to copy code:', err);
+      }
+      document.body.removeChild(textarea);
+    });
+  });
+});
 
 

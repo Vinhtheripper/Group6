@@ -150,10 +150,9 @@
         <!-- Related Combos --> 
         <div class="related-products"> 
           <h2 class="related-title">Other Popular Combos</h2> 
-            <div class="related-grid"> {% for cb in related_combos %} 
+            <div class="related-grid"> 
+            {% for cb in related_combos %} 
               <div class="product-card"> <div class="card-image"> 
-                <span class="badge-tag seasonal">COMBO</span> 
-                  <span class="badge-corner">SAVE ${{ cb.discount_amount|floatformat:0 }}</span> 
                     <img src="{{ cb.image.url }}" alt="{{ cb.name }}" class="product-img"> </div> 
                       <div class="card-info"> 
                       <h3 class="product-name">{{ cb.name }}</h3> 

@@ -11,6 +11,47 @@
     margin: 0 auto;
     padding: 0 60px;
   }
+  .payment-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 0.25s ease;
+}
+
+.payment-option:hover {
+  background-color: #f9f9f9;
+}
+
+.payment-option input[type="radio"] {
+  transform: scale(1.2);
+}
+
+
+.payment-option input[type="radio"]:checked + .payment-logo,
+.payment-option input[type="radio"]:checked ~ span,
+.payment-option input[type="radio"]:checked ~ img,
+.payment-option input[type="radio"]:checked {
+  
+}
+
+.payment-option:has(input[type="radio"]:checked) {
+  background-color: #ffeb3b;
+  
+  
+}
+
+.payment-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+
 </style>
 <!-- HERO -->
 
@@ -77,22 +118,32 @@
             <h2 class="section-title">
               <span class="section-number">3</span> Payment Method
             </h2>
+
             <label class="payment-option">
-              <input type="radio" name="payment" value="cod" checked> Cash on Delivery (COD)
+              <input type="radio" name="payment" value="cod" checked>
+              <img src="{% static 'app/images/cod_ic.png' %}" alt="Cash on Delivery" class="payment-logo">
+              <span>Cash on Delivery (COD)</span>
             </label>
-            <br><br>
+
             <label class="payment-option">
-              <input type="radio" name="payment" value="momo"> Momo
+              <input type="radio" name="payment" value="momo">
+              <img src="{% static 'app/images/momo_ic.png' %}" alt="MoMo" class="payment-logo">
+              <span>MoMo</span>
             </label>
-            <br><br>
+
             <label class="payment-option">
-              <input type="radio" name="payment" value="vnpay"> VNPay
+              <input type="radio" name="payment" value="vnpay">
+              <img src="{% static 'app/images/vnpay_ic.png' %}" alt="VNPay" class="payment-logo">
+              <span>VNPay</span>
             </label>
-            <br><br>
+
             <label class="payment-option">
-              <input type="radio" name="payment" value="bank"> Bank Transfer
+              <input type="radio" name="payment" value="bank">
+              <img src="{% static 'app/images/banking_ic.png' %}" alt="Bank Transfer" class="payment-logo">
+              <span>Bank Transfer</span>
             </label>
           </div>
+
 
           <button type="submit" class="btn btn-primary btn-checkout" name="placeorder" value="1">
             <span>Complete Order</span>

@@ -298,7 +298,7 @@ function displaySampleArticles(category = 'all') {
                 description: "Make the most of autumn's bounty with these nutritious and delicious organic recipes for the whole family.",
                 urlToImage: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80",
                 publishedAt: "2023-09-28T10:00:00Z",
-                url: "#",
+                url: "https://suckhoedoisong.vn/bien-bua-an-hoc-duong-thanh-khoan-dau-tu-cho-tuong-lai-cau-chuyen-tu-thanh-pho-huu-co-kisarazu-nhat-ban-169251107170332935.htm",
                 category: "recipes"
             },
             {
@@ -306,7 +306,7 @@ function displaySampleArticles(category = 'all') {
                 description: "Start your day right with these simple, healthy breakfast recipes using fresh organic ingredients.",
                 urlToImage: "https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=800&q=80",
                 publishedAt: "2023-09-25T08:00:00Z",
-                url: "#",
+                url: "https://suckhoedoisong.vn/su-thieu-hut-dinh-duong-o-phu-nu-sau-sinh-va-giai-phap-bo-sung-169251107141006315.htm",
                 category: "recipes"
             },
             {
@@ -314,7 +314,7 @@ function displaySampleArticles(category = 'all') {
                 description: "Discover how to create balanced, nutrient-packed bowls with organic vegetables and grains.",
                 urlToImage: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80",
                 publishedAt: "2023-09-20T12:00:00Z",
-                url: "#",
+                url: "https://suckhoedoisong.vn/8-thoi-quen-buoi-sang-giup-duong-ruot-khoe-manh-169251101171503591.htm",
                 category: "recipes"
             }
         ],
@@ -324,7 +324,7 @@ function displaySampleArticles(category = 'all') {
                 description: "Beyond just avoiding pesticides, organic foods offer numerous health benefits that might surprise you.",
                 urlToImage: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
                 publishedAt: "2023-10-10T10:00:00Z",
-                url: "#",
+                url: "https://suckhoedoisong.vn/6-loai-do-uong-probiotic-giup-duong-ruot-khoe-manh-hon-169250724155727474.htm",
                 category: "health"
             },
             {
@@ -340,7 +340,7 @@ function displaySampleArticles(category = 'all') {
                 description: "Learn how choosing organic can boost your body's natural defenses and improve overall wellness.",
                 urlToImage: "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&q=80",
                 publishedAt: "2023-09-30T11:00:00Z",
-                url: "#",
+                url: "https://suckhoedoisong.vn/5-loai-thuc-pham-tot-cho-suc-khoe-duong-ruot-169250721164932241.htm",
                 category: "health"
             }
         ],
@@ -350,7 +350,7 @@ function displaySampleArticles(category = 'all') {
                 description: "Limited space is no excuse! Learn how to grow organic vegetables in your apartment or small yard.",
                 urlToImage: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
                 publishedAt: "2023-10-05T14:00:00Z",
-                url: "#",
+                url: "https://suckhoedoisong.vn/lam-dung-thuc-pham-bo-sung-cho-tre-loi-bat-cap-hai-169251108110846032.htm",
                 category: "gardening"
             },
             {
@@ -358,7 +358,7 @@ function displaySampleArticles(category = 'all') {
                 description: "Master the art of composting to create nutrient-rich soil for your organic garden.",
                 urlToImage: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&q=80",
                 publishedAt: "2023-09-28T13:00:00Z",
-                url: "#",
+                url: "https://suckhoedoisong.vn/dieu-gi-xay-ra-khi-dung-omega-3-va-vitamin-e-cung-nhau-169251102172841998.htm",
                 category: "gardening"
             },
             {
@@ -366,7 +366,7 @@ function displaySampleArticles(category = 'all') {
                 description: "Know what to plant and when for a thriving organic garden all year round.",
                 urlToImage: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&q=80",
                 publishedAt: "2023-09-22T10:00:00Z",
-                url: "#",
+                url: "https://suckhoedoisong.vn/top-nhung-thuc-pham-giau-magie-tot-cho-suc-khoe-169250905215121112.htm",
                 category: "gardening"
             }
         ],
@@ -376,7 +376,7 @@ function displaySampleArticles(category = 'all') {
                 description: "Reduce your environmental impact with these simple strategies for a more sustainable kitchen.",
                 urlToImage: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80",
                 publishedAt: "2023-10-08T15:00:00Z",
-                url: "#",
+                url: "https://suckhoedoisong.vn/cach-su-dung-gung-lam-giam-dau-da-day-169251104114759654.htm",
                 category: "sustainability"
             },
             {
@@ -384,7 +384,7 @@ function displaySampleArticles(category = 'all') {
                 description: "Understanding the environmental impact of conventional agriculture and why organic matters.",
                 urlToImage: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=80",
                 publishedAt: "2023-10-01T12:00:00Z",
-                url: "#",
+                url: "https://suckhoedoisong.vn/ha-cholesterol-tu-nhien-voi-hat-bi-ngo-169251101163009133.htm",
                 category: "sustainability"
             },
             {
@@ -392,7 +392,7 @@ function displaySampleArticles(category = 'all') {
                 description: "Easy lifestyle adjustments that make a real difference for our planet's future.",
                 urlToImage: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&q=80",
                 publishedAt: "2023-09-25T16:00:00Z",
-                url: "#",
+                url: "https://suckhoedoisong.vn/uong-nuoc-ma-de-co-tac-dung-gi-169251026114553944.htm",
                 category: "sustainability"
             }
         ]
