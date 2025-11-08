@@ -104,3 +104,4 @@ static/uploads/
 .cache/
 .pytest_cache/
 django_cache/
+
