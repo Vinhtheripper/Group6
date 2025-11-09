@@ -102,19 +102,11 @@ ul {
     align-items: center;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--text-color-dark);
+.logo-img {
+  height: 200px;
+  width: auto;
 }
 
-.logo-icon {
-    font-size: 30px;
-    margin-right: 10px;
-    color: var(--primary-color);
-}
 
 .logo-text span {
     color: var(--primary-color);
