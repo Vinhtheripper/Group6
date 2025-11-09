@@ -59,18 +59,20 @@
     margin: 0 auto 12px;
 }
 
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+
 </style>
-<!-- CART HERO --> 
 <section class="cart-hero"> 
-<div class="container"> 
-  <div class="hero-content"> 
-  <div class="badge-organic">🛒 Your Cart</div> 
-    <h1 class="hero-title">Shopping Cart</h1> 
-      <p class="hero-subtitle"> 
-    <span class="item-count">{{ cart.items.count }} items</span> ready for checkout </p> 
+    <div class="hero-content"> 
+      <!-- Hình ảnh -->
+      <img src="{% static 'app/images/banner2.png' %}" alt="Cart Banner" class="hero-image">
   </div> 
-</div> 
-</section> <!-- CART MAIN SECTION --> 
+</section>
 <section class="cart-main-section"> 
   <div class="container"> 
   <div class="cart-grid">

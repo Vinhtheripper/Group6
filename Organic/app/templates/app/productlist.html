@@ -14,18 +14,23 @@
   margin: 0 auto;
   padding: 0 60px; /* giống phần navbar */
 }
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
 </style>
   
-  <section class="cart-hero"> 
-<div class="container"> 
-  <div class="hero-content"> 
-  <div class="badge-organic">🛒 Your Cart</div> 
-    <h1 class="hero-title">Product List</h1> 
-      <p class="hero-subtitle"> 
-    <span class="item-count">Our items</span> ready for checkout </p> 
+{% load static %}
+
+<section class="cart-hero"> 
+    <div class="hero-content"> 
+      <!-- Hình ảnh -->
+      <img src="{% static 'app/images/banner1.png' %}" alt="Cart Banner" class="hero-image">
   </div> 
-</div> 
-</section> 
+</section>
+
 
   <main class="product-main"> 
   <!-- ========== HERO SECTION ========== --> 

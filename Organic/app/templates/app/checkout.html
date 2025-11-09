@@ -51,18 +51,21 @@
   object-fit: contain;
 }
 
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
 
 </style>
 <!-- HERO -->
 
-<section class="checkout-hero">
-  <div class="container">
-    <div class="hero-content">
-      <div class="badge-organic">🔒 Secure Checkout</div>
-      <h1 class="hero-title">Complete Your Order</h1>
-      <p class="hero-subtitle">Just a few more steps to get your fresh organic products!</p>
-    </div>
-  </div>
+<section class="cart-hero"> 
+    <div class="hero-content"> 
+      <!-- Hình ảnh -->
+      <img src="{% static 'app/images/banner3.png' %}" alt="Cart Banner" class="hero-image">
+  </div> 
 </section>
 
 
