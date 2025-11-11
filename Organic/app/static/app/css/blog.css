@@ -6,6 +6,9 @@
 
 
 /* Category Filter */
+
+
+
 .blog-categories {
     padding: var(--spacing-xl) 0;
     background: var(--white);
@@ -303,4 +306,11 @@
         font-size: 0.85rem;
         padding: 10px 20px;
     }
+}
+
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 60px;
 }

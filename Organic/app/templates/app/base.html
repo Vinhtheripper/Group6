@@ -157,23 +157,6 @@
     </footer>
 
     <script src="{% static 'app/js/wishlist.js' %}"></script>
-    <script>
-
-        window.addEventListener("beforeunload", () => {
-            localStorage.setItem(location.pathname + "_scroll", window.scrollY);
-        });
-
-        window.addEventListener("load", () => {
-            const key = location.pathname + "_scroll";
-            const pos = localStorage.getItem(key);
-            if (pos) {
-                window.scrollTo(0, pos);
-                localStorage.removeItem(key);
-            }
-        });
-        
-    </script>
-
     {% block scripts %}{% endblock %}
 </body>
 

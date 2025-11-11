@@ -196,3 +196,17 @@
     gap: 24px;
     align-items: stretch;
 }
+
+
+.product-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px;
+    /* giống phần navbar */
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}

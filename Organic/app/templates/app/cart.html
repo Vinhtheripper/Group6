@@ -9,64 +9,7 @@
 <link rel="stylesheet" href="{% static 'app/css/product_card.css' %}"> 
 <link rel="stylesheet" href="{% static 'app/css/neo_brutalism_global.css' %}"> 
 <link rel="stylesheet" href="{% static 'app/css/cart.css' %}"> 
-<style>
-.cart-item input[type="checkbox"] {
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  border: 2.5px solid black;
-  border-radius: 6px;
-  background-color: white;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.15s ease;
-}
 
-.cart-item input[type="checkbox"]:checked {
-  background-color: #f8df00; /* vàng highlight */
-}
-
-.cart-item input[type="checkbox"]:checked::after {
-  content: "✔";
-  position: absolute;
-  top: 1px;
-  left: 4px;
-  font-size: 14px;
-  color: black;
-  font-weight: bold;
-}
-
-.sticky-sidebar {
-    position: sticky;
-    top: calc(var(--header-height) + var(--spacing-lg));
-    height: fit-content;
-}
-
-
-.container {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 60px;
-}
-
-
-.sale-icon {
-    width: 80px;
-    height: 90px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 0 auto 12px;
-}
-
-.hero-image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-
-</style>
 <section class="cart-hero"> 
     <div class="hero-content"> 
       <!-- Hình ảnh -->

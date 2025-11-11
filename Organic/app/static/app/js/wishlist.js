@@ -1,3 +1,16 @@
+window.addEventListener("beforeunload", () => {
+    localStorage.setItem(location.pathname + "_scroll", window.scrollY);
+});
+
+window.addEventListener("load", () => {
+    const key = location.pathname + "_scroll";
+    const pos = localStorage.getItem(key);
+    if (pos) {
+        window.scrollTo(0, pos);
+        localStorage.removeItem(key);
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     const wishlistBtns = document.querySelectorAll(".wishlist-btn");
     const wishlistContainer = document.querySelector(".wishlist-items");

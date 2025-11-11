@@ -902,3 +902,51 @@
         width: 100%;
     }
 }
+
+
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.25s ease;
+}
+
+.payment-option:hover {
+    background-color: #f9f9f9;
+}
+
+.payment-option input[type="radio"] {
+    transform: scale(1.2);
+    accent-color: #ffeb3b;
+    /* tô màu radio khi chọn */
+}
+
+/* Khi radio được chọn => thêm class 'selected' vào payment-option */
+.payment-option.selected {
+    background-color: #ffeb3b;
+    border-color: #e0c200;
+}
+
+.payment-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
