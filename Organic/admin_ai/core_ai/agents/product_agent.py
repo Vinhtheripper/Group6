@@ -24,7 +24,7 @@ def handle_product_intent(intent: str) -> str:
             return f"Sản phẩm có giá cao nhất là {p.name}, giá {p.price:,.0f}₫."
         return "Không tìm thấy sản phẩm."
 
-    # 🚫 Sản phẩm chưa bán
+    #  Sản phẩm chưa bán
     if intent == "unsold":
         unsold = Product.objects.filter(orderitem__isnull=True)
         if unsold.exists():

@@ -74,8 +74,8 @@ def handle_business_intent(intent: str, entities: dict = None):
 
         trend = "tăng" if diff > 0 else "giảm"
         if growth is None:
-            return f"Doanh thu tháng này là {this_total:,.0f}₫, {trend_desc}."
-        return f"Doanh thu tháng này là {this_total:,.0f}₫, {trend_desc}"
+            return f"Doanh thu tháng này là ${this_total:,.0f}, {trend_desc}."
+        return f"Doanh thu tháng này là ${this_total:,.0f}, {trend_desc}"
 
 
     if intent == "revenue_cancel_rate":
@@ -84,7 +84,7 @@ def handle_business_intent(intent: str, entities: dict = None):
         rate = (cancelled / total * 100) if total else 0
         return f"Tỉ lệ đơn hàng bị hủy là {rate:.1f}%."
 
-    # 🔁 Mặc định nếu không rõ yêu cầu
+    #  Mặc định nếu không rõ yêu cầu
     return "Mình chưa rõ bạn muốn xem báo cáo doanh thu nào."
 
     

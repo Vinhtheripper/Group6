@@ -28,7 +28,7 @@ class AdminAIView(admin.ModelAdmin):
     def chat_view(self, request):
         context = dict(
             self.admin_site.each_context(request),
-            title="💬 GreeNest AI Assistant",
+            title="💬 Greenest AI Assistant",
         )
         if request.method == "POST":
             msg = request.POST.get("message", "")

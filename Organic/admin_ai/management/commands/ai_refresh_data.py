@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = "Tự động export dữ liệu từ ORM, retrain embedding và in thống kê."
 
     def handle(self, *args, **options):
-        self.stdout.write(self.style.MIGRATE_HEADING("🚀 Bắt đầu làm mới dữ liệu AI GreenNest..."))
+        self.stdout.write(self.style.MIGRATE_HEADING("🚀 Bắt đầu làm mới dữ liệu AI Greenest..."))
         
         try:
             export_all()
@@ -26,8 +26,8 @@ class Command(BaseCommand):
 
         # Kiểm tra số vector hiện tại
         client = chromadb.PersistentClient(path=f"{settings.BASE_DIR}/chroma_db")
-        col = client.get_or_create_collection("greennest_daily")
+        col = client.get_or_create_collection("greenest_daily")
         count = col.count()
 
-        self.stdout.write(self.style.SUCCESS(f"📦 ChromaDB hiện chứa {count} vector embeddings."))
-        self.stdout.write(self.style.HTTP_INFO("✨ Hoàn tất cập nhật dữ liệu AI GreenNest!"))
+        self.stdout.write(self.style.SUCCESS(f" ChromaDB hiện chứa {count} vector embeddings."))
+        self.stdout.write(self.style.HTTP_INFO(" Hoàn tất cập nhật dữ liệu AI Greenest!"))
