@@ -138,27 +138,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Form submissions with toast notifications
-    const editProfileForm = document.getElementById('editProfileForm');
-    if (editProfileForm) {
-        editProfileForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            // Here you would typically send the data to the server
-
-            // Close the modal
-            modals.editProfile.classList.remove('active');
-
-            // Show success toast
-            const toast = document.querySelector('.toast.success');
-            toast.classList.add('active');
-
-            // Auto hide toast after 3 seconds
-            setTimeout(() => {
-                toast.classList.remove('active');
-            }, 3000);
-        });
-    }
-
     // Close toast on button click
     const toastClose = document.querySelector('.toast-close');
     if (toastClose) {

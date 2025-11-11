@@ -26,22 +26,33 @@ def myaccount(request):
     })
 
 
+
+
+@login_required
 def editaccount(request):
     user = request.user
-    customer = getattr(user, "customer", None)
+    
+    customer, _ = Customer.objects.get_or_create(user=user)
 
     if request.method == "POST":
-        user.first_name = request.POST.get("first_name", "")
-        user.last_name = request.POST.get("last_name", "")
-        user.email = request.POST.get("email", "")
+        first = request.POST.get("first_name", "").strip()
+        last = request.POST.get("last_name", "").strip()
+        email = request.POST.get("email", "").strip()
+
+        user.first_name = first
+        user.last_name = last
+        user.email = email
         user.save()
 
-        if customer:
-            customer.phone = request.POST.get("phone", "")
-            customer.save()
+        customer.phone = request.POST.get("phone", "").strip()
+        
+        customer.name = f"{first} {last}".strip()
+        customer.save()
 
         messages.success(request, "Profile updated successfully!")
+
     return redirect("myaccount")
+
 
 def changeavatar(request):
     customer = getattr(request.user, "customer", None)
