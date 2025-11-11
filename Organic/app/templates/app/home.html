@@ -168,66 +168,72 @@
       <p class="section-subtitle">Grab your discount before it’s gone!</p>
     </div>
 
-    <div class="vouchers-grid">
-      {% for voucher in vouchers %}
-      <div class="voucher-card {% if current_coupon and current_coupon.id == voucher.id %}highlight{% endif %}">
-        
-
-        <div class="voucher-content">
-          <div class="voucher-header">
-            <div class="voucher-icon">
-              {% if current_coupon and current_coupon.id == voucher.id %}
-                    <img src="{% static 'app/images/truck.png' %}" alt="Truck Icon" class="sale-icon">
-              {% else %}
-                    <img src="{% static 'app/images/mail.png' %}" alt="Truck Icon" class="sale-icon">
-              {% endif %}
-            </div>
-            <div class="voucher-info">
-              <h3 class="voucher-title">{{ voucher.name|default:"Special Offer" }}</h3>
-              <p class="voucher-desc">{{ voucher.description|default:"Enjoy this exclusive deal!" }}</p>
-            </div>
-          </div>
-
-          <div class="voucher-body">
-            <div class="discount-amount">
-              {% if voucher.discount_amount %}
-              {{ voucher.discount_amount }}% OFF
-              {% else %}
-              Discount Available
-              {% endif %}
-            </div>
-            <div class="voucher-details">
-              {% if voucher.min_spend %}
-              <div class="detail-item">
-                <span class="detail-icon">💰</span>
-                <span class="detail-text">Min. spend ${{ voucher.min_spend }}</span>
+    {% if user.is_authenticated %}
+      <div class="vouchers-grid">
+        {% for voucher in vouchers %}
+        <div class="voucher-card {% if current_coupon and current_coupon.id == voucher.id %}highlight{% endif %}">
+          <div class="voucher-content">
+            <div class="voucher-header">
+              <div class="voucher-icon">
+                {% if current_coupon and current_coupon.id == voucher.id %}
+                  <img src="{% static 'app/images/truck.png' %}" alt="Truck Icon" class="sale-icon">
+                {% else %}
+                  <img src="{% static 'app/images/mail.png' %}" alt="Mail Icon" class="sale-icon">
+                {% endif %}
               </div>
-              {% endif %}
-              {% if voucher.expiry_date %}
-              <div class="detail-item">
-                <span class="detail-icon">📅</span>
-                <span class="detail-text">Valid until {{ voucher.expiry_date }}</span>
+              <div class="voucher-info">
+                <h3 class="voucher-title">{{ voucher.name|default:"Special Offer" }}</h3>
+                <p class="voucher-desc">{{ voucher.description|default:"Enjoy this exclusive deal!" }}</p>
               </div>
-              {% endif %}
             </div>
-          </div>
 
-          <div class="voucher-footer">
-            <div class="voucher-code-wrapper">
-              <span class="code-label">Code:</span>
-              <span class="voucher-code" data-code="{{ voucher.code }}">{{ voucher.code }}</span>
+            <div class="voucher-body">
+              <div class="discount-amount">
+                {% if voucher.discount_amount %}
+                  {{ voucher.discount_amount }}% OFF
+                {% else %}
+                  Discount Available
+                {% endif %}
+              </div>
+              <div class="voucher-details">
+                {% if voucher.min_spend %}
+                  <div class="detail-item">
+                    <span class="detail-icon">💰</span>
+                    <span class="detail-text">Min. spend ${{ voucher.min_spend }}</span>
+                  </div>
+                {% endif %}
+                {% if voucher.expiry_date %}
+                  <div class="detail-item">
+                    <span class="detail-icon">📅</span>
+                    <span class="detail-text">Valid until {{ voucher.expiry_date }}</span>
+                  </div>
+                {% endif %}
+              </div>
             </div>
-            <button class="btn-copy-code" data-code="{{ voucher.code }}">
-              <i class="lni lni-files"></i>
-              <span>Copy</span>
-            </button>
+
+            <div class="voucher-footer">
+              <div class="voucher-code-wrapper">
+                <span class="code-label">Code:</span>
+                <span class="voucher-code" data-code="{{ voucher.code }}">{{ voucher.code }}</span>
+              </div>
+              <button class="btn-copy-code" data-code="{{ voucher.code }}">
+                <i class="lni lni-files"></i>
+                <span>Copy</span>
+              </button>
+            </div>
           </div>
         </div>
+        {% empty %}
+        <p class="no-voucher">No vouchers available at the moment.</p>
+        {% endfor %}
       </div>
-      {% empty %}
-      <p class="no-voucher">No vouchers available at the moment.</p>
-      {% endfor %}
-    </div>
+    {% else %}
+      <div class="no-login">
+        <p style="text-align:center; margin: 40px 0; color: var(--muted); font-size: 1rem;">
+           Please <a href="{% url 'auth' %}" style="color: var(--primary); font-weight:600;">login</a> to earn exclusive deals & offers!
+        </p>
+      </div>
+    {% endif %}
   </div>
 </section>
 
